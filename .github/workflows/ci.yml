@@ -1,0 +1,125 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+
+      - name: Verify projection state
+        id: source
+        shell: bash
+        env:
+          PROJECTION_NAME: terraform-provider-deixic
+          DESTINATION_REPOSITORY: dx-corp/terraform-provider-deixic
+          PULL_REQUEST_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          set -euo pipefail
+          if [[ ! -f .repository-projection.json ]]; then
+            if [[ -n "$PULL_REQUEST_BASE_SHA" ]] && git cat-file -e "$PULL_REQUEST_BASE_SHA:.repository-projection.json" 2>/dev/null; then
+              echo "A pull request cannot remove established projection provenance" >&2
+              exit 1
+            fi
+            unexpected="$(git ls-files | grep -Ev '^(README\.md|\.github/workflows/ci\.yml)$' || true)"
+            if [[ -n "$unexpected" ]]; then
+              echo "Projected source is present without .repository-projection.json:" >&2
+              echo "$unexpected" >&2
+              exit 1
+            fi
+            echo "The repository is still in its documented README-only bootstrap state."
+            echo "present=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          python3 <<'PY'
+          import json
+          import os
+          import re
+
+          with open(".repository-projection.json", encoding="utf-8") as handle:
+              receipt = json.load(handle)
+          expected_keys = {
+              "schemaVersion", "projection", "projectionSchemaVersion", "sourceRepository",
+              "sourceSha", "destinationRepository", "priorProjectedBase", "definitionDigest",
+              "toolDigest", "contentDigest", "publicationEligible",
+          }
+          assert set(receipt) == expected_keys, "projection provenance fields changed"
+          assert receipt["schemaVersion"] == 1 and receipt["projectionSchemaVersion"] == 1
+          assert receipt["projection"] == os.environ["PROJECTION_NAME"]
+          assert receipt["sourceRepository"] == "dx-corp/mono"
+          assert receipt["destinationRepository"] == os.environ["DESTINATION_REPOSITORY"]
+          assert re.fullmatch(r"[0-9a-f]{40}", receipt["sourceSha"])
+          assert re.fullmatch(r"[0-9a-f]{40}", receipt["priorProjectedBase"])
+          for key in ("definitionDigest", "toolDigest", "contentDigest"):
+              assert re.fullmatch(r"[0-9a-f]{64}", receipt[key]), key
+          assert receipt["publicationEligible"] is True
+          PY
+
+          for required in go.mod go.sum main.go internal/provider/provider.go internal/provider/business_object_resource_test.go; do
+            test -f "$required" || { echo "Missing projected input: $required" >&2; exit 1; }
+          done
+          echo "present=true" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Go
+        if: steps.source.outputs.present == 'true'
+        uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version: 1.25.8
+          cache: false
+
+      - name: Set up Terraform CLI
+        if: steps.source.outputs.present == 'true'
+        uses: hashicorp/setup-terraform@b9cd54a3c349d3f38e8881555d616ced269862dd # v3
+        with:
+          terraform_version: 1.16.3
+          terraform_wrapper: false
+
+      - name: Verify public module boundary
+        if: steps.source.outputs.present == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          head -n 1 go.mod | grep -Fx 'module github.com/dx-corp/terraform-provider-deixic'
+          if grep -REq 'github\.com/(evalops|dx-corp)/mono|github\.com/evalops/platform' --include='*.go' --include='go.mod' .; then
+            echo "The provider still depends on the private source repository" >&2
+            exit 1
+          fi
+          terraform version | grep -F 'Terraform v1.16.3'
+
+      - name: Test, vet, build, and install provider
+        if: steps.source.outputs.present == 'true'
+        shell: bash
+        env:
+          GOWORK: "off"
+        run: |
+          set -euo pipefail
+          go test ./...
+          go vet ./...
+          go build ./...
+          mkdir -p "$RUNNER_TEMP/provider-bin"
+          GOBIN="$RUNNER_TEMP/provider-bin" go install .
+          test -x "$RUNNER_TEMP/provider-bin/terraform-provider-deixic"
+
+      - name: Run Terraform CLI acceptance tests
+        if: steps.source.outputs.present == 'true'
+        shell: bash
+        env:
+          GOWORK: "off"
+          TF_ACC: "1"
+          TF_ACC_TERRAFORM_VERSION: 1.16.3
+        run: |
+          set -euo pipefail
+          go test ./internal/provider -run '^TestAcc' -v -count=1
