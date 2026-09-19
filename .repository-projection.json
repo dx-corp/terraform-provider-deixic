@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "projection": "terraform-provider-deixic",
+  "projectionSchemaVersion": 1,
+  "sourceRepository": "dx-corp/mono",
+  "sourceSha": "6878323651fdb771b8cbf76b08597b930938ce36",
+  "destinationRepository": "dx-corp/terraform-provider-deixic",
+  "priorProjectedBase": "05b71131109e0d466183d3fd46371d66bdb98974",
+  "definitionDigest": "56f988887dac63a90488be51cc0326d10937b2b22e1df689f325b020ca2cf91d",
+  "toolDigest": "16fcaea2f0e7e35de09bcd8e515d915f65cdf1eb13033eaf2845f60eaa9e0a4f",
+  "contentDigest": "907e9c379aa5a74e007ca9ed5dd66e30278c00ffb929acb82b206eadab2c6d76",
+  "publicationEligible": true
+}
