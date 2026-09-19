@@ -77,7 +77,7 @@ jobs:
         if: steps.source.outputs.present == 'true'
         uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
         with:
-          go-version: 1.25.8
+          go-version-file: go.mod
           cache: false
 
       - name: Set up Terraform CLI
@@ -98,6 +98,18 @@ jobs:
             exit 1
           fi
           terraform version | grep -F 'Terraform v1.16.3'
+
+      - name: Check reachable Go vulnerabilities
+        if: steps.source.outputs.present == 'true'
+        shell: bash
+        env:
+          GOWORK: "off"
+        run: |
+          set -euo pipefail
+          tool_bin="$RUNNER_TEMP/govulncheck-bin"
+          mkdir -p "$tool_bin"
+          GOBIN="$tool_bin" go install golang.org/x/vuln/cmd/govulncheck@v1.3.0
+          "$tool_bin/govulncheck" ./...
 
       - name: Test, vet, build, and install provider
         if: steps.source.outputs.present == 'true'
