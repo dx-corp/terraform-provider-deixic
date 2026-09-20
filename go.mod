@@ -3,7 +3,7 @@ module github.com/dx-corp/terraform-provider-deixic
 go 1.26.6
 
 require (
-	buf.build/gen/go/evalops-infra/proto/protocolbuffers/go v1.36.12-20260918173121-3b3bd1a1c9b1.2
+	buf.build/gen/go/evalops-infra/proto/protocolbuffers/go v1.36.12-20260920023329-13493834ffcd.2
 	github.com/hashicorp/terraform-plugin-framework v1.19.0
 	github.com/hashicorp/terraform-plugin-go v0.31.0
 	github.com/hashicorp/terraform-plugin-testing v1.16.0
