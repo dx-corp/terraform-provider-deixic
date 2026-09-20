@@ -1,7 +1,7 @@
 buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.12-20260415201107-50325440f8f2.2 h1:6NSZCbUQcDWZlgiF5XyM9SiNAt20hQvg2JRrBzQZVgU=
 buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.12-20260415201107-50325440f8f2.2/go.mod h1:TCt1lluMFnctISJXvkIQ4x3ABrPuUKCWKyjKdkJNBpw=
-buf.build/gen/go/evalops-infra/proto/protocolbuffers/go v1.36.12-20260918173121-3b3bd1a1c9b1.2 h1:4MsOZzUTGMJjsnRIDWbdwsEZUDoReex0kx18IWuNvXE=
-buf.build/gen/go/evalops-infra/proto/protocolbuffers/go v1.36.12-20260918173121-3b3bd1a1c9b1.2/go.mod h1:6VqHd5D0U1a9I7XFA0pyRug2VigXtXHgDFS72z5sLLo=
+buf.build/gen/go/evalops-infra/proto/protocolbuffers/go v1.36.12-20260920023329-13493834ffcd.2 h1:0LkReWBJ8AUZ7qcay40uqAAfBN8F9R3a68AbWqKAOVw=
+buf.build/gen/go/evalops-infra/proto/protocolbuffers/go v1.36.12-20260920023329-13493834ffcd.2/go.mod h1:6VqHd5D0U1a9I7XFA0pyRug2VigXtXHgDFS72z5sLLo=
 dario.cat/mergo v1.0.0 h1:AGCNq9Evsj31mOgNPcLyXc+4PNABt905YmuqPYYpBWk=
 dario.cat/mergo v1.0.0/go.mod h1:uNxQE+84aUszobStD9th8a29P2fMDhsBdgRYvZOxGmk=
 github.com/Microsoft/go-winio v0.6.2 h1:F2VQgta7ecxGYO8k3ZZz3RS8fVIXVxONVUPlNERoyfY=
