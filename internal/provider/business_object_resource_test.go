@@ -11,7 +11,7 @@ import (
 	"sync/atomic"
 	"testing"
 
-	consolev1 "buf.build/gen/go/evalops-infra/proto/protocolbuffers/go/console/v1"
+	publicv1 "github.com/dx-corp/terraform-provider-deixic/internal/publicproto"
 	"github.com/hashicorp/terraform-plugin-framework/providerserver"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
@@ -42,18 +42,18 @@ func TestBusinessObjectImportIDRejectsMalformedInput(t *testing.T) {
 }
 
 func TestFieldValueRoundTripAllKinds(t *testing.T) {
-	tests := []*consolev1.BusinessFieldValue{
-		{FieldId: "text", Value: &consolev1.BusinessFieldValue_Text{Text: ""}},
-		{FieldId: "integer", Value: &consolev1.BusinessFieldValue_Integer{Integer: 0}},
-		{FieldId: "boolean", Value: &consolev1.BusinessFieldValue_Boolean{Boolean: false}},
-		{FieldId: "decimal", Value: &consolev1.BusinessFieldValue_Decimal{Decimal: "12.50"}},
-		{FieldId: "money", Value: &consolev1.BusinessFieldValue_Money{Money: &consolev1.BusinessMoney{Amount: "5.00", Currency: "USD"}}},
-		{FieldId: "enum", Value: &consolev1.BusinessFieldValue_EnumValue{EnumValue: "ACTIVE"}},
-		{FieldId: "date", Value: &consolev1.BusinessFieldValue_Date{Date: "2026-09-18"}},
-		{FieldId: "timestamp", Value: &consolev1.BusinessFieldValue_Timestamp{Timestamp: "2026-09-18T18:00:00Z"}},
-		{FieldId: "reference", Value: &consolev1.BusinessFieldValue_Reference{Reference: &consolev1.BusinessObjectReference{ObjectId: "object-1"}}},
-		{FieldId: "artifact", Value: &consolev1.BusinessFieldValue_Artifact{Artifact: &consolev1.BusinessArtifactReference{ArtifactVersionId: "artifact-version-1"}}},
-		{FieldId: "list", Value: &consolev1.BusinessFieldValue_TextList{TextList: &consolev1.BusinessTextList{Values: []string{"a", "b"}}}},
+	tests := []*publicv1.BusinessFieldValue{
+		{FieldId: "text", Value: &publicv1.BusinessFieldValue_Text{Text: ""}},
+		{FieldId: "integer", Value: &publicv1.BusinessFieldValue_Integer{Integer: 0}},
+		{FieldId: "boolean", Value: &publicv1.BusinessFieldValue_Boolean{Boolean: false}},
+		{FieldId: "decimal", Value: &publicv1.BusinessFieldValue_Decimal{Decimal: "12.50"}},
+		{FieldId: "money", Value: &publicv1.BusinessFieldValue_Money{Money: &publicv1.BusinessMoney{Amount: "5.00", Currency: "USD"}}},
+		{FieldId: "enum", Value: &publicv1.BusinessFieldValue_EnumValue{EnumValue: "ACTIVE"}},
+		{FieldId: "date", Value: &publicv1.BusinessFieldValue_Date{Date: "2026-09-18"}},
+		{FieldId: "timestamp", Value: &publicv1.BusinessFieldValue_Timestamp{Timestamp: "2026-09-18T18:00:00Z"}},
+		{FieldId: "reference", Value: &publicv1.BusinessFieldValue_Reference{Reference: &publicv1.BusinessObjectReference{ObjectId: "object-1"}}},
+		{FieldId: "artifact", Value: &publicv1.BusinessFieldValue_Artifact{Artifact: &publicv1.BusinessArtifactReference{ArtifactVersionId: "artifact-version-1"}}},
+		{FieldId: "list", Value: &publicv1.BusinessFieldValue_TextList{TextList: &publicv1.BusinessTextList{Values: []string{"a", "b"}}}},
 	}
 	for _, test := range tests {
 		t.Run(test.GetFieldId(), func(t *testing.T) {
@@ -114,8 +114,8 @@ func TestChangedProviderBindingMakesNoOwnerRequest(t *testing.T) {
 				context.Background(),
 				test.state,
 				"GetBusinessObject",
-				&consolev1.GetBusinessObjectRequest{},
-				&consolev1.GetBusinessObjectResponse{},
+				&publicv1.GetBusinessObjectRequest{},
+				&publicv1.GetBusinessObjectResponse{},
 			)
 			if err == nil || !strings.Contains(err.Error(), "resource state belongs to") {
 				t.Fatalf("expected state binding error, got %v", err)
@@ -128,8 +128,8 @@ func TestChangedProviderBindingMakesNoOwnerRequest(t *testing.T) {
 }
 
 func TestDeleteResponseRequiresOwnerTombstone(t *testing.T) {
-	request := &consolev1.DeleteBusinessObjectRequest{ObjectId: "business_object_1", ExpectedRevision: 4}
-	object := &consolev1.BusinessObject{
+	request := &publicv1.DeleteBusinessObjectRequest{ObjectId: "business_object_1", ExpectedRevision: 4}
+	object := &publicv1.BusinessObject{
 		ObjectId:       request.GetObjectId(),
 		TypeId:         "customer",
 		SchemaRevision: 1,
@@ -145,8 +145,8 @@ func TestDeleteResponseRequiresOwnerTombstone(t *testing.T) {
 }
 
 func TestOwnerResponsesMustMatchRequestedIdentity(t *testing.T) {
-	readRequest := &consolev1.GetBusinessObjectRequest{ObjectId: "business_object_expected"}
-	object := &consolev1.BusinessObject{
+	readRequest := &publicv1.GetBusinessObjectRequest{ObjectId: "business_object_expected"}
+	object := &publicv1.BusinessObject{
 		ObjectId:       "business_object_other",
 		TypeId:         "customer",
 		SchemaRevision: 1,
@@ -156,7 +156,7 @@ func TestOwnerResponsesMustMatchRequestedIdentity(t *testing.T) {
 	if err := validateReadResponse(state, readRequest, object); err == nil || !strings.Contains(err.Error(), "requested object") {
 		t.Fatalf("expected owner identity mismatch, got %v", err)
 	}
-	createRequest := &consolev1.CreateBusinessObjectRequest{TypeId: "customer", SchemaRevision: 1}
+	createRequest := &publicv1.CreateBusinessObjectRequest{TypeId: "customer", SchemaRevision: 1}
 	object.ObjectId = ""
 	if err := validateCreateResponse(createRequest, object); err == nil || !strings.Contains(err.Error(), "without an ID") {
 		t.Fatalf("expected missing owner ID error, got %v", err)

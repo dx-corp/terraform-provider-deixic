@@ -6,7 +6,7 @@ owner has a complete lifecycle: `deixic_business_object`.
 
 The provider uses Terraform Plugin Protocol 6 and Deixic's canonical binary
 protobuf contract. Calls go to
-`/deixic.v1.DeixicService/{Create,Get,Update,Delete}BusinessObject` with
+`/deixicpublic.v1.DeixicPublicService/{Create,Get,Update,Delete}BusinessObject` with
 `Content-Type: application/proto`, `Connect-Protocol-Version: 1`, bearer
 authentication, and explicit organization and workspace scope.
 
@@ -48,9 +48,9 @@ the complete resource shape, import format, and lifecycle limits.
 
 ## Development
 
-The provider depends on the versioned public BSR-generated Go module for the
-canonical Deixic protobuf messages. It has no dependency on the private Mono
-module.
+The provider vendors only the generated `deixicpublic.v1` binding from Mono's
+reviewed public proto source. The package audit parses its embedded descriptor
+and the release gate also checks the compiled provider binary.
 
 ```sh
 go test ./...

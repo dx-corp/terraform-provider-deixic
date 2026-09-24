@@ -11,7 +11,7 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	consolev1 "buf.build/gen/go/evalops-infra/proto/protocolbuffers/go/console/v1"
+	publicv1 "github.com/dx-corp/terraform-provider-deixic/internal/publicproto"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -84,7 +84,7 @@ func (r *businessObjectResource) Metadata(_ context.Context, req resource.Metada
 
 func (r *businessObjectResource) Schema(_ context.Context, _ resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		Description: "A tenant-scoped, durable Deixic business object backed by the canonical DeixicService CRUD facade.",
+		Description: "A tenant-scoped, durable Deixic business object backed by the canonical Deixic public CRUD service.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				Computed:    true,
@@ -175,7 +175,7 @@ func (r *businessObjectResource) Create(ctx context.Context, req resource.Create
 		resp.Diagnostics.AddError("Create business object", err.Error())
 		return
 	}
-	request := &consolev1.CreateBusinessObjectRequest{
+	request := &publicv1.CreateBusinessObjectRequest{
 		OrganizationId: r.client.OrganizationID(),
 		WorkspaceId:    r.client.WorkspaceID(),
 		IdempotencyKey: idempotencyKey,
@@ -183,7 +183,7 @@ func (r *businessObjectResource) Create(ctx context.Context, req resource.Create
 		SchemaRevision: plan.SchemaRevision.ValueInt64(),
 		Values:         values,
 	}
-	response := &consolev1.CreateBusinessObjectResponse{}
+	response := &publicv1.CreateBusinessObjectResponse{}
 	if err := r.client.Invoke(ctx, "CreateBusinessObject", request, response); err != nil {
 		resp.Diagnostics.AddError("Create Deixic business object", err.Error())
 		return
@@ -206,12 +206,12 @@ func (r *businessObjectResource) Read(ctx context.Context, req resource.ReadRequ
 	if resp.Diagnostics.HasError() {
 		return
 	}
-	request := &consolev1.GetBusinessObjectRequest{
+	request := &publicv1.GetBusinessObjectRequest{
 		OrganizationId: r.client.OrganizationID(),
 		WorkspaceId:    r.client.WorkspaceID(),
 		ObjectId:       state.ID.ValueString(),
 	}
-	response := &consolev1.GetBusinessObjectResponse{}
+	response := &publicv1.GetBusinessObjectResponse{}
 	if err := r.invokeForState(ctx, state, "GetBusinessObject", request, response); err != nil {
 		if errors.Is(err, ErrNotFound) {
 			resp.State.RemoveResource(ctx)
@@ -257,7 +257,7 @@ func (r *businessObjectResource) Update(ctx context.Context, req resource.Update
 		resp.Diagnostics.AddError("Update business object", err.Error())
 		return
 	}
-	request := &consolev1.UpdateBusinessObjectRequest{
+	request := &publicv1.UpdateBusinessObjectRequest{
 		OrganizationId:   r.client.OrganizationID(),
 		WorkspaceId:      r.client.WorkspaceID(),
 		IdempotencyKey:   idempotencyKey,
@@ -266,7 +266,7 @@ func (r *businessObjectResource) Update(ctx context.Context, req resource.Update
 		Values:           values,
 		SchemaRevision:   plan.SchemaRevision.ValueInt64(),
 	}
-	response := &consolev1.UpdateBusinessObjectResponse{}
+	response := &publicv1.UpdateBusinessObjectResponse{}
 	if err := r.invokeForState(ctx, state, "UpdateBusinessObject", request, response); err != nil {
 		resp.Diagnostics.AddError("Update Deixic business object", err.Error())
 		return
@@ -298,14 +298,14 @@ func (r *businessObjectResource) Delete(ctx context.Context, req resource.Delete
 		resp.Diagnostics.AddError("Delete business object", err.Error())
 		return
 	}
-	request := &consolev1.DeleteBusinessObjectRequest{
+	request := &publicv1.DeleteBusinessObjectRequest{
 		OrganizationId:   r.client.OrganizationID(),
 		WorkspaceId:      r.client.WorkspaceID(),
 		IdempotencyKey:   idempotencyKey,
 		ObjectId:         state.ID.ValueString(),
 		ExpectedRevision: state.Revision.ValueInt64(),
 	}
-	response := &consolev1.DeleteBusinessObjectResponse{}
+	response := &publicv1.DeleteBusinessObjectResponse{}
 	if err := r.invokeForState(ctx, state, "DeleteBusinessObject", request, response); err != nil {
 		if errors.Is(err, ErrNotFound) {
 			return
@@ -341,7 +341,7 @@ func (r *businessObjectResource) ImportState(ctx context.Context, req resource.I
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("workspace_id"), workspaceID)...)
 }
 
-func valuesToProto(ctx context.Context, values types.Map, diagnostics *diag.Diagnostics) []*consolev1.BusinessFieldValue {
+func valuesToProto(ctx context.Context, values types.Map, diagnostics *diag.Diagnostics) []*publicv1.BusinessFieldValue {
 	if values.IsNull() || values.IsUnknown() {
 		diagnostics.AddError("Invalid business object values", "values must be known and non-null.")
 		return nil
@@ -356,7 +356,7 @@ func valuesToProto(ctx context.Context, values types.Map, diagnostics *diag.Diag
 		fieldIDs = append(fieldIDs, fieldID)
 	}
 	sort.Strings(fieldIDs)
-	result := make([]*consolev1.BusinessFieldValue, 0, len(fieldIDs))
+	result := make([]*publicv1.BusinessFieldValue, 0, len(fieldIDs))
 	for _, fieldID := range fieldIDs {
 		value, err := fieldValueToProto(ctx, fieldID, models[fieldID])
 		if err != nil {
@@ -368,11 +368,11 @@ func valuesToProto(ctx context.Context, values types.Map, diagnostics *diag.Diag
 	return result
 }
 
-func fieldValueToProto(ctx context.Context, fieldID string, model fieldValueModel) (*consolev1.BusinessFieldValue, error) {
+func fieldValueToProto(ctx context.Context, fieldID string, model fieldValueModel) (*publicv1.BusinessFieldValue, error) {
 	if strings.TrimSpace(fieldID) == "" {
 		return nil, errors.New("field ID must not be empty or whitespace")
 	}
-	value := &consolev1.BusinessFieldValue{FieldId: fieldID}
+	value := &publicv1.BusinessFieldValue{FieldId: fieldID}
 	kinds := 0
 	set := func(present bool, apply func()) {
 		if present {
@@ -380,32 +380,32 @@ func fieldValueToProto(ctx context.Context, fieldID string, model fieldValueMode
 			apply()
 		}
 	}
-	set(known(model.Text), func() { value.Value = &consolev1.BusinessFieldValue_Text{Text: model.Text.ValueString()} })
-	set(known(model.Integer), func() { value.Value = &consolev1.BusinessFieldValue_Integer{Integer: model.Integer.ValueInt64()} })
-	set(known(model.Boolean), func() { value.Value = &consolev1.BusinessFieldValue_Boolean{Boolean: model.Boolean.ValueBool()} })
-	set(known(model.Decimal), func() { value.Value = &consolev1.BusinessFieldValue_Decimal{Decimal: model.Decimal.ValueString()} })
+	set(known(model.Text), func() { value.Value = &publicv1.BusinessFieldValue_Text{Text: model.Text.ValueString()} })
+	set(known(model.Integer), func() { value.Value = &publicv1.BusinessFieldValue_Integer{Integer: model.Integer.ValueInt64()} })
+	set(known(model.Boolean), func() { value.Value = &publicv1.BusinessFieldValue_Boolean{Boolean: model.Boolean.ValueBool()} })
+	set(known(model.Decimal), func() { value.Value = &publicv1.BusinessFieldValue_Decimal{Decimal: model.Decimal.ValueString()} })
 	moneyAmount := known(model.MoneyAmount)
 	moneyCurrency := known(model.MoneyCurrency)
 	if moneyAmount != moneyCurrency {
 		return nil, errors.New("money_amount and money_currency must be set together")
 	}
 	set(moneyAmount, func() {
-		value.Value = &consolev1.BusinessFieldValue_Money{Money: &consolev1.BusinessMoney{
+		value.Value = &publicv1.BusinessFieldValue_Money{Money: &publicv1.BusinessMoney{
 			Amount: model.MoneyAmount.ValueString(), Currency: model.MoneyCurrency.ValueString(),
 		}}
 	})
 	set(known(model.EnumValue), func() {
-		value.Value = &consolev1.BusinessFieldValue_EnumValue{EnumValue: model.EnumValue.ValueString()}
+		value.Value = &publicv1.BusinessFieldValue_EnumValue{EnumValue: model.EnumValue.ValueString()}
 	})
-	set(known(model.Date), func() { value.Value = &consolev1.BusinessFieldValue_Date{Date: model.Date.ValueString()} })
+	set(known(model.Date), func() { value.Value = &publicv1.BusinessFieldValue_Date{Date: model.Date.ValueString()} })
 	set(known(model.Timestamp), func() {
-		value.Value = &consolev1.BusinessFieldValue_Timestamp{Timestamp: model.Timestamp.ValueString()}
+		value.Value = &publicv1.BusinessFieldValue_Timestamp{Timestamp: model.Timestamp.ValueString()}
 	})
 	set(known(model.ReferenceObjectID), func() {
-		value.Value = &consolev1.BusinessFieldValue_Reference{Reference: &consolev1.BusinessObjectReference{ObjectId: model.ReferenceObjectID.ValueString()}}
+		value.Value = &publicv1.BusinessFieldValue_Reference{Reference: &publicv1.BusinessObjectReference{ObjectId: model.ReferenceObjectID.ValueString()}}
 	})
 	set(known(model.ArtifactVersionID), func() {
-		value.Value = &consolev1.BusinessFieldValue_Artifact{Artifact: &consolev1.BusinessArtifactReference{ArtifactVersionId: model.ArtifactVersionID.ValueString()}}
+		value.Value = &publicv1.BusinessFieldValue_Artifact{Artifact: &publicv1.BusinessArtifactReference{ArtifactVersionId: model.ArtifactVersionID.ValueString()}}
 	})
 	if !model.TextList.IsNull() && !model.TextList.IsUnknown() {
 		var entries []string
@@ -414,7 +414,7 @@ func fieldValueToProto(ctx context.Context, fieldID string, model fieldValueMode
 			return nil, fmt.Errorf("text_list must contain only known strings: %s", diagnostics.Errors()[0].Detail())
 		}
 		set(true, func() {
-			value.Value = &consolev1.BusinessFieldValue_TextList{TextList: &consolev1.BusinessTextList{Values: entries}}
+			value.Value = &publicv1.BusinessFieldValue_TextList{TextList: &publicv1.BusinessTextList{Values: entries}}
 		})
 	}
 	if kinds != 1 {
@@ -430,7 +430,7 @@ type nullable interface {
 
 func known(value nullable) bool { return !value.IsNull() && !value.IsUnknown() }
 
-func objectToModel(ctx context.Context, object *consolev1.BusinessObject, client *Client, diagnostics *diag.Diagnostics) businessObjectModel {
+func objectToModel(ctx context.Context, object *publicv1.BusinessObject, client *Client, diagnostics *diag.Diagnostics) businessObjectModel {
 	values := make(map[string]fieldValueModel, len(object.GetValues()))
 	for _, value := range object.GetValues() {
 		if value == nil {
@@ -505,7 +505,7 @@ func validateStateBinding(state businessObjectModel, client *Client) error {
 	return nil
 }
 
-func validateCreateResponse(request *consolev1.CreateBusinessObjectRequest, object *consolev1.BusinessObject) error {
+func validateCreateResponse(request *publicv1.CreateBusinessObjectRequest, object *publicv1.BusinessObject) error {
 	if err := validateAcceptedObject(object); err != nil {
 		return err
 	}
@@ -521,7 +521,7 @@ func validateCreateResponse(request *consolev1.CreateBusinessObjectRequest, obje
 	return nil
 }
 
-func validateReadResponse(state businessObjectModel, request *consolev1.GetBusinessObjectRequest, object *consolev1.BusinessObject) error {
+func validateReadResponse(state businessObjectModel, request *publicv1.GetBusinessObjectRequest, object *publicv1.BusinessObject) error {
 	if err := validateAcceptedObject(object); err != nil {
 		return err
 	}
@@ -534,7 +534,7 @@ func validateReadResponse(state businessObjectModel, request *consolev1.GetBusin
 	return nil
 }
 
-func validateUpdateResponse(state businessObjectModel, request *consolev1.UpdateBusinessObjectRequest, object *consolev1.BusinessObject) error {
+func validateUpdateResponse(state businessObjectModel, request *publicv1.UpdateBusinessObjectRequest, object *publicv1.BusinessObject) error {
 	if err := validateAcceptedObject(object); err != nil {
 		return err
 	}
@@ -556,7 +556,7 @@ func validateUpdateResponse(state businessObjectModel, request *consolev1.Update
 	return nil
 }
 
-func validateDeleteResponse(request *consolev1.DeleteBusinessObjectRequest, object *consolev1.BusinessObject) error {
+func validateDeleteResponse(request *publicv1.DeleteBusinessObjectRequest, object *publicv1.BusinessObject) error {
 	if err := validateAcceptedObject(object); err != nil {
 		return err
 	}
@@ -572,7 +572,7 @@ func validateDeleteResponse(request *consolev1.DeleteBusinessObjectRequest, obje
 	return nil
 }
 
-func validateAcceptedObject(object *consolev1.BusinessObject) error {
+func validateAcceptedObject(object *publicv1.BusinessObject) error {
 	if object == nil {
 		return errors.New("the owner returned no business object")
 	}
@@ -591,40 +591,40 @@ func validateAcceptedObject(object *consolev1.BusinessObject) error {
 	return nil
 }
 
-func fieldValueFromProto(ctx context.Context, value *consolev1.BusinessFieldValue) (fieldValueModel, error) {
+func fieldValueFromProto(ctx context.Context, value *publicv1.BusinessFieldValue) (fieldValueModel, error) {
 	model := emptyFieldValueModel()
 	switch typed := value.GetValue().(type) {
-	case *consolev1.BusinessFieldValue_Text:
+	case *publicv1.BusinessFieldValue_Text:
 		model.Text = types.StringValue(typed.Text)
-	case *consolev1.BusinessFieldValue_Integer:
+	case *publicv1.BusinessFieldValue_Integer:
 		model.Integer = types.Int64Value(typed.Integer)
-	case *consolev1.BusinessFieldValue_Boolean:
+	case *publicv1.BusinessFieldValue_Boolean:
 		model.Boolean = types.BoolValue(typed.Boolean)
-	case *consolev1.BusinessFieldValue_Decimal:
+	case *publicv1.BusinessFieldValue_Decimal:
 		model.Decimal = types.StringValue(typed.Decimal)
-	case *consolev1.BusinessFieldValue_Money:
+	case *publicv1.BusinessFieldValue_Money:
 		if typed.Money == nil {
 			return model, fmt.Errorf("field %q has an empty money value", value.GetFieldId())
 		}
 		model.MoneyAmount = types.StringValue(typed.Money.GetAmount())
 		model.MoneyCurrency = types.StringValue(typed.Money.GetCurrency())
-	case *consolev1.BusinessFieldValue_EnumValue:
+	case *publicv1.BusinessFieldValue_EnumValue:
 		model.EnumValue = types.StringValue(typed.EnumValue)
-	case *consolev1.BusinessFieldValue_Date:
+	case *publicv1.BusinessFieldValue_Date:
 		model.Date = types.StringValue(typed.Date)
-	case *consolev1.BusinessFieldValue_Timestamp:
+	case *publicv1.BusinessFieldValue_Timestamp:
 		model.Timestamp = types.StringValue(typed.Timestamp)
-	case *consolev1.BusinessFieldValue_Reference:
+	case *publicv1.BusinessFieldValue_Reference:
 		if typed.Reference == nil {
 			return model, fmt.Errorf("field %q has an empty reference value", value.GetFieldId())
 		}
 		model.ReferenceObjectID = types.StringValue(typed.Reference.GetObjectId())
-	case *consolev1.BusinessFieldValue_Artifact:
+	case *publicv1.BusinessFieldValue_Artifact:
 		if typed.Artifact == nil {
 			return model, fmt.Errorf("field %q has an empty artifact value", value.GetFieldId())
 		}
 		model.ArtifactVersionID = types.StringValue(typed.Artifact.GetArtifactVersionId())
-	case *consolev1.BusinessFieldValue_TextList:
+	case *publicv1.BusinessFieldValue_TextList:
 		if typed.TextList == nil {
 			return model, fmt.Errorf("field %q has an empty text-list value", value.GetFieldId())
 		}

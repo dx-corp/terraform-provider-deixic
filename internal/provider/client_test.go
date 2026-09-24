@@ -8,7 +8,7 @@ import (
 	"sync/atomic"
 	"testing"
 
-	consolev1 "buf.build/gen/go/evalops-infra/proto/protocolbuffers/go/console/v1"
+	publicv1 "github.com/dx-corp/terraform-provider-deixic/internal/publicproto"
 )
 
 func TestClientUsesBinaryConnectContract(t *testing.T) {
@@ -19,16 +19,16 @@ func TestClientUsesBinaryConnectContract(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	response := &consolev1.CreateBusinessObjectResponse{}
-	err = client.Invoke(context.Background(), "CreateBusinessObject", &consolev1.CreateBusinessObjectRequest{
+	response := &publicv1.CreateBusinessObjectResponse{}
+	err = client.Invoke(context.Background(), "CreateBusinessObject", &publicv1.CreateBusinessObjectRequest{
 		OrganizationId: fixture.organizationID,
 		WorkspaceId:    fixture.workspaceID,
 		IdempotencyKey: "test-idempotency",
 		TypeId:         "customer",
 		SchemaRevision: 1,
-		Values: []*consolev1.BusinessFieldValue{{
+		Values: []*publicv1.BusinessFieldValue{{
 			FieldId: "name",
-			Value:   &consolev1.BusinessFieldValue_Text{Text: "Acme"},
+			Value:   &publicv1.BusinessFieldValue_Text{Text: "Acme"},
 		}},
 	}, response)
 	if err != nil {
@@ -47,11 +47,11 @@ func TestClientClassifiesConnectNotFound(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	err = client.Invoke(context.Background(), "GetBusinessObject", &consolev1.GetBusinessObjectRequest{
+	err = client.Invoke(context.Background(), "GetBusinessObject", &publicv1.GetBusinessObjectRequest{
 		OrganizationId: fixture.organizationID,
 		WorkspaceId:    fixture.workspaceID,
 		ObjectId:       "missing",
-	}, &consolev1.GetBusinessObjectResponse{})
+	}, &publicv1.GetBusinessObjectResponse{})
 	if !errors.Is(err, ErrNotFound) {
 		t.Fatalf("expected ErrNotFound, got %v", err)
 	}
@@ -82,7 +82,7 @@ func TestClientDoesNotClassifyUntrusted404AsMissing(t *testing.T) {
 			if err != nil {
 				t.Fatal(err)
 			}
-			err = client.Invoke(context.Background(), "GetBusinessObject", &consolev1.GetBusinessObjectRequest{}, &consolev1.GetBusinessObjectResponse{})
+			err = client.Invoke(context.Background(), "GetBusinessObject", &publicv1.GetBusinessObjectRequest{}, &publicv1.GetBusinessObjectResponse{})
 			if err == nil || errors.Is(err, ErrNotFound) {
 				t.Fatalf("untrusted 404 was treated as deletion: %v", err)
 			}
@@ -98,11 +98,11 @@ func TestClientRejectsBadAuthentication(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	err = client.Invoke(context.Background(), "GetBusinessObject", &consolev1.GetBusinessObjectRequest{
+	err = client.Invoke(context.Background(), "GetBusinessObject", &publicv1.GetBusinessObjectRequest{
 		OrganizationId: fixture.organizationID,
 		WorkspaceId:    fixture.workspaceID,
 		ObjectId:       "missing",
-	}, &consolev1.GetBusinessObjectResponse{})
+	}, &publicv1.GetBusinessObjectResponse{})
 	var apiError *APIError
 	if !errors.As(err, &apiError) || apiError.Code != "unauthenticated" {
 		t.Fatalf("expected unauthenticated API error, got %v", err)
@@ -135,7 +135,7 @@ func TestClientRejectsRedirectWithoutFollowingIt(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	err = client.Invoke(context.Background(), "GetBusinessObject", &consolev1.GetBusinessObjectRequest{}, &consolev1.GetBusinessObjectResponse{})
+	err = client.Invoke(context.Background(), "GetBusinessObject", &publicv1.GetBusinessObjectRequest{}, &publicv1.GetBusinessObjectResponse{})
 	if err == nil {
 		t.Fatal("expected redirect response error")
 	}
