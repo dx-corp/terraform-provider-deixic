@@ -16,7 +16,7 @@ import (
 )
 
 const (
-	deixicServicePath = "/deixic.v1.DeixicService/"
+	deixicServicePath = "/deixicpublic.v1.DeixicPublicService/"
 	maxResponseBytes  = 4 << 20
 )
 

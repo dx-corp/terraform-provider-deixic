@@ -10,7 +10,7 @@ import (
 	"sync"
 	"testing"
 
-	consolev1 "buf.build/gen/go/evalops-infra/proto/protocolbuffers/go/console/v1"
+	publicv1 "github.com/dx-corp/terraform-provider-deixic/internal/publicproto"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -21,7 +21,7 @@ type contractServer struct {
 	organizationID string
 	workspaceID    string
 	nextID         int
-	objects        map[string]*consolev1.BusinessObject
+	objects        map[string]*publicv1.BusinessObject
 }
 
 func newContractServer(t *testing.T) *contractServer {
@@ -31,7 +31,7 @@ func newContractServer(t *testing.T) *contractServer {
 		token:          "test-token",
 		organizationID: "org/terraform.test",
 		workspaceID:    "workspace:terraform.test",
-		objects:        map[string]*consolev1.BusinessObject{},
+		objects:        map[string]*publicv1.BusinessObject{},
 	}
 }
 
@@ -74,7 +74,7 @@ func (s *contractServer) ServeHTTP(writer http.ResponseWriter, request *http.Req
 }
 
 func (s *contractServer) create(writer http.ResponseWriter, body []byte) {
-	request := &consolev1.CreateBusinessObjectRequest{}
+	request := &publicv1.CreateBusinessObjectRequest{}
 	if !s.decodeRequest(writer, body, request) || !s.validScope(writer, request.GetOrganizationId(), request.GetWorkspaceId()) {
 		return
 	}
@@ -85,7 +85,7 @@ func (s *contractServer) create(writer http.ResponseWriter, body []byte) {
 	s.mu.Lock()
 	defer s.mu.Unlock()
 	s.nextID++
-	object := &consolev1.BusinessObject{
+	object := &publicv1.BusinessObject{
 		ObjectId:       fmt.Sprintf("business_object_test%03d", s.nextID),
 		TypeId:         request.GetTypeId(),
 		SchemaRevision: request.GetSchemaRevision(),
@@ -95,11 +95,11 @@ func (s *contractServer) create(writer http.ResponseWriter, body []byte) {
 		UpdatedAt:      "2026-09-18T18:00:00Z",
 	}
 	s.objects[object.GetObjectId()] = object
-	s.writeProto(writer, &consolev1.CreateBusinessObjectResponse{Object: s.cloneObject(object)})
+	s.writeProto(writer, &publicv1.CreateBusinessObjectResponse{Object: s.cloneObject(object)})
 }
 
 func (s *contractServer) get(writer http.ResponseWriter, body []byte) {
-	request := &consolev1.GetBusinessObjectRequest{}
+	request := &publicv1.GetBusinessObjectRequest{}
 	if !s.decodeRequest(writer, body, request) || !s.validScope(writer, request.GetOrganizationId(), request.GetWorkspaceId()) {
 		return
 	}
@@ -110,11 +110,11 @@ func (s *contractServer) get(writer http.ResponseWriter, body []byte) {
 		s.writeError(writer, http.StatusNotFound, "not_found", "Business object or definition not found")
 		return
 	}
-	s.writeProto(writer, &consolev1.GetBusinessObjectResponse{Object: s.cloneObject(object)})
+	s.writeProto(writer, &publicv1.GetBusinessObjectResponse{Object: s.cloneObject(object)})
 }
 
 func (s *contractServer) update(writer http.ResponseWriter, body []byte) {
-	request := &consolev1.UpdateBusinessObjectRequest{}
+	request := &publicv1.UpdateBusinessObjectRequest{}
 	if !s.decodeRequest(writer, body, request) || !s.validScope(writer, request.GetOrganizationId(), request.GetWorkspaceId()) {
 		return
 	}
@@ -137,11 +137,11 @@ func (s *contractServer) update(writer http.ResponseWriter, body []byte) {
 	object.Revision++
 	object.Values = s.cloneValues(request.GetValues())
 	object.UpdatedAt = "2026-09-18T18:01:00Z"
-	s.writeProto(writer, &consolev1.UpdateBusinessObjectResponse{Object: s.cloneObject(object)})
+	s.writeProto(writer, &publicv1.UpdateBusinessObjectResponse{Object: s.cloneObject(object)})
 }
 
 func (s *contractServer) delete(writer http.ResponseWriter, body []byte) {
-	request := &consolev1.DeleteBusinessObjectRequest{}
+	request := &publicv1.DeleteBusinessObjectRequest{}
 	if !s.decodeRequest(writer, body, request) || !s.validScope(writer, request.GetOrganizationId(), request.GetWorkspaceId()) {
 		return
 	}
@@ -163,7 +163,7 @@ func (s *contractServer) delete(writer http.ResponseWriter, body []byte) {
 	object.Deleted = true
 	object.Revision++
 	object.UpdatedAt = "2026-09-18T18:02:00Z"
-	s.writeProto(writer, &consolev1.DeleteBusinessObjectResponse{Object: s.cloneObject(object)})
+	s.writeProto(writer, &publicv1.DeleteBusinessObjectResponse{Object: s.cloneObject(object)})
 }
 
 func (s *contractServer) decodeRequest(writer http.ResponseWriter, body []byte, request proto.Message) bool {
@@ -223,18 +223,18 @@ func (s *contractServer) allDeleted() bool {
 	return true
 }
 
-func (s *contractServer) cloneObject(object *consolev1.BusinessObject) *consolev1.BusinessObject {
-	cloned, ok := proto.Clone(object).(*consolev1.BusinessObject)
+func (s *contractServer) cloneObject(object *publicv1.BusinessObject) *publicv1.BusinessObject {
+	cloned, ok := proto.Clone(object).(*publicv1.BusinessObject)
 	if !ok {
 		s.t.Fatalf("clone fixture object returned %T", cloned)
 	}
 	return cloned
 }
 
-func (s *contractServer) cloneValues(values []*consolev1.BusinessFieldValue) []*consolev1.BusinessFieldValue {
-	result := make([]*consolev1.BusinessFieldValue, 0, len(values))
+func (s *contractServer) cloneValues(values []*publicv1.BusinessFieldValue) []*publicv1.BusinessFieldValue {
+	result := make([]*publicv1.BusinessFieldValue, 0, len(values))
 	for _, value := range values {
-		cloned, ok := proto.Clone(value).(*consolev1.BusinessFieldValue)
+		cloned, ok := proto.Clone(value).(*publicv1.BusinessFieldValue)
 		if !ok {
 			s.t.Fatalf("clone fixture field value returned %T", cloned)
 		}
