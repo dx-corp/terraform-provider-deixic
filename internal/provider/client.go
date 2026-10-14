@@ -30,6 +30,8 @@ type Client struct {
 	organizationID string
 	workspaceID    string
 	httpClient     *http.Client
+	// connectorsEndpoint is the connectors service base URL; empty means endpoint.
+	connectorsEndpoint string
 }
 
 type APIError struct {
@@ -178,4 +180,68 @@ func decodeAPIError(statusCode int, contentType, protocolVersion string, body []
 		Message:          payload.Message,
 		CanonicalConnect: canonicalConnect,
 	}
+}
+
+// WithConnectorsEndpoint sets the connectors service base URL, validated like the main endpoint.
+func (c *Client) WithConnectorsEndpoint(endpoint string) error {
+	if endpoint == "" {
+		return nil
+	}
+	validated, err := NewClient(endpoint, c.token, c.organizationID, c.workspaceID, c.httpClient)
+	if err != nil {
+		return fmt.Errorf("connectors endpoint: %w", err)
+	}
+	c.connectorsEndpoint = validated.endpoint
+	return nil
+}
+
+// InvokeConnectors POSTs a JSON request to the connectors service and decodes the JSON response.
+func (c *Client) InvokeConnectors(ctx context.Context, path string, request, response any) error {
+	base := c.connectorsEndpoint
+	if base == "" {
+		base = c.endpoint
+	}
+	body, err := json.Marshal(request)
+	if err != nil {
+		return fmt.Errorf("encode %s request: %w", path, err)
+	}
+	httpRequest, err := http.NewRequestWithContext(ctx, http.MethodPost, base+path, bytes.NewReader(body))
+	if err != nil {
+		return fmt.Errorf("build %s request: %w", path, err)
+	}
+	httpRequest.Header.Set("Authorization", "Bearer "+c.token)
+	httpRequest.Header.Set("Content-Type", "application/json")
+	httpRequest.Header.Set("Accept", "application/json")
+	httpRequest.Header.Set("X-Organization-Id", c.organizationID)
+	httpRequest.Header.Set("X-Workspace-Id", c.workspaceID)
+	httpRequest.Header.Set("User-Agent", "terraform-provider-deixic")
+	httpResponse, err := c.httpClient.Do(httpRequest)
+	if err != nil {
+		return fmt.Errorf("call connectors %s: %w", path, err)
+	}
+	defer func() { _ = httpResponse.Body.Close() }()
+	responseBody, err := io.ReadAll(io.LimitReader(httpResponse.Body, maxResponseBytes+1))
+	if err != nil || len(responseBody) > maxResponseBytes {
+		return fmt.Errorf("read connectors %s response", path)
+	}
+	if httpResponse.StatusCode >= 300 {
+		detail := struct {
+			Code    string `json:"code"`
+			Error   string `json:"error"`
+			Message string `json:"message"`
+		}{}
+		_ = json.Unmarshal(responseBody, &detail)
+		code := detail.Code
+		if code == "" {
+			code = detail.Error
+		}
+		if code == "" {
+			code = http.StatusText(httpResponse.StatusCode)
+		}
+		return &APIError{StatusCode: httpResponse.StatusCode, Code: code, Message: detail.Message}
+	}
+	if err := json.Unmarshal(responseBody, response); err != nil {
+		return fmt.Errorf("decode connectors %s response: %w", path, err)
+	}
+	return nil
 }

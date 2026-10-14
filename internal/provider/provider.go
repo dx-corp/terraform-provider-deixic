@@ -29,6 +29,7 @@ type providerModel struct {
 	Token          types.String `tfsdk:"token"`
 	OrganizationID types.String `tfsdk:"organization_id"`
 	WorkspaceID    types.String `tfsdk:"workspace_id"`
+	ConnectorsURL  types.String `tfsdk:"connectors_endpoint"`
 }
 
 // New returns the protocol-v6 Deixic Terraform provider factory.
@@ -60,6 +61,10 @@ func (p *deixicProvider) Schema(_ context.Context, _ provider.SchemaRequest, res
 				Optional:    true,
 				Description: "Deixic organization ID. May also be set with DEIXIC_ORGANIZATION_ID.",
 			},
+			"connectors_endpoint": providerschema.StringAttribute{
+				Optional:    true,
+				Description: "Base URL of the connectors service used by deixic_connection. Defaults to endpoint. May also be set with DEIXIC_CONNECTORS_ENDPOINT.",
+			},
 			"workspace_id": providerschema.StringAttribute{
 				Optional:    true,
 				Description: "Deixic workspace ID. May also be set with DEIXIC_WORKSPACE_ID.",
@@ -83,6 +88,7 @@ func (p *deixicProvider) Configure(ctx context.Context, req provider.ConfigureRe
 		return
 	}
 
+	connectorsEndpoint := configuredString(config.ConnectorsURL, "connectors_endpoint", "DEIXIC_CONNECTORS_ENDPOINT", &resp.Diagnostics)
 	requireProviderValue(&resp.Diagnostics, "endpoint", "DEIXIC_ENDPOINT", endpoint)
 	requireProviderValue(&resp.Diagnostics, "token", "DEIXIC_TOKEN", token)
 	requireProviderValue(&resp.Diagnostics, "organization_id", "DEIXIC_ORGANIZATION_ID", organizationID)
@@ -96,12 +102,16 @@ func (p *deixicProvider) Configure(ctx context.Context, req provider.ConfigureRe
 		resp.Diagnostics.AddError("Invalid Deixic provider configuration", err.Error())
 		return
 	}
+	if err := client.WithConnectorsEndpoint(connectorsEndpoint); err != nil {
+		resp.Diagnostics.AddError("Invalid Deixic provider configuration", err.Error())
+		return
+	}
 	resp.ResourceData = client
 	resp.DataSourceData = client
 }
 
 func (p *deixicProvider) Resources(_ context.Context) []func() resource.Resource {
-	return []func() resource.Resource{NewBusinessObjectResource, NewComplianceLibraryResource, NewProgramResource, NewProgramRepositoryBindingResource, NewControlTestLinkResource}
+	return []func() resource.Resource{NewBusinessObjectResource, NewComplianceLibraryResource, NewProgramResource, NewProgramRepositoryBindingResource, NewControlTestLinkResource, NewConnectionResource}
 }
 
 func (p *deixicProvider) DataSources(context.Context) []func() datasource.DataSource {

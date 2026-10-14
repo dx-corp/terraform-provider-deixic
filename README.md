@@ -13,7 +13,7 @@ authentication, and explicit organization and workspace scope.
 ## Requirements
 
 - Terraform 1.9 or later
-- Go 1.26.6 or later to build the provider
+- Go 1.26.9 or later to build the provider
 - A Deixic Platform API endpoint
 - A bearer token with `console:read` and `console:write`
 - An existing published business object type and exact schema revision
