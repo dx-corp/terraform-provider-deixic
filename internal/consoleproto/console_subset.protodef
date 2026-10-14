@@ -1,0 +1,298 @@
+// Wire-compatible subset of console.v1 (proto/console/v1/console.proto) used by
+// the Terraform provider. Field numbers and types are copied verbatim; fields
+// the provider does not read are omitted and skipped as unknown on decode.
+// Served at /deixic.v1.DeixicService/<Method>.
+syntax = "proto3";
+
+package terraform.console.v1;
+
+option go_package = "github.com/dx-corp/terraform-provider-deixic/internal/consoleproto;consoleproto";
+
+message BusinessObjectReference {
+  string object_id = 1;
+}
+
+message BusinessFieldValue {
+  string field_id = 1;
+  oneof value {
+    string text = 2;
+    int64 integer = 3;
+    bool boolean = 4;
+    string enum_value = 7;
+    string date = 8;
+    string timestamp = 9;
+    BusinessObjectReference reference = 10;
+  }
+}
+
+message BusinessSourceBinding {
+  string resource_id = 1;
+  string connection_id = 2;
+  string family_stable_id = 10;
+  string record_id = 11;
+  string source_event_id = 12;
+}
+
+message BusinessObject {
+  string object_id = 1;
+  string type_id = 2;
+  int64 schema_revision = 3;
+  int64 revision = 4;
+  repeated BusinessFieldValue values = 5;
+  bool deleted = 6;
+  BusinessSourceBinding source = 7;
+}
+
+message BusinessBlueprintSource {
+  string blueprint_id = 1;
+  int64 version = 2;
+  string content_digest = 3;
+  string clone_id = 4;
+  string source_type_id = 5;
+}
+
+message BusinessObjectType {
+  string type_id = 1;
+  string name = 2;
+  int64 revision = 3;
+  BusinessBlueprintSource blueprint_source = 9;
+}
+
+message ListBusinessObjectTypesRequest {
+  string organization_id = 1;
+  string workspace_id = 2;
+  string idempotency_key = 3;
+  int32 limit = 4;
+  string after_type_id = 5;
+}
+
+message ListBusinessObjectTypesResponse {
+  repeated BusinessObjectType definitions = 1;
+  string next_type_id = 2;
+}
+
+message BusinessBlueprint {
+  string blueprint_id = 1;
+  int64 version = 2;
+  string content_digest = 3;
+  string name = 4;
+  string description = 5;
+}
+
+message ListBusinessBlueprintsRequest {
+  string organization_id = 1;
+  string workspace_id = 2;
+}
+
+message ListBusinessBlueprintsResponse {
+  repeated BusinessBlueprint blueprints = 1;
+}
+
+message ListBusinessObjectsRequest {
+  string organization_id = 1;
+  string workspace_id = 2;
+  string idempotency_key = 3;
+  string type_id = 4;
+  int32 limit = 5;
+  string after_object_id = 6;
+}
+
+message ListBusinessObjectsResponse {
+  repeated BusinessObject objects = 1;
+  string next_object_id = 2;
+}
+
+message CreateBusinessObjectRequest {
+  string organization_id = 1;
+  string workspace_id = 2;
+  string idempotency_key = 3;
+  string type_id = 4;
+  int64 schema_revision = 5;
+  repeated BusinessFieldValue values = 6;
+}
+
+message CreateBusinessObjectResponse {
+  BusinessObject object = 1;
+}
+
+message BindBusinessObjectSourceRequest {
+  string organization_id = 1;
+  string workspace_id = 2;
+  string idempotency_key = 3;
+  string object_id = 4;
+  int64 expected_revision = 5;
+  string connection_id = 9;
+  string family_stable_id = 10;
+  string record_id = 11;
+}
+
+message BindBusinessObjectSourceResponse {
+  BusinessObject object = 1;
+}
+
+message BusinessObjectRelationship {
+  string source_object_id = 1;
+  string relationship_id = 2;
+  string target_object_id = 3;
+}
+
+message CreateBusinessObjectRelationshipRequest {
+  string organization_id = 1;
+  string workspace_id = 2;
+  string idempotency_key = 3;
+  BusinessObjectRelationship relationship = 4;
+  int64 expected_revision = 5;
+}
+
+message CreateBusinessObjectRelationshipResponse {
+  BusinessObject object = 1;
+}
+
+message ListBusinessObjectRelationshipsRequest {
+  string organization_id = 1;
+  string workspace_id = 2;
+  string idempotency_key = 3;
+  string object_id = 4;
+  int32 limit = 5;
+  string after_key = 6;
+  string relationship_id = 8;
+  string peer_object_id = 9;
+  string peer_type_id = 10;
+}
+
+message ListBusinessObjectRelationshipsResponse {
+  repeated BusinessObjectRelationship relationships = 1;
+  string next_key = 2;
+}
+
+message BlueprintSelection {
+  string blueprint_id = 1;
+  int64 version = 2;
+  string content_digest = 3;
+}
+
+enum ComplianceLibraryReconcileMode {
+  COMPLIANCE_LIBRARY_RECONCILE_MODE_UNSPECIFIED = 0;
+  COMPLIANCE_LIBRARY_RECONCILE_MODE_PREVIEW = 1;
+  COMPLIANCE_LIBRARY_RECONCILE_MODE_APPLY = 2;
+}
+
+enum ComplianceLibraryChangeKind {
+  COMPLIANCE_LIBRARY_CHANGE_KIND_UNSPECIFIED = 0;
+  COMPLIANCE_LIBRARY_CHANGE_KIND_ADD = 1;
+  COMPLIANCE_LIBRARY_CHANGE_KIND_UPDATE = 2;
+  COMPLIANCE_LIBRARY_CHANGE_KIND_WITHDRAW = 3;
+  COMPLIANCE_LIBRARY_CHANGE_KIND_MAPPING = 4;
+  COMPLIANCE_LIBRARY_CHANGE_KIND_CONFLICT = 5;
+  COMPLIANCE_LIBRARY_CHANGE_KIND_PRESERVE_LOCAL = 6;
+}
+
+message ReconcileComplianceLibraryRequest {
+  string organization_id = 1;
+  string workspace_id = 2;
+  string idempotency_key = 3;
+  string library_type_id = 4;
+  repeated BlueprintSelection selections = 5;
+  string expected_plan_digest = 6;
+  ComplianceLibraryReconcileMode mode = 7;
+}
+
+message ComplianceLibraryChange {
+  ComplianceLibraryChangeKind kind = 1;
+  string source_key = 2;
+  string object_id = 3;
+}
+
+message ReconcileComplianceLibraryResponse {
+  string library_clone_id = 1;
+  string plan_digest = 2;
+  repeated ComplianceLibraryChange changes = 3;
+  bool applied = 4;
+  repeated BlueprintSelection current_selections = 5;
+}
+
+message CreateProgramRequest {
+  string organization_id = 1;
+  string workspace_id = 2;
+  string idempotency_key = 3;
+  string name = 4;
+  string goal = 5;
+  string owner_label = 6;
+  string due_date = 7;
+}
+
+message Program {
+  string program_id = 1;
+  string type_id = 2;
+  int64 revision = 4;
+  string name = 5;
+  string goal = 6;
+  string owner_label = 8;
+  string due_date = 11;
+}
+
+message CreateProgramResponse {
+  Program program = 1;
+}
+
+message GetProgramRequest {
+  string organization_id = 1;
+  string workspace_id = 2;
+  string program_id = 3;
+}
+
+message GetProgramResponse {
+  Program program = 1;
+}
+
+message UpdateProgramRequest {
+  string organization_id = 1;
+  string workspace_id = 2;
+  string idempotency_key = 3;
+  string program_id = 4;
+  int64 expected_revision = 5;
+  string name = 6;
+  string goal = 7;
+  string planning_status = 8;
+  string owner_label = 9;
+  string due_date = 10;
+}
+
+message UpdateProgramResponse {
+  Program program = 1;
+}
+
+message DeleteBusinessObjectRequest {
+  string organization_id = 1;
+  string workspace_id = 2;
+  string idempotency_key = 3;
+  string object_id = 4;
+  int64 expected_revision = 5;
+}
+
+message DeleteBusinessObjectResponse {
+  BusinessObject object = 1;
+}
+
+message GetBusinessObjectRequest {
+  string organization_id = 1;
+  string workspace_id = 2;
+  string idempotency_key = 3;
+  string object_id = 4;
+}
+
+message GetBusinessObjectResponse {
+  BusinessObject object = 1;
+}
+
+message DeleteBusinessObjectRelationshipRequest {
+  string organization_id = 1;
+  string workspace_id = 2;
+  string idempotency_key = 3;
+  BusinessObjectRelationship relationship = 4;
+  int64 expected_revision = 5;
+}
+
+message DeleteBusinessObjectRelationshipResponse {
+  BusinessObject object = 1;
+}

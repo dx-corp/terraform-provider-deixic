@@ -148,15 +148,20 @@ func (r *businessObjectResource) Schema(_ context.Context, _ resource.SchemaRequ
 }
 
 func (r *businessObjectResource) Configure(_ context.Context, req resource.ConfigureRequest, resp *resource.ConfigureResponse) {
-	if req.ProviderData == nil {
-		return
+	r.client = configureClient(req.ProviderData, &resp.Diagnostics)
+}
+
+// configureClient extracts the provider client, or reports a diagnostic.
+func configureClient(providerData any, diagnostics *diag.Diagnostics) *Client {
+	if providerData == nil {
+		return nil
 	}
-	client, ok := req.ProviderData.(*Client)
+	client, ok := providerData.(*Client)
 	if !ok {
-		resp.Diagnostics.AddError("Unexpected provider data", fmt.Sprintf("Expected *provider.Client, got %T.", req.ProviderData))
-		return
+		diagnostics.AddError("Unexpected provider data", fmt.Sprintf("Expected *provider.Client, got %T.", providerData))
+		return nil
 	}
-	r.client = client
+	return client
 }
 
 func (r *businessObjectResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
