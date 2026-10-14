@@ -97,14 +97,19 @@ func (p *deixicProvider) Configure(ctx context.Context, req provider.ConfigureRe
 		return
 	}
 	resp.ResourceData = client
+	resp.DataSourceData = client
 }
 
 func (p *deixicProvider) Resources(_ context.Context) []func() resource.Resource {
-	return []func() resource.Resource{NewBusinessObjectResource}
+	return []func() resource.Resource{NewBusinessObjectResource, NewComplianceLibraryResource, NewProgramResource, NewProgramRepositoryBindingResource, NewControlTestLinkResource}
 }
 
 func (p *deixicProvider) DataSources(context.Context) []func() datasource.DataSource {
-	return nil
+	return []func() datasource.DataSource{
+		NewBusinessBlueprintsDataSource,
+		NewFrameworksDataSource,
+		NewControlsDataSource,
+	}
 }
 
 func configuredString(value types.String, attribute, environment string, diagnostics *diag.Diagnostics) string {

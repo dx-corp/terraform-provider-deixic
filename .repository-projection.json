@@ -3,11 +3,11 @@
   "projection": "terraform-provider-deixic",
   "projectionSchemaVersion": 1,
   "sourceRepository": "dx-corp/mono",
-  "sourceSha": "2ad8c66b3517d855ccbf35b926d53d4c16b00c8c",
+  "sourceSha": "927ac3ffda591a9cb20d8e62dc212daaa501e9ef",
   "destinationRepository": "dx-corp/terraform-provider-deixic",
   "priorProjectedBase": "a38fc6c3fd10e9f5a67398e91772a796cce10e34",
   "definitionDigest": "56f988887dac63a90488be51cc0326d10937b2b22e1df689f325b020ca2cf91d",
   "toolDigest": "af7fd420f302830c60c827dbe2449bd2a3935d2d",
-  "contentDigest": "f90e9026300baf23685f3d3a2d204e2999c08079ce83edd83afd0b9bc14598fa",
+  "contentDigest": "8c7301dee1d603e10b25a3d163958eee47c8a49fdbf3ddda115f92a3aa2db332",
   "publicationEligible": true
 }

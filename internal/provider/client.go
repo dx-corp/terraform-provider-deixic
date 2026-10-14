@@ -17,7 +17,9 @@ import (
 
 const (
 	deixicServicePath = "/deixicpublic.v1.DeixicPublicService/"
-	maxResponseBytes  = 4 << 20
+	// consoleServicePath serves the console RPCs the compliance resources wrap.
+	consoleServicePath = "/deixic.v1.DeixicService/"
+	maxResponseBytes   = 4 << 20
 )
 
 var ErrNotFound = errors.New("deixic resource not found")
@@ -90,6 +92,16 @@ func (c *Client) WorkspaceID() string    { return c.workspaceID }
 func (c *Client) Endpoint() string       { return c.endpoint }
 
 func (c *Client) Invoke(ctx context.Context, method string, request, response proto.Message) error {
+	return c.invoke(ctx, deixicServicePath, method, request, response)
+}
+
+// InvokeConsole calls a console RPC with the same bearer, tenant headers and
+// binary Connect framing as Invoke.
+func (c *Client) InvokeConsole(ctx context.Context, method string, request, response proto.Message) error {
+	return c.invoke(ctx, consoleServicePath, method, request, response)
+}
+
+func (c *Client) invoke(ctx context.Context, servicePath, method string, request, response proto.Message) error {
 	body, err := proto.Marshal(request)
 	if err != nil {
 		return fmt.Errorf("encode %s request: %w", method, err)
@@ -98,7 +110,7 @@ func (c *Client) Invoke(ctx context.Context, method string, request, response pr
 	httpRequest, err := http.NewRequestWithContext(
 		ctx,
 		http.MethodPost,
-		c.endpoint+deixicServicePath+method,
+		c.endpoint+servicePath+method,
 		bytes.NewReader(body),
 	)
 	if err != nil {
