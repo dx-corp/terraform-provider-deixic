@@ -1,14 +1,16 @@
 # Terraform Provider for Deixic
 
 The Deixic provider manages durable, tenant-scoped Deixic resources through the
-Platform API. This initial provider deliberately exposes one resource whose
-owner has a complete lifecycle: `deixic_business_object`.
+Platform API. Resources manage business objects, compliance-library selections,
+programs, repository bindings, control-test links, and connections. Data sources
+list business blueprints, installed frameworks, and controls.
 
 The provider uses Terraform Plugin Protocol 6 and Deixic's canonical binary
 protobuf contract. Calls go to
-`/deixicpublic.v1.DeixicPublicService/{Create,Get,Update,Delete}BusinessObject` with
+`/deixicpublic.v1.DeixicPublicService/<Method>` with
 `Content-Type: application/proto`, `Connect-Protocol-Version: 1`, bearer
-authentication, and explicit organization and workspace scope.
+authentication, and explicit organization and workspace scope. Connection
+management uses the connectors HTTP API through the configured connectors endpoint.
 
 ## Requirements
 
@@ -43,13 +45,20 @@ marked sensitive and is used only to configure the API client. Terraform does
 not store it in resource state. API endpoints must use HTTPS; plaintext HTTP is
 accepted only for loopback development and contract tests.
 
-See [the business object documentation](docs/resources/business_object.md) for
-the complete resource shape, import format, and lifecycle limits.
+See [the business object documentation](docs/resources/business_object.md),
+[compliance libraries](docs/resources/compliance_library.md),
+[programs](docs/resources/program.md), [repository bindings](docs/resources/program_repository_binding.md),
+[control-test links](docs/resources/control_test_link.md), and
+[connections](docs/resources/connection.md) for resource shapes and lifecycle limits.
 
 ## Development
 
 The provider vendors only the generated `deixicpublic.v1` binding from Mono's
-reviewed public proto source. The package audit parses its embedded descriptor
+reviewed public proto source. Resource discovery, programs, relationships, and
+compliance-library operations use explicit public requests and owner projections.
+Source binding requires an explicit compatible repository type, source groups,
+and field references (`display_name` or `external_id`). It submits a governed
+intent; reads exclude internal source coordinates and authority metadata. The package audit parses its embedded descriptor
 and the release gate also checks the compiled provider binary.
 
 ```sh
@@ -70,7 +79,7 @@ TF_ACC=1 TF_ACC_TERRAFORM_VERSION=1.16.3 \
 `terraform-plugin-testing` installs that pinned Terraform CLI release for the
 test. The suite also passes with Terraform 1.9.8.
 
-## Current scope
+## Lifecycle limits
 
 The provider does not manage business object types. Deixic type definitions
 are immutable revisions and the owner does not expose deletion semantics, so

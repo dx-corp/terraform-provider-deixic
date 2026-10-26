@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"slices"
 
 	publicv1 "github.com/dx-corp/terraform-provider-deixic/internal/publicproto"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -117,12 +116,7 @@ func (r *controlTestLinkResource) Create(ctx context.Context, req resource.Creat
 		return
 	}
 	testObject := created.GetObject().GetObjectId()
-	err = c.Invoke(ctx, "CreateBusinessObjectRelationship", &publicv1.CreateBusinessObjectRelationshipRequest{
-		OrganizationId: c.organizationID,
-		WorkspaceId:    c.workspaceID,
-		IdempotencyKey: stableKey("control-test-control", testObject, controlID),
-		Relationship:   &publicv1.BusinessObjectRelationship{SourceObjectId: testObject, RelationshipId: controlsRelationship, TargetObjectId: controlID},
-	}, &publicv1.CreateBusinessObjectRelationshipResponse{})
+	err = c.setRelationship(ctx, testObject, controlsRelationship, controlID, false)
 	if err != nil {
 		resp.Diagnostics.AddError("Link control test to control", err.Error())
 		return
@@ -149,12 +143,12 @@ func (r *controlTestLinkResource) Read(ctx context.Context, req resource.ReadReq
 		resp.Diagnostics.AddError("Read control test", err.Error())
 		return
 	}
-	linked, err := r.client.listRelated(ctx, state.ID.ValueString(), controlsRelationship)
+	linked, err := r.client.relationshipExists(ctx, state.ID.ValueString(), controlsRelationship, state.ControlID.ValueString())
 	if err != nil {
 		resp.Diagnostics.AddError("Read control test links", err.Error())
 		return
 	}
-	if !slices.Contains(linked, state.ControlID.ValueString()) {
+	if !linked {
 		resp.State.RemoveResource(ctx)
 		return
 	}
@@ -172,12 +166,7 @@ func (r *controlTestLinkResource) Delete(ctx context.Context, req resource.Delet
 		return
 	}
 	c := r.client
-	err := c.Invoke(ctx, "DeleteBusinessObjectRelationship", &publicv1.DeleteBusinessObjectRelationshipRequest{
-		OrganizationId: c.organizationID,
-		WorkspaceId:    c.workspaceID,
-		IdempotencyKey: stableKey("control-test-control-remove", state.ID.ValueString(), state.ControlID.ValueString()),
-		Relationship:   &publicv1.BusinessObjectRelationship{SourceObjectId: state.ID.ValueString(), RelationshipId: controlsRelationship, TargetObjectId: state.ControlID.ValueString()},
-	}, &publicv1.DeleteBusinessObjectRelationshipResponse{})
+	err := c.setRelationship(ctx, state.ID.ValueString(), controlsRelationship, state.ControlID.ValueString(), true)
 	if err != nil && !errors.Is(err, ErrNotFound) {
 		resp.Diagnostics.AddError("Unlink control test", err.Error())
 		return

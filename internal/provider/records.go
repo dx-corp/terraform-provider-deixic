@@ -4,8 +4,10 @@ import (
 	"context"
 	"crypto/sha256"
 	"encoding/hex"
+	"errors"
 	"fmt"
 	"sort"
+	"strconv"
 	"strings"
 
 	publicv1 "github.com/dx-corp/terraform-provider-deixic/internal/publicproto"
@@ -133,4 +135,83 @@ func (c *Client) listBlueprints(ctx context.Context, prefix string) ([]*publicv1
 		}
 	}
 	return kept, nil
+}
+
+// setRelationship observes current owner state before one revision-fenced attempt.
+// After a lost response, the next apply recognizes an already accepted effect.
+func (c *Client) setRelationship(ctx context.Context, source, kind, target string, remove bool) error {
+	if strings.TrimSpace(source) == "" || strings.TrimSpace(kind) == "" || strings.TrimSpace(target) == "" {
+		return errors.New("relationship mutation requires a source, kind and explicit peer")
+	}
+	present, err := c.relationshipExists(ctx, source, kind, target)
+	if err != nil {
+		return err
+	}
+	if present != remove {
+		return nil
+	}
+	object, err := c.getObject(ctx, source)
+	if err != nil {
+		return err
+	}
+	revision := object.GetRevision()
+	if revision <= 0 {
+		return fmt.Errorf("source object %q has no owner revision", source)
+	}
+	relation := &publicv1.BusinessObjectRelationship{
+		SourceObjectId: source,
+		RelationshipId: kind,
+		TargetObjectId: target,
+	}
+	operation := "CreateBusinessObjectRelationship"
+	if remove {
+		operation = "DeleteBusinessObjectRelationship"
+	}
+	key := stableKey(operation, c.organizationID, c.workspaceID, source, kind, target, strconv.FormatInt(revision, 10))
+	if remove {
+		return c.Invoke(ctx, operation, &publicv1.DeleteBusinessObjectRelationshipRequest{
+			OrganizationId:   c.organizationID,
+			WorkspaceId:      c.workspaceID,
+			IdempotencyKey:   key,
+			Relationship:     relation,
+			ExpectedRevision: revision,
+		}, &publicv1.DeleteBusinessObjectRelationshipResponse{})
+	}
+	return c.Invoke(ctx, operation, &publicv1.CreateBusinessObjectRelationshipRequest{
+		OrganizationId:   c.organizationID,
+		WorkspaceId:      c.workspaceID,
+		IdempotencyKey:   key,
+		Relationship:     relation,
+		ExpectedRevision: revision,
+	}, &publicv1.CreateBusinessObjectRelationshipResponse{})
+}
+
+// relationshipExists names the intended peer so the owner must authorize it.
+// A broad audience-filtered discovery page cannot establish an edge's absence.
+func (c *Client) relationshipExists(ctx context.Context, source, kind, target string) (bool, error) {
+	after := ""
+	for {
+		response := &publicv1.ListBusinessObjectRelationshipsResponse{}
+		err := c.Invoke(ctx, "ListBusinessObjectRelationships", &publicv1.ListBusinessObjectRelationshipsRequest{
+			OrganizationId: c.organizationID,
+			WorkspaceId:    c.workspaceID,
+			ObjectId:       source,
+			RelationshipId: kind,
+			PeerObjectId:   target,
+			Limit:          recordPageSize,
+			AfterKey:       after,
+		}, response)
+		if err != nil {
+			return false, err
+		}
+		for _, relation := range response.GetRelationships() {
+			if relation.GetSourceObjectId() == source && relation.GetRelationshipId() == kind && relation.GetTargetObjectId() == target {
+				return true, nil
+			}
+		}
+		after = response.GetNextKey()
+		if after == "" {
+			return false, nil
+		}
+	}
 }

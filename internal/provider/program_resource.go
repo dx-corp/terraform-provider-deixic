@@ -205,6 +205,15 @@ func (r *programResource) Delete(ctx context.Context, req resource.DeleteRequest
 			return
 		}
 	}
+	// Relationship mutations advance the same source record revision.
+	program, err = c.getProgram(ctx, id)
+	if errors.Is(err, ErrNotFound) {
+		return
+	}
+	if err != nil {
+		resp.Diagnostics.AddError("Read Deixic program after unlinking frameworks", err.Error())
+		return
+	}
 	err = c.Invoke(ctx, "DeleteBusinessObject", &publicv1.DeleteBusinessObjectRequest{
 		OrganizationId:   c.organizationID,
 		WorkspaceId:      c.workspaceID,
@@ -257,25 +266,7 @@ func (c *Client) getProgram(ctx context.Context, id string) (*publicv1.Program, 
 
 // relateFramework creates or removes the program -> frameworks -> framework link.
 func (c *Client) relateFramework(ctx context.Context, programID, frameworkID string, remove bool) error {
-	relationship := &publicv1.BusinessObjectRelationship{
-		SourceObjectId: programID,
-		RelationshipId: frameworksRelationship,
-		TargetObjectId: frameworkID,
-	}
-	if remove {
-		return c.Invoke(ctx, "DeleteBusinessObjectRelationship", &publicv1.DeleteBusinessObjectRelationshipRequest{
-			OrganizationId: c.organizationID,
-			WorkspaceId:    c.workspaceID,
-			IdempotencyKey: stableKey("program-framework-remove", programID, frameworkID),
-			Relationship:   relationship,
-		}, &publicv1.DeleteBusinessObjectRelationshipResponse{})
-	}
-	return c.Invoke(ctx, "CreateBusinessObjectRelationship", &publicv1.CreateBusinessObjectRelationshipRequest{
-		OrganizationId: c.organizationID,
-		WorkspaceId:    c.workspaceID,
-		IdempotencyKey: stableKey("program-framework", programID, frameworkID),
-		Relationship:   relationship,
-	}, &publicv1.CreateBusinessObjectRelationshipResponse{})
+	return c.setRelationship(ctx, programID, frameworksRelationship, frameworkID, remove)
 }
 
 // listRelated returns the target IDs of one relationship kind.

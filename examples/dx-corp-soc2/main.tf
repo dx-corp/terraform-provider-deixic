@@ -1,5 +1,5 @@
-# dx-corp compliance setup: SOC 2 library, program, repository bindings and the
-# DX-CHG-03 branch-protection test.
+# SOC 2 library, repository bindings and the DX-CHG-03 branch-protection test
+# for an existing program with a compatible pinned repository relationship.
 #
 #   export DEIXIC_TOKEN=<fresh bearer token>
 #   ./apply.sh
@@ -17,7 +17,7 @@ terraform {
 variable "endpoint" {
   type        = string
   default     = "https://app.deixic.com"
-  description = "Base URL that serves the public Deixic RPCs (app.deixic.com routes /deixicpublic.v1.DeixicPublicService/ to the platform API)."
+  description = "Base URL that serves the public RPCs (app.deixic.com routes /deixicpublic.v1.DeixicPublicService/ to the platform API)."
 }
 
 variable "github_connection_id" {
@@ -35,6 +35,22 @@ variable "repositories" {
   description = "GitHub repository full name to numeric repository ID."
 }
 
+variable "repository_program_id" {
+  type        = string
+  description = "Existing authorized program whose pinned schema declares repositories targeting repository_type_id."
+}
+variable "repository_type_id" {
+  type        = string
+  description = "Published type with a text display field and source-mappable selected groups."
+}
+variable "source_group_ids" {
+  type = set(string)
+}
+variable "source_fields" {
+  type        = map(string)
+  description = "Every selected field ID mapped to display_name or external_id."
+}
+
 provider "deixic" {
   endpoint        = var.endpoint
   organization_id = "org_402d591f3ab22ef377ddb83f921e687d"
@@ -46,39 +62,30 @@ resource "deixic_compliance_library" "soc2" {
   blueprint_ids = ["cerebro-framework-soc2"]
 }
 
-# Framework records exist only after the library is applied.
-data "deixic_frameworks" "soc2" {
-  search     = "soc"
-  depends_on = [deixic_compliance_library.soc2]
-}
-
-resource "deixic_program" "soc2" {
-  name          = "dx-corp SOC 2"
-  goal          = "SOC 2 Type 1 readiness for dx-corp: GitHub change management evidence through native control tests."
-  owner_label   = "Jonathan Haas"
-  framework_ids = [for framework in data.deixic_frameworks.soc2.records : framework.id]
-}
-
 resource "deixic_program_repository_binding" "repo" {
   for_each = var.repositories
 
-  program_id     = deixic_program.soc2.id
-  connection_id  = var.github_connection_id
-  repository     = each.key
-  github_repo_id = each.value
-  depends_on     = [deixic_compliance_library.soc2]
+  program_id         = var.repository_program_id
+  connection_id      = var.github_connection_id
+  repository         = each.key
+  github_repo_id     = each.value
+  repository_type_id = var.repository_type_id
+  source_group_ids   = var.source_group_ids
+  source_fields      = var.source_fields
+  depends_on         = [deixic_compliance_library.soc2]
 }
 
 resource "deixic_control_test_link" "dx_chg_03" {
-  control_key   = "DX-CHG-03"
-  test_id       = "dx.test.repository.default_branch_protection/v1"
-  connection_id = var.github_connection_id
-  name          = "Default branch protection (classic) on every repository"
-  depends_on    = [deixic_compliance_library.soc2, deixic_program_repository_binding.repo]
+  repository_type_id = var.repository_type_id
+  control_key        = "DX-CHG-03"
+  test_id            = "dx.test.repository.default_branch_protection/v1"
+  connection_id      = var.github_connection_id
+  name               = "Default branch protection (classic) on every repository"
+  depends_on         = [deixic_compliance_library.soc2, deixic_program_repository_binding.repo]
 }
 
 output "program_id" {
-  value = deixic_program.soc2.id
+  value = var.repository_program_id
 }
 
 output "library_plan_digest" {

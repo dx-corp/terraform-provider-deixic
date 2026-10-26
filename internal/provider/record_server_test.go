@@ -26,28 +26,36 @@ var recordHandlers = map[string]recordHandler{}
 
 // recordServer is an in-memory stand-in for the public record RPCs of the platform API.
 type recordServer struct {
-	t              *testing.T
-	mu             sync.Mutex
-	token          string
-	organizationID string
-	workspaceID    string
-	nextID         int
-	types          []*publicv1.BusinessObjectType
-	objects        map[string]*publicv1.BusinessObject
-	relationships  map[string]*publicv1.BusinessObjectRelationship
-	calls          map[string]int
+	t                      *testing.T
+	mu                     sync.Mutex
+	token                  string
+	organizationID         string
+	workspaceID            string
+	nextID                 int
+	types                  []*publicv1.BusinessObjectType
+	objects                map[string]*publicv1.BusinessObject
+	relationships          map[string]*publicv1.BusinessObjectRelationship
+	calls                  map[string]int
+	creationReplays        map[string][]byte
+	bindingReplays         map[string][]byte
+	bindingCommands        map[string]string
+	foreignBindOnRead      bool
+	denyRelationshipWrites bool
 }
 
 func newRecordServer(t *testing.T) *recordServer {
 	t.Helper()
 	return &recordServer{
-		t:              t,
-		token:          "test-token",
-		organizationID: "org_test",
-		workspaceID:    "org_test-default",
-		objects:        map[string]*publicv1.BusinessObject{},
-		relationships:  map[string]*publicv1.BusinessObjectRelationship{},
-		calls:          map[string]int{},
+		t:               t,
+		token:           "test-token",
+		organizationID:  "org_test",
+		workspaceID:     "org_test-default",
+		objects:         map[string]*publicv1.BusinessObject{},
+		relationships:   map[string]*publicv1.BusinessObjectRelationship{},
+		calls:           map[string]int{},
+		creationReplays: map[string][]byte{},
+		bindingReplays:  map[string][]byte{},
+		bindingCommands: map[string]string{},
 	}
 }
 
