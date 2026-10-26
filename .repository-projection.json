@@ -3,7 +3,7 @@
   "projection": "terraform-provider-deixic",
   "projectionSchemaVersion": 1,
   "sourceRepository": "dx-corp/mono",
-  "sourceSha": "86a093e1ebdcf1cf2ece0c2319584db1463c8d79",
+  "sourceSha": "932cc6eda3dd4955219cdc53241c63de900a0dd1",
   "destinationRepository": "dx-corp/terraform-provider-deixic",
   "priorProjectedBase": "e7be498a27a323ca3e10d08417898c6ef069136f",
   "definitionDigest": "56f988887dac63a90488be51cc0326d10937b2b22e1df689f325b020ca2cf91d",
