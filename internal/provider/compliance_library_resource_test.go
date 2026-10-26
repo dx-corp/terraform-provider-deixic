@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	consolev1 "github.com/dx-corp/terraform-provider-deixic/internal/consoleproto"
+	publicv1 "github.com/dx-corp/terraform-provider-deixic/internal/publicproto"
 	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
 	"github.com/hashicorp/terraform-plugin-testing/terraform"
 	"google.golang.org/protobuf/proto"
@@ -27,33 +27,33 @@ type libraryFixture struct {
 var testLibrary = &libraryFixture{}
 
 func init() {
-	consoleHandlers["ListBusinessBlueprints"] = func(_ *consoleServer, body []byte) (proto.Message, *consoleFailure) {
-		if failure := decodeConsole(body, &consolev1.ListBusinessBlueprintsRequest{}); failure != nil {
+	recordHandlers["ListBusinessBlueprints"] = func(_ *recordServer, body []byte) (proto.Message, *recordFailure) {
+		if failure := decodeRecord(body, &publicv1.ListBusinessBlueprintsRequest{}); failure != nil {
 			return nil, failure
 		}
-		return &consolev1.ListBusinessBlueprintsResponse{Blueprints: []*consolev1.BusinessBlueprint{
+		return &publicv1.ListBusinessBlueprintsResponse{Blueprints: []*publicv1.BusinessBlueprint{
 			{BlueprintId: "cerebro-framework-soc2", Version: 1, ContentDigest: "old"},
 			{BlueprintId: "cerebro-framework-soc2", Version: 2, ContentDigest: "new"},
 			{BlueprintId: "cerebro-framework-iso27001", Version: 1, ContentDigest: "iso"},
 		}}, nil
 	}
-	consoleHandlers["ReconcileComplianceLibrary"] = func(_ *consoleServer, body []byte) (proto.Message, *consoleFailure) {
-		request := &consolev1.ReconcileComplianceLibraryRequest{}
-		if failure := decodeConsole(body, request); failure != nil {
+	recordHandlers["ReconcileComplianceLibrary"] = func(_ *recordServer, body []byte) (proto.Message, *recordFailure) {
+		request := &publicv1.ReconcileComplianceLibraryRequest{}
+		if failure := decodeRecord(body, request); failure != nil {
 			return nil, failure
 		}
 		library := testLibrary
-		response := &consolev1.ReconcileComplianceLibraryResponse{LibraryCloneId: "clone-1", PlanDigest: library.planDigest}
-		if request.GetMode() == consolev1.ComplianceLibraryReconcileMode_COMPLIANCE_LIBRARY_RECONCILE_MODE_PREVIEW {
+		response := &publicv1.ReconcileComplianceLibraryResponse{LibraryCloneId: "clone-1", PlanDigest: library.planDigest}
+		if request.GetMode() == publicv1.ComplianceLibraryReconcileMode_COMPLIANCE_LIBRARY_RECONCILE_MODE_PREVIEW {
 			if !library.applied {
 				for i := 0; i < library.changes; i++ {
-					response.Changes = append(response.Changes, &consolev1.ComplianceLibraryChange{Kind: consolev1.ComplianceLibraryChangeKind_COMPLIANCE_LIBRARY_CHANGE_KIND_ADD})
+					response.Changes = append(response.Changes, &publicv1.ComplianceLibraryChange{Kind: publicv1.ComplianceLibraryChangeKind_COMPLIANCE_LIBRARY_CHANGE_KIND_ADD})
 				}
 			}
 			return response, nil
 		}
 		if request.GetIdempotencyKey() == "" || request.GetExpectedPlanDigest() != library.planDigest {
-			return nil, &consoleFailure{http.StatusConflict, "aborted", "stale plan digest"}
+			return nil, &recordFailure{http.StatusConflict, "aborted", "stale plan digest"}
 		}
 		library.keys[request.GetIdempotencyKey()] = true
 		library.applyCalls++
@@ -61,14 +61,14 @@ func init() {
 			library.applied = true
 			response.Applied = true
 			for i := 0; i < library.changes; i++ {
-				response.Changes = append(response.Changes, &consolev1.ComplianceLibraryChange{})
+				response.Changes = append(response.Changes, &publicv1.ComplianceLibraryChange{})
 			}
 		}
 		return response, nil
 	}
 }
 
-func libraryConfig(endpoint string, s *consoleServer, ids string) string {
+func libraryConfig(endpoint string, s *recordServer, ids string) string {
 	return fmt.Sprintf(`
 provider "deixic" {
   endpoint        = %q
@@ -86,7 +86,7 @@ resource "deixic_compliance_library" "lib" {
 func TestAccComplianceLibraryPollsServerJobAndRecordsPlanDigest(t *testing.T) {
 	libraryPollInterval = time.Millisecond
 	testLibrary = &libraryFixture{planDigest: "plan-abc", changes: 4204, runningPolls: 3, keys: map[string]bool{}}
-	fixture := newConsoleServer(t)
+	fixture := newRecordServer(t)
 	fixture.addType("type-test", "control_test")
 	server := fixture.start(t)
 	resource.Test(t, resource.TestCase{
@@ -113,7 +113,7 @@ func TestAccComplianceLibraryPollsServerJobAndRecordsPlanDigest(t *testing.T) {
 
 func TestAccComplianceLibraryRejectsUnknownPack(t *testing.T) {
 	testLibrary = &libraryFixture{planDigest: "p", keys: map[string]bool{}}
-	fixture := newConsoleServer(t)
+	fixture := newRecordServer(t)
 	fixture.addType("type-test", "control_test")
 	server := fixture.start(t)
 	resource.Test(t, resource.TestCase{

@@ -17,7 +17,7 @@ terraform {
 variable "endpoint" {
   type        = string
   default     = "https://app.deixic.com"
-  description = "Base URL that serves the console RPCs (app.deixic.com routes /deixic.v1.DeixicService/ to the platform API)."
+  description = "Base URL that serves the public Deixic RPCs (app.deixic.com routes /deixicpublic.v1.DeixicPublicService/ to the platform API)."
 }
 
 variable "github_connection_id" {

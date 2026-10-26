@@ -8,27 +8,27 @@ import (
 	"sort"
 	"strings"
 
-	consolev1 "github.com/dx-corp/terraform-provider-deixic/internal/consoleproto"
+	publicv1 "github.com/dx-corp/terraform-provider-deixic/internal/publicproto"
 )
 
-const consolePageSize = 100
+const recordPageSize = 100
 
 // listObjectTypes returns every business object type definition in the workspace.
-func (c *Client) listObjectTypes(ctx context.Context) ([]*consolev1.BusinessObjectType, error) {
-	var types []*consolev1.BusinessObjectType
+func (c *Client) listObjectTypes(ctx context.Context) ([]*publicv1.BusinessObjectType, error) {
+	var types []*publicv1.BusinessObjectType
 	after := ""
 	for {
-		response := &consolev1.ListBusinessObjectTypesResponse{}
-		err := c.InvokeConsole(ctx, "ListBusinessObjectTypes", &consolev1.ListBusinessObjectTypesRequest{
+		response := &publicv1.ListBusinessObjectTypesResponse{}
+		err := c.Invoke(ctx, "ListBusinessObjectTypes", &publicv1.ListBusinessObjectTypesRequest{
 			OrganizationId: c.organizationID,
 			WorkspaceId:    c.workspaceID,
-			Limit:          consolePageSize,
+			Limit:          recordPageSize,
 			AfterTypeId:    after,
 		}, response)
 		if err != nil {
 			return nil, err
 		}
-		types = append(types, response.GetDefinitions()...)
+		types = append(types, response.GetObjectTypes()...)
 		after = response.GetNextTypeId()
 		if after == "" {
 			return types, nil
@@ -48,7 +48,7 @@ func (c *Client) resolveTypeID(ctx context.Context, explicit, sourceTypeID strin
 	}
 	var matches []string
 	for _, definition := range types {
-		if definition.GetBlueprintSource().GetSourceTypeId() == sourceTypeID {
+		if definition.GetBlueprintOrigin().GetSourceTypeId() == sourceTypeID {
 			matches = append(matches, definition.GetTypeId())
 		}
 	}
@@ -64,16 +64,16 @@ func (c *Client) resolveTypeID(ctx context.Context, explicit, sourceTypeID strin
 }
 
 // listObjects returns every record of one type.
-func (c *Client) listObjects(ctx context.Context, typeID string) ([]*consolev1.BusinessObject, error) {
-	var objects []*consolev1.BusinessObject
+func (c *Client) listObjects(ctx context.Context, typeID string) ([]*publicv1.BusinessObject, error) {
+	var objects []*publicv1.BusinessObject
 	after := ""
 	for {
-		response := &consolev1.ListBusinessObjectsResponse{}
-		err := c.InvokeConsole(ctx, "ListBusinessObjects", &consolev1.ListBusinessObjectsRequest{
+		response := &publicv1.ListBusinessObjectsResponse{}
+		err := c.Invoke(ctx, "ListBusinessObjects", &publicv1.ListBusinessObjectsRequest{
 			OrganizationId: c.organizationID,
 			WorkspaceId:    c.workspaceID,
 			TypeId:         typeID,
-			Limit:          consolePageSize,
+			Limit:          recordPageSize,
 			AfterObjectId:  after,
 		}, response)
 		if err != nil {
@@ -92,7 +92,7 @@ func (c *Client) listObjects(ctx context.Context, typeID string) ([]*consolev1.B
 }
 
 // fieldText returns a text or enum field of a record, or "" when absent.
-func fieldText(object *consolev1.BusinessObject, fieldID string) string {
+func fieldText(object *publicv1.BusinessObject, fieldID string) string {
 	for _, value := range object.GetValues() {
 		if value.GetFieldId() != fieldID {
 			continue
@@ -105,8 +105,8 @@ func fieldText(object *consolev1.BusinessObject, fieldID string) string {
 	return ""
 }
 
-func textField(fieldID, text string) *consolev1.BusinessFieldValue {
-	return &consolev1.BusinessFieldValue{FieldId: fieldID, Value: &consolev1.BusinessFieldValue_Text{Text: text}}
+func textField(fieldID, text string) *publicv1.BusinessFieldValue {
+	return &publicv1.BusinessFieldValue{FieldId: fieldID, Value: &publicv1.BusinessFieldValue_Text{Text: text}}
 }
 
 // stableKey derives a deterministic idempotency key from the parts, so a retried
@@ -117,16 +117,16 @@ func stableKey(parts ...string) string {
 }
 
 // listBlueprints returns the catalog, optionally limited to an ID prefix.
-func (c *Client) listBlueprints(ctx context.Context, prefix string) ([]*consolev1.BusinessBlueprint, error) {
-	response := &consolev1.ListBusinessBlueprintsResponse{}
-	err := c.InvokeConsole(ctx, "ListBusinessBlueprints", &consolev1.ListBusinessBlueprintsRequest{
+func (c *Client) listBlueprints(ctx context.Context, prefix string) ([]*publicv1.BusinessBlueprint, error) {
+	response := &publicv1.ListBusinessBlueprintsResponse{}
+	err := c.Invoke(ctx, "ListBusinessBlueprints", &publicv1.ListBusinessBlueprintsRequest{
 		OrganizationId: c.organizationID,
 		WorkspaceId:    c.workspaceID,
 	}, response)
 	if err != nil {
 		return nil, err
 	}
-	var kept []*consolev1.BusinessBlueprint
+	var kept []*publicv1.BusinessBlueprint
 	for _, blueprint := range response.GetBlueprints() {
 		if strings.HasPrefix(blueprint.GetBlueprintId(), prefix) {
 			kept = append(kept, blueprint)

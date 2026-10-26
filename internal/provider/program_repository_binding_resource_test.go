@@ -6,57 +6,83 @@ import (
 	"net/http"
 	"testing"
 
-	consolev1 "github.com/dx-corp/terraform-provider-deixic/internal/consoleproto"
+	publicv1 "github.com/dx-corp/terraform-provider-deixic/internal/publicproto"
 	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
 	"github.com/hashicorp/terraform-plugin-testing/terraform"
 	"google.golang.org/protobuf/proto"
 )
 
-var testRepositories = map[string]*consolev1.BusinessObject{}
+var (
+	testRepositories = map[string]*publicv1.BusinessObject{}
+	// testRepositoryBindings holds source bindings the way the owner does: beside
+	// the record, never in the public projection.
+	testRepositoryBindings = map[string]*publicv1.BindBusinessObjectSourceRequest{}
+	// testRepositoryReplies replays keyed mutations with their original response.
+	testRepositoryReplies = map[string]proto.Message{}
+)
+
+func resetTestRepositories() {
+	testRepositories = map[string]*publicv1.BusinessObject{}
+	testRepositoryBindings = map[string]*publicv1.BindBusinessObjectSourceRequest{}
+	testRepositoryReplies = map[string]proto.Message{}
+}
+
+func cloneRepository(object *publicv1.BusinessObject) *publicv1.BusinessObject {
+	clone, _ := proto.Clone(object).(*publicv1.BusinessObject)
+	return clone
+}
 
 func init() {
-	consoleHandlers["CreateBusinessObject"] = func(s *consoleServer, body []byte) (proto.Message, *consoleFailure) {
-		request := &consolev1.CreateBusinessObjectRequest{}
-		if failure := decodeConsole(body, request); failure != nil {
+	recordHandlers["CreateBusinessObject"] = func(s *recordServer, body []byte) (proto.Message, *recordFailure) {
+		request := &publicv1.CreateBusinessObjectRequest{}
+		if failure := decodeRecord(body, request); failure != nil {
 			return nil, failure
 		}
-		for _, existing := range testRepositories {
-			if fieldText(existing, "name") == fieldText(&consolev1.BusinessObject{Values: request.GetValues()}, "name") {
-				return &consolev1.CreateBusinessObjectResponse{Object: existing}, nil
-			}
+		if reply, found := testRepositoryReplies[request.GetIdempotencyKey()]; found {
+			return proto.Clone(reply), nil
 		}
 		s.nextID++
-		object := &consolev1.BusinessObject{ObjectId: fmt.Sprintf("repo_%d", s.nextID), TypeId: request.GetTypeId(), Revision: 1, Values: request.GetValues()}
+		object := &publicv1.BusinessObject{ObjectId: fmt.Sprintf("repo_%d", s.nextID), TypeId: request.GetTypeId(), Revision: 1, Values: request.GetValues()}
 		testRepositories[object.GetObjectId()] = object
-		return &consolev1.CreateBusinessObjectResponse{Object: object}, nil
+		reply := &publicv1.CreateBusinessObjectResponse{Object: cloneRepository(object)}
+		testRepositoryReplies[request.GetIdempotencyKey()] = reply
+		return proto.Clone(reply), nil
 	}
-	consoleHandlers["BindBusinessObjectSource"] = func(_ *consoleServer, body []byte) (proto.Message, *consoleFailure) {
-		request := &consolev1.BindBusinessObjectSourceRequest{}
-		if failure := decodeConsole(body, request); failure != nil {
+	recordHandlers["BindBusinessObjectSource"] = func(_ *recordServer, body []byte) (proto.Message, *recordFailure) {
+		request := &publicv1.BindBusinessObjectSourceRequest{}
+		if failure := decodeRecord(body, request); failure != nil {
 			return nil, failure
+		}
+		if reply, found := testRepositoryReplies[request.GetIdempotencyKey()]; found {
+			return proto.Clone(reply), nil
 		}
 		object := testRepositories[request.GetObjectId()]
 		if object == nil || object.GetRevision() != request.GetExpectedRevision() {
-			return nil, &consoleFailure{http.StatusConflict, "aborted", "revision changed"}
+			return nil, &recordFailure{http.StatusConflict, "aborted", "revision changed"}
 		}
-		object.Source = &consolev1.BusinessSourceBinding{ConnectionId: request.GetConnectionId(), FamilyStableId: request.GetFamilyStableId(), RecordId: request.GetRecordId()}
+		if testRepositoryBindings[object.GetObjectId()] != nil {
+			return nil, &recordFailure{http.StatusBadRequest, "invalid_argument", "Source binding already exists"}
+		}
+		testRepositoryBindings[object.GetObjectId()] = request
 		object.Revision++
-		return &consolev1.BindBusinessObjectSourceResponse{Object: object}, nil
+		reply := &publicv1.BindBusinessObjectSourceResponse{Object: cloneRepository(object)}
+		testRepositoryReplies[request.GetIdempotencyKey()] = reply
+		return proto.Clone(reply), nil
 	}
-	consoleHandlers["GetBusinessObject"] = func(_ *consoleServer, body []byte) (proto.Message, *consoleFailure) {
-		request := &consolev1.GetBusinessObjectRequest{}
-		if failure := decodeConsole(body, request); failure != nil {
+	recordHandlers["GetBusinessObject"] = func(_ *recordServer, body []byte) (proto.Message, *recordFailure) {
+		request := &publicv1.GetBusinessObjectRequest{}
+		if failure := decodeRecord(body, request); failure != nil {
 			return nil, failure
 		}
 		object := testRepositories[request.GetObjectId()]
 		if object == nil {
-			return nil, &consoleFailure{http.StatusNotFound, "not_found", "not found"}
+			return nil, &recordFailure{http.StatusNotFound, "not_found", "not found"}
 		}
-		return &consolev1.GetBusinessObjectResponse{Object: object}, nil
+		return &publicv1.GetBusinessObjectResponse{Object: object}, nil
 	}
 }
 
-func repositoryBindingConfig(endpoint string, s *consoleServer, repository, repoID string) string {
+func repositoryBindingConfig(endpoint string, s *recordServer, repository, repoID string) string {
 	return fmt.Sprintf(`
 provider "deixic" {
   endpoint        = %q
@@ -77,8 +103,8 @@ resource "deixic_program_repository_binding" "repo" {
 func TestAccProgramRepositoryBindingBindsAndLinks(t *testing.T) {
 	testPrograms = newProgramFixture()
 	testPrograms.links["program_1"] = map[string]bool{}
-	testRepositories = map[string]*consolev1.BusinessObject{}
-	fixture := newConsoleServer(t)
+	resetTestRepositories()
+	fixture := newRecordServer(t)
 	fixture.addType("type-repo", "repository")
 	server := fixture.start(t)
 	resource.Test(t, resource.TestCase{
@@ -96,9 +122,9 @@ func TestAccProgramRepositoryBindingBindsAndLinks(t *testing.T) {
 					resource.TestCheckResourceAttr("deixic_program_repository_binding.repo", "repository_type_id", "type-repo"),
 					resource.TestCheckResourceAttr("deixic_program_repository_binding.repo", "family_stable_id", defaultRepositoryFamily),
 					func(*terraform.State) error {
-						object := testRepositories["repo_1"]
-						if object.GetSource().GetRecordId() != "1211645548classic_protection" || object.GetSource().GetConnectionId() != "conn_github" {
-							return fmt.Errorf("source binding wrong: %v", object.GetSource())
+						binding := testRepositoryBindings["repo_1"]
+						if binding.GetRecordId() != "1211645548classic_protection" || binding.GetConnectionId() != "conn_github" || binding.GetFamilyStableId() != defaultRepositoryFamily {
+							return fmt.Errorf("source binding wrong: %v", binding)
 						}
 						if !testPrograms.links["program_1"]["repo_1"] {
 							return errors.New("program link missing")

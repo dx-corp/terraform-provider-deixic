@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	consolev1 "github.com/dx-corp/terraform-provider-deixic/internal/consoleproto"
+	publicv1 "github.com/dx-corp/terraform-provider-deixic/internal/publicproto"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -105,8 +105,8 @@ func (d *recordsDataSource) Read(ctx context.Context, req datasource.ReadRequest
 	resp.Diagnostics.Append(resp.State.Set(ctx, &config)...)
 }
 
-func filterRecords(objects []*consolev1.BusinessObject, key, needle string) []*consolev1.BusinessObject {
-	var kept []*consolev1.BusinessObject
+func filterRecords(objects []*publicv1.BusinessObject, key, needle string) []*publicv1.BusinessObject {
+	var kept []*publicv1.BusinessObject
 	for _, object := range objects {
 		if key != "" && fieldText(object, "key") != key {
 			continue

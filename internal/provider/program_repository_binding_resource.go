@@ -5,7 +5,7 @@ import (
 	"errors"
 	"slices"
 
-	consolev1 "github.com/dx-corp/terraform-provider-deixic/internal/consoleproto"
+	publicv1 "github.com/dx-corp/terraform-provider-deixic/internal/publicproto"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -86,48 +86,48 @@ func (r *programRepositoryBindingResource) Create(ctx context.Context, req resou
 		return
 	}
 	repoKey := plan.ConnectionID.ValueString() + "/" + plan.GitHubRepoID.ValueString()
-	created := &consolev1.CreateBusinessObjectResponse{}
-	err = c.InvokeConsole(ctx, "CreateBusinessObject", &consolev1.CreateBusinessObjectRequest{
+	created := &publicv1.CreateBusinessObjectResponse{}
+	err = c.Invoke(ctx, "CreateBusinessObject", &publicv1.CreateBusinessObjectRequest{
 		OrganizationId: c.organizationID,
 		WorkspaceId:    c.workspaceID,
 		IdempotencyKey: stableKey("repository", c.organizationID, c.workspaceID, repoKey),
 		TypeId:         typeID,
 		SchemaRevision: 1,
-		Values:         []*consolev1.BusinessFieldValue{textField("name", plan.Repository.ValueString())},
+		Values:         []*publicv1.BusinessFieldValue{textField("name", plan.Repository.ValueString())},
 	}, created)
 	if err != nil {
 		resp.Diagnostics.AddError("Create repository record", err.Error())
 		return
 	}
+	// A retried apply replays both keyed calls: the create returns the original
+	// unbound record and the bind replays its original binding.
 	object := created.GetObject()
-	if object.GetSource() == nil {
-		bound := &consolev1.BindBusinessObjectSourceResponse{}
-		err = c.InvokeConsole(ctx, "BindBusinessObjectSource", &consolev1.BindBusinessObjectSourceRequest{
-			OrganizationId:   c.organizationID,
-			WorkspaceId:      c.workspaceID,
-			IdempotencyKey:   stableKey("repository-bind", c.organizationID, c.workspaceID, repoKey),
-			ObjectId:         object.GetObjectId(),
-			ExpectedRevision: object.GetRevision(),
-			ConnectionId:     plan.ConnectionID.ValueString(),
-			FamilyStableId:   plan.FamilyStableID.ValueString(),
-			RecordId:         plan.GitHubRepoID.ValueString() + plan.RecordSuffix.ValueString(),
-		}, bound)
-		if err != nil {
-			resp.Diagnostics.AddError("Bind repository to its GitHub source", err.Error())
-			return
-		}
-		object = bound.GetObject()
+	bound := &publicv1.BindBusinessObjectSourceResponse{}
+	err = c.Invoke(ctx, "BindBusinessObjectSource", &publicv1.BindBusinessObjectSourceRequest{
+		OrganizationId:   c.organizationID,
+		WorkspaceId:      c.workspaceID,
+		IdempotencyKey:   stableKey("repository-bind", c.organizationID, c.workspaceID, repoKey),
+		ObjectId:         object.GetObjectId(),
+		ExpectedRevision: object.GetRevision(),
+		ConnectionId:     plan.ConnectionID.ValueString(),
+		FamilyStableId:   plan.FamilyStableID.ValueString(),
+		RecordId:         plan.GitHubRepoID.ValueString() + plan.RecordSuffix.ValueString(),
+	}, bound)
+	if err != nil {
+		resp.Diagnostics.AddError("Bind repository to its GitHub source", err.Error())
+		return
 	}
-	err = c.InvokeConsole(ctx, "CreateBusinessObjectRelationship", &consolev1.CreateBusinessObjectRelationshipRequest{
+	object = bound.GetObject()
+	err = c.Invoke(ctx, "CreateBusinessObjectRelationship", &publicv1.CreateBusinessObjectRelationshipRequest{
 		OrganizationId: c.organizationID,
 		WorkspaceId:    c.workspaceID,
 		IdempotencyKey: stableKey("program-repository", plan.ProgramID.ValueString(), object.GetObjectId()),
-		Relationship: &consolev1.BusinessObjectRelationship{
+		Relationship: &publicv1.BusinessObjectRelationship{
 			SourceObjectId: plan.ProgramID.ValueString(),
 			RelationshipId: repositoriesRelationship,
 			TargetObjectId: object.GetObjectId(),
 		},
-	}, &consolev1.CreateBusinessObjectRelationshipResponse{})
+	}, &publicv1.CreateBusinessObjectRelationshipResponse{})
 	if err != nil {
 		resp.Diagnostics.AddError("Link repository to program", err.Error())
 		return
@@ -144,8 +144,8 @@ func (r *programRepositoryBindingResource) Read(ctx context.Context, req resourc
 		return
 	}
 	c := r.client
-	got := &consolev1.GetBusinessObjectResponse{}
-	err := c.InvokeConsole(ctx, "GetBusinessObject", &consolev1.GetBusinessObjectRequest{
+	got := &publicv1.GetBusinessObjectResponse{}
+	err := c.Invoke(ctx, "GetBusinessObject", &publicv1.GetBusinessObjectRequest{
 		OrganizationId: c.organizationID,
 		WorkspaceId:    c.workspaceID,
 		ObjectId:       state.ID.ValueString(),
@@ -181,16 +181,16 @@ func (r *programRepositoryBindingResource) Delete(ctx context.Context, req resou
 		return
 	}
 	c := r.client
-	err := c.InvokeConsole(ctx, "DeleteBusinessObjectRelationship", &consolev1.DeleteBusinessObjectRelationshipRequest{
+	err := c.Invoke(ctx, "DeleteBusinessObjectRelationship", &publicv1.DeleteBusinessObjectRelationshipRequest{
 		OrganizationId: c.organizationID,
 		WorkspaceId:    c.workspaceID,
 		IdempotencyKey: stableKey("program-repository-remove", state.ProgramID.ValueString(), state.ID.ValueString()),
-		Relationship: &consolev1.BusinessObjectRelationship{
+		Relationship: &publicv1.BusinessObjectRelationship{
 			SourceObjectId: state.ProgramID.ValueString(),
 			RelationshipId: repositoriesRelationship,
 			TargetObjectId: state.ID.ValueString(),
 		},
-	}, &consolev1.DeleteBusinessObjectRelationshipResponse{})
+	}, &publicv1.DeleteBusinessObjectRelationshipResponse{})
 	if err != nil && !errors.Is(err, ErrNotFound) {
 		resp.Diagnostics.AddError("Unlink repository from program", err.Error())
 	}
