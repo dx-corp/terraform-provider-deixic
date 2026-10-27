@@ -1,6 +1,6 @@
 module github.com/dx-corp/terraform-provider-deixic
 
-go 1.26.9
+go 1.26.10
 
 require (
 	github.com/hashicorp/terraform-plugin-framework v1.19.0
