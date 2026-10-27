@@ -6,7 +6,7 @@ import (
 	"sort"
 	"time"
 
-	consolev1 "github.com/dx-corp/terraform-provider-deixic/internal/consoleproto"
+	publicv1 "github.com/dx-corp/terraform-provider-deixic/internal/publicproto"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -139,7 +139,7 @@ func (r *complianceLibraryResource) Read(ctx context.Context, req resource.ReadR
 		return
 	}
 	selections := selectionsFromList(ctx, state.Selections)
-	preview, err := r.client.reconcileLibrary(ctx, state.LibraryTypeID.ValueString(), selections, "", "", consolev1.ComplianceLibraryReconcileMode_COMPLIANCE_LIBRARY_RECONCILE_MODE_PREVIEW)
+	preview, err := r.client.reconcileLibrary(ctx, state.LibraryTypeID.ValueString(), selections, "", "", publicv1.ComplianceLibraryReconcileMode_COMPLIANCE_LIBRARY_RECONCILE_MODE_PREVIEW)
 	if err != nil {
 		resp.Diagnostics.AddError("Preview Deixic compliance library", err.Error())
 		return
@@ -169,7 +169,7 @@ func (r *complianceLibraryResource) reconcile(ctx context.Context, plan *complia
 		diagnostics.AddError("Resolve compliance library type", err.Error())
 		return
 	}
-	preview, err := r.client.reconcileLibrary(ctx, typeID, selections, "", "", consolev1.ComplianceLibraryReconcileMode_COMPLIANCE_LIBRARY_RECONCILE_MODE_PREVIEW)
+	preview, err := r.client.reconcileLibrary(ctx, typeID, selections, "", "", publicv1.ComplianceLibraryReconcileMode_COMPLIANCE_LIBRARY_RECONCILE_MODE_PREVIEW)
 	if err != nil {
 		diagnostics.AddError("Preview Deixic compliance library", err.Error())
 		return
@@ -198,15 +198,15 @@ func (r *complianceLibraryResource) reconcile(ctx context.Context, plan *complia
 }
 
 // resolveSelections pins each blueprint ID to its newest catalog version and digest.
-func (c *Client) resolveSelections(ctx context.Context, ids []string) ([]*consolev1.BlueprintSelection, error) {
+func (c *Client) resolveSelections(ctx context.Context, ids []string) ([]*publicv1.BlueprintSelection, error) {
 	blueprints, err := c.listBlueprints(ctx, "")
 	if err != nil {
 		return nil, err
 	}
 	sort.Strings(ids)
-	selections := make([]*consolev1.BlueprintSelection, 0, len(ids))
+	selections := make([]*publicv1.BlueprintSelection, 0, len(ids))
 	for _, id := range ids {
-		var best *consolev1.BusinessBlueprint
+		var best *publicv1.BusinessBlueprint
 		for _, blueprint := range blueprints {
 			if blueprint.GetBlueprintId() == id && (best == nil || blueprint.GetVersion() > best.GetVersion()) {
 				best = blueprint
@@ -215,7 +215,7 @@ func (c *Client) resolveSelections(ctx context.Context, ids []string) ([]*consol
 		if best == nil {
 			return nil, fmt.Errorf("blueprint %q is not in the catalog", id)
 		}
-		selections = append(selections, &consolev1.BlueprintSelection{
+		selections = append(selections, &publicv1.BlueprintSelection{
 			BlueprintId:   best.GetBlueprintId(),
 			Version:       best.GetVersion(),
 			ContentDigest: best.GetContentDigest(),
@@ -224,9 +224,9 @@ func (c *Client) resolveSelections(ctx context.Context, ids []string) ([]*consol
 	return selections, nil
 }
 
-func (c *Client) reconcileLibrary(ctx context.Context, typeID string, selections []*consolev1.BlueprintSelection, key, expectedDigest string, mode consolev1.ComplianceLibraryReconcileMode) (*consolev1.ReconcileComplianceLibraryResponse, error) {
-	response := &consolev1.ReconcileComplianceLibraryResponse{}
-	err := c.InvokeConsole(ctx, "ReconcileComplianceLibrary", &consolev1.ReconcileComplianceLibraryRequest{
+func (c *Client) reconcileLibrary(ctx context.Context, typeID string, selections []*publicv1.BlueprintSelection, key, expectedDigest string, mode publicv1.ComplianceLibraryReconcileMode) (*publicv1.ReconcileComplianceLibraryResponse, error) {
+	response := &publicv1.ReconcileComplianceLibraryResponse{}
+	err := c.Invoke(ctx, "ReconcileComplianceLibrary", &publicv1.ReconcileComplianceLibraryRequest{
 		OrganizationId:     c.organizationID,
 		WorkspaceId:        c.workspaceID,
 		IdempotencyKey:     key,
@@ -241,7 +241,7 @@ func (c *Client) reconcileLibrary(ctx context.Context, typeID string, selections
 // applyLibrary applies the previewed plan. The key derives from the plan, so a
 // retry or a repeated call joins the same server job. The server answers
 // applied=false while that job runs; the identical request is the poll.
-func (c *Client) applyLibrary(ctx context.Context, typeID string, selections []*consolev1.BlueprintSelection, planDigest string) (*consolev1.ReconcileComplianceLibraryResponse, error) {
+func (c *Client) applyLibrary(ctx context.Context, typeID string, selections []*publicv1.BlueprintSelection, planDigest string) (*publicv1.ReconcileComplianceLibraryResponse, error) {
 	parts := []string{"library-apply", c.organizationID, c.workspaceID, typeID, planDigest}
 	for _, selection := range selections {
 		parts = append(parts, selection.GetBlueprintId(), selection.GetContentDigest())
@@ -250,7 +250,7 @@ func (c *Client) applyLibrary(ctx context.Context, typeID string, selections []*
 	ctx, cancel := context.WithTimeout(ctx, libraryApplyDeadline)
 	defer cancel()
 	for {
-		response, err := c.reconcileLibrary(ctx, typeID, selections, key, planDigest, consolev1.ComplianceLibraryReconcileMode_COMPLIANCE_LIBRARY_RECONCILE_MODE_APPLY)
+		response, err := c.reconcileLibrary(ctx, typeID, selections, key, planDigest, publicv1.ComplianceLibraryReconcileMode_COMPLIANCE_LIBRARY_RECONCILE_MODE_APPLY)
 		if err != nil {
 			return nil, err
 		}
@@ -265,7 +265,7 @@ func (c *Client) applyLibrary(ctx context.Context, typeID string, selections []*
 	}
 }
 
-func selectionsToList(selections []*consolev1.BlueprintSelection) (types.List, diag.Diagnostics) {
+func selectionsToList(selections []*publicv1.BlueprintSelection) (types.List, diag.Diagnostics) {
 	objectType := types.ObjectType{AttrTypes: selectionAttrTypes}
 	values := make([]attr.Value, 0, len(selections))
 	for _, selection := range selections {
@@ -278,12 +278,12 @@ func selectionsToList(selections []*consolev1.BlueprintSelection) (types.List, d
 	return types.ListValue(objectType, values)
 }
 
-func selectionsFromList(_ context.Context, list types.List) []*consolev1.BlueprintSelection {
-	var selections []*consolev1.BlueprintSelection
+func selectionsFromList(_ context.Context, list types.List) []*publicv1.BlueprintSelection {
+	var selections []*publicv1.BlueprintSelection
 	for _, element := range list.Elements() {
 		object, _ := element.(basetypes.ObjectValue)
 		attrs := object.Attributes()
-		selections = append(selections, &consolev1.BlueprintSelection{
+		selections = append(selections, &publicv1.BlueprintSelection{
 			BlueprintId:   stringAttr(attrs["blueprint_id"]),
 			Version:       int64Attr(attrs["version"]),
 			ContentDigest: stringAttr(attrs["content_digest"]),

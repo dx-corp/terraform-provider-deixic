@@ -8,7 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
 )
 
-func providerBlock(endpoint string, s *consoleServer) string {
+func providerBlock(endpoint string, s *recordServer) string {
 	return fmt.Sprintf(`
 provider "deixic" {
   endpoint        = %q
@@ -20,7 +20,7 @@ provider "deixic" {
 }
 
 func TestAccBusinessBlueprintsDataSourceFiltersByPrefix(t *testing.T) {
-	fixture := newConsoleServer(t)
+	fixture := newRecordServer(t)
 	server := fixture.start(t)
 	resource.Test(t, resource.TestCase{
 		ProtoV6ProviderFactories: testProviderFactories(server.Client()),
@@ -37,7 +37,7 @@ data "deixic_business_blueprints" "soc2" { id_prefix = "cerebro-framework-soc2" 
 }
 
 func TestAccFrameworksAndControlsDataSources(t *testing.T) {
-	fixture := newConsoleServer(t)
+	fixture := newRecordServer(t)
 	fixture.addType("type-framework", "framework")
 	fixture.addType("type-control", "control")
 	fixture.addObject("type-framework", textField("key", "soc2"), textField("name", "SOC 2"))
@@ -65,7 +65,7 @@ data "deixic_controls" "all" {}
 }
 
 func TestAccRecordsDataSourceReportsMissingAndAmbiguousTypes(t *testing.T) {
-	fixture := newConsoleServer(t)
+	fixture := newRecordServer(t)
 	server := fixture.start(t)
 	resource.Test(t, resource.TestCase{
 		ProtoV6ProviderFactories: testProviderFactories(server.Client()),

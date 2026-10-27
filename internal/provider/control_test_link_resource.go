@@ -5,9 +5,8 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"slices"
 
-	consolev1 "github.com/dx-corp/terraform-provider-deixic/internal/consoleproto"
+	publicv1 "github.com/dx-corp/terraform-provider-deixic/internal/publicproto"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -97,19 +96,19 @@ func (r *controlTestLinkResource) Create(ctx context.Context, req resource.Creat
 		return
 	}
 	key := fmt.Sprintf("%s:%s:%s", plan.Source.ValueString(), plan.ConnectionID.ValueString(), plan.TestID.ValueString())
-	created := &consolev1.CreateBusinessObjectResponse{}
-	err = c.InvokeConsole(ctx, "CreateBusinessObject", &consolev1.CreateBusinessObjectRequest{
+	created := &publicv1.CreateBusinessObjectResponse{}
+	err = c.Invoke(ctx, "CreateBusinessObject", &publicv1.CreateBusinessObjectRequest{
 		OrganizationId: c.organizationID,
 		WorkspaceId:    c.workspaceID,
 		IdempotencyKey: stableKey("control-test", c.organizationID, c.workspaceID, key),
 		TypeId:         testType,
 		SchemaRevision: 1,
-		Values: []*consolev1.BusinessFieldValue{
+		Values: []*publicv1.BusinessFieldValue{
 			textField("key", key),
 			textField("name", plan.Name.ValueString()),
 			textField("test_id", plan.TestID.ValueString()),
 			textField("population", string(population)),
-			{FieldId: "aggregation", Value: &consolev1.BusinessFieldValue_EnumValue{EnumValue: plan.Aggregation.ValueString()}},
+			{FieldId: "aggregation", Value: &publicv1.BusinessFieldValue_EnumValue{EnumValue: plan.Aggregation.ValueString()}},
 		},
 	}, created)
 	if err != nil {
@@ -117,12 +116,7 @@ func (r *controlTestLinkResource) Create(ctx context.Context, req resource.Creat
 		return
 	}
 	testObject := created.GetObject().GetObjectId()
-	err = c.InvokeConsole(ctx, "CreateBusinessObjectRelationship", &consolev1.CreateBusinessObjectRelationshipRequest{
-		OrganizationId: c.organizationID,
-		WorkspaceId:    c.workspaceID,
-		IdempotencyKey: stableKey("control-test-control", testObject, controlID),
-		Relationship:   &consolev1.BusinessObjectRelationship{SourceObjectId: testObject, RelationshipId: controlsRelationship, TargetObjectId: controlID},
-	}, &consolev1.CreateBusinessObjectRelationshipResponse{})
+	err = c.setRelationship(ctx, testObject, controlsRelationship, controlID, false)
 	if err != nil {
 		resp.Diagnostics.AddError("Link control test to control", err.Error())
 		return
@@ -149,12 +143,12 @@ func (r *controlTestLinkResource) Read(ctx context.Context, req resource.ReadReq
 		resp.Diagnostics.AddError("Read control test", err.Error())
 		return
 	}
-	linked, err := r.client.listRelated(ctx, state.ID.ValueString(), controlsRelationship)
+	linked, err := r.client.relationshipExists(ctx, state.ID.ValueString(), controlsRelationship, state.ControlID.ValueString())
 	if err != nil {
 		resp.Diagnostics.AddError("Read control test links", err.Error())
 		return
 	}
-	if !slices.Contains(linked, state.ControlID.ValueString()) {
+	if !linked {
 		resp.State.RemoveResource(ctx)
 		return
 	}
@@ -172,12 +166,7 @@ func (r *controlTestLinkResource) Delete(ctx context.Context, req resource.Delet
 		return
 	}
 	c := r.client
-	err := c.InvokeConsole(ctx, "DeleteBusinessObjectRelationship", &consolev1.DeleteBusinessObjectRelationshipRequest{
-		OrganizationId: c.organizationID,
-		WorkspaceId:    c.workspaceID,
-		IdempotencyKey: stableKey("control-test-control-remove", state.ID.ValueString(), state.ControlID.ValueString()),
-		Relationship:   &consolev1.BusinessObjectRelationship{SourceObjectId: state.ID.ValueString(), RelationshipId: controlsRelationship, TargetObjectId: state.ControlID.ValueString()},
-	}, &consolev1.DeleteBusinessObjectRelationshipResponse{})
+	err := c.setRelationship(ctx, state.ID.ValueString(), controlsRelationship, state.ControlID.ValueString(), true)
 	if err != nil && !errors.Is(err, ErrNotFound) {
 		resp.Diagnostics.AddError("Unlink control test", err.Error())
 		return
@@ -190,21 +179,21 @@ func (r *controlTestLinkResource) Delete(ctx context.Context, req resource.Delet
 		resp.Diagnostics.AddError("Read control test", err.Error())
 		return
 	}
-	err = c.InvokeConsole(ctx, "DeleteBusinessObject", &consolev1.DeleteBusinessObjectRequest{
+	err = c.Invoke(ctx, "DeleteBusinessObject", &publicv1.DeleteBusinessObjectRequest{
 		OrganizationId:   c.organizationID,
 		WorkspaceId:      c.workspaceID,
 		IdempotencyKey:   stableKey("control-test-delete", state.ID.ValueString()),
 		ObjectId:         state.ID.ValueString(),
 		ExpectedRevision: object.GetRevision(),
-	}, &consolev1.DeleteBusinessObjectResponse{})
+	}, &publicv1.DeleteBusinessObjectResponse{})
 	if err != nil && !errors.Is(err, ErrNotFound) {
 		resp.Diagnostics.AddError("Delete control test", err.Error())
 	}
 }
 
-func (c *Client) getObject(ctx context.Context, id string) (*consolev1.BusinessObject, error) {
-	response := &consolev1.GetBusinessObjectResponse{}
-	err := c.InvokeConsole(ctx, "GetBusinessObject", &consolev1.GetBusinessObjectRequest{
+func (c *Client) getObject(ctx context.Context, id string) (*publicv1.BusinessObject, error) {
+	response := &publicv1.GetBusinessObjectResponse{}
+	err := c.Invoke(ctx, "GetBusinessObject", &publicv1.GetBusinessObjectRequest{
 		OrganizationId: c.organizationID,
 		WorkspaceId:    c.workspaceID,
 		ObjectId:       id,

@@ -6,12 +6,12 @@ import (
 	"regexp"
 	"testing"
 
-	consolev1 "github.com/dx-corp/terraform-provider-deixic/internal/consoleproto"
+	publicv1 "github.com/dx-corp/terraform-provider-deixic/internal/publicproto"
 	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
 	"github.com/hashicorp/terraform-plugin-testing/terraform"
 )
 
-func controlTestLinkConfig(endpoint string, s *consoleServer, controlKey string) string {
+func controlTestLinkConfig(endpoint string, s *recordServer, controlKey string) string {
 	return fmt.Sprintf(`
 provider "deixic" {
   endpoint        = %q
@@ -29,11 +29,11 @@ resource "deixic_control_test_link" "branch_protection" {
 `, endpoint, s.token, s.organizationID, s.workspaceID, controlKey)
 }
 
-func controlTestFixture(t *testing.T) (*consoleServer, string) {
+func controlTestFixture(t *testing.T) (*recordServer, string) {
 	t.Helper()
 	testPrograms = newProgramFixture()
-	testRepositories = map[string]*consolev1.BusinessObject{}
-	fixture := newConsoleServer(t)
+	testRepositories = map[string]*publicv1.BusinessObject{}
+	fixture := newRecordServer(t)
 	fixture.addType("type-test", "control_test")
 	fixture.addType("type-repo", "repository")
 	fixture.addType("type-control", "control")

@@ -35,7 +35,7 @@ func connectorsServer(t *testing.T, status int, seen *map[string]any) *httptest.
 	return server
 }
 
-func connectionConfig(endpoint, connectors string, s *consoleServer) string {
+func connectionConfig(endpoint, connectors string, s *recordServer) string {
 	return fmt.Sprintf(`
 provider "deixic" {
   endpoint            = %q
@@ -68,7 +68,7 @@ resource "deixic_connection" "gcp" {
 func TestAccConnectionEnrollsByReference(t *testing.T) {
 	var seen map[string]any
 	connectors := connectorsServer(t, http.StatusOK, &seen)
-	fixture := newConsoleServer(t)
+	fixture := newRecordServer(t)
 	server := fixture.start(t)
 	resource.Test(t, resource.TestCase{
 		ProtoV6ProviderFactories: testProviderFactories(server.Client()),
@@ -93,7 +93,7 @@ func TestAccConnectionEnrollsByReference(t *testing.T) {
 func TestAccConnectionSurfacesExchangeFailure(t *testing.T) {
 	var seen map[string]any
 	connectors := connectorsServer(t, http.StatusBadGateway, &seen)
-	fixture := newConsoleServer(t)
+	fixture := newRecordServer(t)
 	server := fixture.start(t)
 	resource.Test(t, resource.TestCase{
 		ProtoV6ProviderFactories: testProviderFactories(server.Client()),

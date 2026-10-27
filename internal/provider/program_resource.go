@@ -5,7 +5,7 @@ import (
 	"errors"
 	"strconv"
 
-	consolev1 "github.com/dx-corp/terraform-provider-deixic/internal/consoleproto"
+	publicv1 "github.com/dx-corp/terraform-provider-deixic/internal/publicproto"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -69,8 +69,8 @@ func (r *programResource) Create(ctx context.Context, req resource.CreateRequest
 		return
 	}
 	c := r.client
-	response := &consolev1.CreateProgramResponse{}
-	err := c.InvokeConsole(ctx, "CreateProgram", &consolev1.CreateProgramRequest{
+	response := &publicv1.CreateProgramResponse{}
+	err := c.Invoke(ctx, "CreateProgram", &publicv1.CreateProgramRequest{
 		OrganizationId: c.organizationID,
 		WorkspaceId:    c.workspaceID,
 		IdempotencyKey: stableKey("program", c.organizationID, c.workspaceID, plan.Name.ValueString()),
@@ -140,7 +140,7 @@ func (r *programResource) Update(ctx context.Context, req resource.UpdateRequest
 		return
 	}
 	if plan.Name != state.Name || plan.Goal != state.Goal || plan.OwnerLabel != state.OwnerLabel || plan.DueDate != state.DueDate {
-		err = c.InvokeConsole(ctx, "UpdateProgram", &consolev1.UpdateProgramRequest{
+		err = c.Invoke(ctx, "UpdateProgram", &publicv1.UpdateProgramRequest{
 			OrganizationId:   c.organizationID,
 			WorkspaceId:      c.workspaceID,
 			IdempotencyKey:   stableKey("program-update", id, strconv.FormatInt(program.GetRevision(), 10), plan.Name.ValueString(), plan.Goal.ValueString(), plan.OwnerLabel.ValueString(), plan.DueDate.ValueString()),
@@ -150,7 +150,9 @@ func (r *programResource) Update(ctx context.Context, req resource.UpdateRequest
 			Goal:             plan.Goal.ValueString(),
 			OwnerLabel:       plan.OwnerLabel.ValueString(),
 			DueDate:          plan.DueDate.ValueString(),
-		}, &consolev1.UpdateProgramResponse{})
+			// The owner requires a status; Terraform does not manage it, so keep the current one.
+			PlanningStatus: program.GetPlanningStatus(),
+		}, &publicv1.UpdateProgramResponse{})
 		if err != nil {
 			resp.Diagnostics.AddError("Update Deixic program", err.Error())
 			return
@@ -203,13 +205,22 @@ func (r *programResource) Delete(ctx context.Context, req resource.DeleteRequest
 			return
 		}
 	}
-	err = c.InvokeConsole(ctx, "DeleteBusinessObject", &consolev1.DeleteBusinessObjectRequest{
+	// Relationship mutations advance the same source record revision.
+	program, err = c.getProgram(ctx, id)
+	if errors.Is(err, ErrNotFound) {
+		return
+	}
+	if err != nil {
+		resp.Diagnostics.AddError("Read Deixic program after unlinking frameworks", err.Error())
+		return
+	}
+	err = c.Invoke(ctx, "DeleteBusinessObject", &publicv1.DeleteBusinessObjectRequest{
 		OrganizationId:   c.organizationID,
 		WorkspaceId:      c.workspaceID,
 		IdempotencyKey:   stableKey("program-delete", id),
 		ObjectId:         id,
 		ExpectedRevision: program.GetRevision(),
-	}, &consolev1.DeleteBusinessObjectResponse{})
+	}, &publicv1.DeleteBusinessObjectResponse{})
 	if err != nil && !errors.Is(err, ErrNotFound) {
 		resp.Diagnostics.AddError("Delete Deixic program", err.Error())
 	}
@@ -243,9 +254,9 @@ func (r *programResource) refresh(ctx context.Context, model *programModel, diag
 	model.FrameworkIDs = set
 }
 
-func (c *Client) getProgram(ctx context.Context, id string) (*consolev1.Program, error) {
-	response := &consolev1.GetProgramResponse{}
-	err := c.InvokeConsole(ctx, "GetProgram", &consolev1.GetProgramRequest{
+func (c *Client) getProgram(ctx context.Context, id string) (*publicv1.Program, error) {
+	response := &publicv1.GetProgramResponse{}
+	err := c.Invoke(ctx, "GetProgram", &publicv1.GetProgramRequest{
 		OrganizationId: c.organizationID,
 		WorkspaceId:    c.workspaceID,
 		ProgramId:      id,
@@ -255,25 +266,7 @@ func (c *Client) getProgram(ctx context.Context, id string) (*consolev1.Program,
 
 // relateFramework creates or removes the program -> frameworks -> framework link.
 func (c *Client) relateFramework(ctx context.Context, programID, frameworkID string, remove bool) error {
-	relationship := &consolev1.BusinessObjectRelationship{
-		SourceObjectId: programID,
-		RelationshipId: frameworksRelationship,
-		TargetObjectId: frameworkID,
-	}
-	if remove {
-		return c.InvokeConsole(ctx, "DeleteBusinessObjectRelationship", &consolev1.DeleteBusinessObjectRelationshipRequest{
-			OrganizationId: c.organizationID,
-			WorkspaceId:    c.workspaceID,
-			IdempotencyKey: stableKey("program-framework-remove", programID, frameworkID),
-			Relationship:   relationship,
-		}, &consolev1.DeleteBusinessObjectRelationshipResponse{})
-	}
-	return c.InvokeConsole(ctx, "CreateBusinessObjectRelationship", &consolev1.CreateBusinessObjectRelationshipRequest{
-		OrganizationId: c.organizationID,
-		WorkspaceId:    c.workspaceID,
-		IdempotencyKey: stableKey("program-framework", programID, frameworkID),
-		Relationship:   relationship,
-	}, &consolev1.CreateBusinessObjectRelationshipResponse{})
+	return c.setRelationship(ctx, programID, frameworksRelationship, frameworkID, remove)
 }
 
 // listRelated returns the target IDs of one relationship kind.
@@ -281,13 +274,13 @@ func (c *Client) listRelated(ctx context.Context, objectID, relationshipID strin
 	var targets []string
 	after := ""
 	for {
-		response := &consolev1.ListBusinessObjectRelationshipsResponse{}
-		err := c.InvokeConsole(ctx, "ListBusinessObjectRelationships", &consolev1.ListBusinessObjectRelationshipsRequest{
+		response := &publicv1.ListBusinessObjectRelationshipsResponse{}
+		err := c.Invoke(ctx, "ListBusinessObjectRelationships", &publicv1.ListBusinessObjectRelationshipsRequest{
 			OrganizationId: c.organizationID,
 			WorkspaceId:    c.workspaceID,
 			ObjectId:       objectID,
 			RelationshipId: relationshipID,
-			Limit:          consolePageSize,
+			Limit:          recordPageSize,
 			AfterKey:       after,
 		}, response)
 		if err != nil {
