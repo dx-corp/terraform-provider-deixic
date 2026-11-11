@@ -634,6 +634,82 @@ func (ClientMcpMode) EnumDescriptor() ([]byte, []int) {
 	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{9}
 }
 
+type BusinessFieldKind int32
+
+const (
+	BusinessFieldKind_BUSINESS_FIELD_KIND_UNSPECIFIED BusinessFieldKind = 0
+	BusinessFieldKind_BUSINESS_FIELD_KIND_TEXT        BusinessFieldKind = 1
+	BusinessFieldKind_BUSINESS_FIELD_KIND_INTEGER     BusinessFieldKind = 2
+	BusinessFieldKind_BUSINESS_FIELD_KIND_BOOLEAN     BusinessFieldKind = 3
+	BusinessFieldKind_BUSINESS_FIELD_KIND_DECIMAL     BusinessFieldKind = 4
+	BusinessFieldKind_BUSINESS_FIELD_KIND_MONEY       BusinessFieldKind = 5
+	BusinessFieldKind_BUSINESS_FIELD_KIND_ENUM        BusinessFieldKind = 6
+	BusinessFieldKind_BUSINESS_FIELD_KIND_DATE        BusinessFieldKind = 7
+	BusinessFieldKind_BUSINESS_FIELD_KIND_TIMESTAMP   BusinessFieldKind = 8
+	BusinessFieldKind_BUSINESS_FIELD_KIND_REFERENCE   BusinessFieldKind = 9
+	BusinessFieldKind_BUSINESS_FIELD_KIND_ARTIFACT    BusinessFieldKind = 10
+	BusinessFieldKind_BUSINESS_FIELD_KIND_TEXT_LIST   BusinessFieldKind = 11
+)
+
+// Enum value maps for BusinessFieldKind.
+var (
+	BusinessFieldKind_name = map[int32]string{
+		0:  "BUSINESS_FIELD_KIND_UNSPECIFIED",
+		1:  "BUSINESS_FIELD_KIND_TEXT",
+		2:  "BUSINESS_FIELD_KIND_INTEGER",
+		3:  "BUSINESS_FIELD_KIND_BOOLEAN",
+		4:  "BUSINESS_FIELD_KIND_DECIMAL",
+		5:  "BUSINESS_FIELD_KIND_MONEY",
+		6:  "BUSINESS_FIELD_KIND_ENUM",
+		7:  "BUSINESS_FIELD_KIND_DATE",
+		8:  "BUSINESS_FIELD_KIND_TIMESTAMP",
+		9:  "BUSINESS_FIELD_KIND_REFERENCE",
+		10: "BUSINESS_FIELD_KIND_ARTIFACT",
+		11: "BUSINESS_FIELD_KIND_TEXT_LIST",
+	}
+	BusinessFieldKind_value = map[string]int32{
+		"BUSINESS_FIELD_KIND_UNSPECIFIED": 0,
+		"BUSINESS_FIELD_KIND_TEXT":        1,
+		"BUSINESS_FIELD_KIND_INTEGER":     2,
+		"BUSINESS_FIELD_KIND_BOOLEAN":     3,
+		"BUSINESS_FIELD_KIND_DECIMAL":     4,
+		"BUSINESS_FIELD_KIND_MONEY":       5,
+		"BUSINESS_FIELD_KIND_ENUM":        6,
+		"BUSINESS_FIELD_KIND_DATE":        7,
+		"BUSINESS_FIELD_KIND_TIMESTAMP":   8,
+		"BUSINESS_FIELD_KIND_REFERENCE":   9,
+		"BUSINESS_FIELD_KIND_ARTIFACT":    10,
+		"BUSINESS_FIELD_KIND_TEXT_LIST":   11,
+	}
+)
+
+func (x BusinessFieldKind) Enum() *BusinessFieldKind {
+	p := new(BusinessFieldKind)
+	*p = x
+	return p
+}
+
+func (x BusinessFieldKind) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (BusinessFieldKind) Descriptor() protoreflect.EnumDescriptor {
+	return file_deixicpublic_v1_sdk_proto_enumTypes[10].Descriptor()
+}
+
+func (BusinessFieldKind) Type() protoreflect.EnumType {
+	return &file_deixicpublic_v1_sdk_proto_enumTypes[10]
+}
+
+func (x BusinessFieldKind) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use BusinessFieldKind.Descriptor instead.
+func (BusinessFieldKind) EnumDescriptor() ([]byte, []int) {
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{10}
+}
+
 // Binds a record to a caller-named connection resource. The response is the
 // projected record; the binding itself stays with the implementation.
 type BusinessSourceFieldProperty int32
@@ -669,11 +745,11 @@ func (x BusinessSourceFieldProperty) String() string {
 }
 
 func (BusinessSourceFieldProperty) Descriptor() protoreflect.EnumDescriptor {
-	return file_deixicpublic_v1_sdk_proto_enumTypes[10].Descriptor()
+	return file_deixicpublic_v1_sdk_proto_enumTypes[11].Descriptor()
 }
 
 func (BusinessSourceFieldProperty) Type() protoreflect.EnumType {
-	return &file_deixicpublic_v1_sdk_proto_enumTypes[10]
+	return &file_deixicpublic_v1_sdk_proto_enumTypes[11]
 }
 
 func (x BusinessSourceFieldProperty) Number() protoreflect.EnumNumber {
@@ -682,7 +758,7 @@ func (x BusinessSourceFieldProperty) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use BusinessSourceFieldProperty.Descriptor instead.
 func (BusinessSourceFieldProperty) EnumDescriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{10}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{11}
 }
 
 type ComplianceLibraryReconcileMode int32
@@ -718,11 +794,11 @@ func (x ComplianceLibraryReconcileMode) String() string {
 }
 
 func (ComplianceLibraryReconcileMode) Descriptor() protoreflect.EnumDescriptor {
-	return file_deixicpublic_v1_sdk_proto_enumTypes[11].Descriptor()
+	return file_deixicpublic_v1_sdk_proto_enumTypes[12].Descriptor()
 }
 
 func (ComplianceLibraryReconcileMode) Type() protoreflect.EnumType {
-	return &file_deixicpublic_v1_sdk_proto_enumTypes[11]
+	return &file_deixicpublic_v1_sdk_proto_enumTypes[12]
 }
 
 func (x ComplianceLibraryReconcileMode) Number() protoreflect.EnumNumber {
@@ -731,7 +807,7 @@ func (x ComplianceLibraryReconcileMode) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ComplianceLibraryReconcileMode.Descriptor instead.
 func (ComplianceLibraryReconcileMode) EnumDescriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{11}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{12}
 }
 
 type ComplianceLibraryChangeKind int32
@@ -779,11 +855,11 @@ func (x ComplianceLibraryChangeKind) String() string {
 }
 
 func (ComplianceLibraryChangeKind) Descriptor() protoreflect.EnumDescriptor {
-	return file_deixicpublic_v1_sdk_proto_enumTypes[12].Descriptor()
+	return file_deixicpublic_v1_sdk_proto_enumTypes[13].Descriptor()
 }
 
 func (ComplianceLibraryChangeKind) Type() protoreflect.EnumType {
-	return &file_deixicpublic_v1_sdk_proto_enumTypes[12]
+	return &file_deixicpublic_v1_sdk_proto_enumTypes[13]
 }
 
 func (x ComplianceLibraryChangeKind) Number() protoreflect.EnumNumber {
@@ -792,7 +868,7 @@ func (x ComplianceLibraryChangeKind) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ComplianceLibraryChangeKind.Descriptor instead.
 func (ComplianceLibraryChangeKind) EnumDescriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{12}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{13}
 }
 
 type ResponseAction int32
@@ -840,11 +916,11 @@ func (x ResponseAction) String() string {
 }
 
 func (ResponseAction) Descriptor() protoreflect.EnumDescriptor {
-	return file_deixicpublic_v1_sdk_proto_enumTypes[13].Descriptor()
+	return file_deixicpublic_v1_sdk_proto_enumTypes[14].Descriptor()
 }
 
 func (ResponseAction) Type() protoreflect.EnumType {
-	return &file_deixicpublic_v1_sdk_proto_enumTypes[13]
+	return &file_deixicpublic_v1_sdk_proto_enumTypes[14]
 }
 
 func (x ResponseAction) Number() protoreflect.EnumNumber {
@@ -853,7 +929,7 @@ func (x ResponseAction) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ResponseAction.Descriptor instead.
 func (ResponseAction) EnumDescriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{13}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{14}
 }
 
 // IDs select Settings-owned voices. Clients never supply trusted guidance.
@@ -893,11 +969,11 @@ func (x VoiceMode) String() string {
 }
 
 func (VoiceMode) Descriptor() protoreflect.EnumDescriptor {
-	return file_deixicpublic_v1_sdk_proto_enumTypes[14].Descriptor()
+	return file_deixicpublic_v1_sdk_proto_enumTypes[15].Descriptor()
 }
 
 func (VoiceMode) Type() protoreflect.EnumType {
-	return &file_deixicpublic_v1_sdk_proto_enumTypes[14]
+	return &file_deixicpublic_v1_sdk_proto_enumTypes[15]
 }
 
 func (x VoiceMode) Number() protoreflect.EnumNumber {
@@ -906,7 +982,7 @@ func (x VoiceMode) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use VoiceMode.Descriptor instead.
 func (VoiceMode) EnumDescriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{14}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{15}
 }
 
 type VoiceTone int32
@@ -945,11 +1021,11 @@ func (x VoiceTone) String() string {
 }
 
 func (VoiceTone) Descriptor() protoreflect.EnumDescriptor {
-	return file_deixicpublic_v1_sdk_proto_enumTypes[15].Descriptor()
+	return file_deixicpublic_v1_sdk_proto_enumTypes[16].Descriptor()
 }
 
 func (VoiceTone) Type() protoreflect.EnumType {
-	return &file_deixicpublic_v1_sdk_proto_enumTypes[15]
+	return &file_deixicpublic_v1_sdk_proto_enumTypes[16]
 }
 
 func (x VoiceTone) Number() protoreflect.EnumNumber {
@@ -958,7 +1034,7 @@ func (x VoiceTone) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use VoiceTone.Descriptor instead.
 func (VoiceTone) EnumDescriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{15}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{16}
 }
 
 // A control's current verification state, from the same owner read the
@@ -1010,11 +1086,11 @@ func (x ControlState) String() string {
 }
 
 func (ControlState) Descriptor() protoreflect.EnumDescriptor {
-	return file_deixicpublic_v1_sdk_proto_enumTypes[16].Descriptor()
+	return file_deixicpublic_v1_sdk_proto_enumTypes[17].Descriptor()
 }
 
 func (ControlState) Type() protoreflect.EnumType {
-	return &file_deixicpublic_v1_sdk_proto_enumTypes[16]
+	return &file_deixicpublic_v1_sdk_proto_enumTypes[17]
 }
 
 func (x ControlState) Number() protoreflect.EnumNumber {
@@ -1023,7 +1099,7 @@ func (x ControlState) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ControlState.Descriptor instead.
 func (ControlState) EnumDescriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{16}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{17}
 }
 
 // A resource's latest result for one test.
@@ -1076,11 +1152,11 @@ func (x TestResultState) String() string {
 }
 
 func (TestResultState) Descriptor() protoreflect.EnumDescriptor {
-	return file_deixicpublic_v1_sdk_proto_enumTypes[17].Descriptor()
+	return file_deixicpublic_v1_sdk_proto_enumTypes[18].Descriptor()
 }
 
 func (TestResultState) Type() protoreflect.EnumType {
-	return &file_deixicpublic_v1_sdk_proto_enumTypes[17]
+	return &file_deixicpublic_v1_sdk_proto_enumTypes[18]
 }
 
 func (x TestResultState) Number() protoreflect.EnumNumber {
@@ -1089,7 +1165,7 @@ func (x TestResultState) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use TestResultState.Descriptor instead.
 func (TestResultState) EnumDescriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{17}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{18}
 }
 
 type Scope struct {
@@ -4311,12 +4387,23 @@ func (x *BusinessBlueprintOrigin) GetSourceTypeId() string {
 }
 
 type BusinessObjectTypeField struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	FieldId        string                 `protobuf:"bytes,1,opt,name=field_id,json=fieldId,proto3" json:"field_id,omitempty"`
-	GroupId        string                 `protobuf:"bytes,2,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
-	SourceMappable bool                   `protobuf:"varint,3,opt,name=source_mappable,json=sourceMappable,proto3" json:"source_mappable,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state   protoimpl.MessageState `protogen:"open.v1"`
+	FieldId string                 `protobuf:"bytes,1,opt,name=field_id,json=fieldId,proto3" json:"field_id,omitempty"`
+	GroupId string                 `protobuf:"bytes,2,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
+	// Output only: derived from the field kind.
+	SourceMappable bool              `protobuf:"varint,3,opt,name=source_mappable,json=sourceMappable,proto3" json:"source_mappable,omitempty"`
+	Name           string            `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
+	Kind           BusinessFieldKind `protobuf:"varint,5,opt,name=kind,proto3,enum=deixicpublic.v1.BusinessFieldKind" json:"kind,omitempty"`
+	Required       bool              `protobuf:"varint,6,opt,name=required,proto3" json:"required,omitempty"`
+	// At most one live record of the type holds a given value.
+	Unique          bool     `protobuf:"varint,7,opt,name=unique,proto3" json:"unique,omitempty"`
+	EnumValues      []string `protobuf:"bytes,8,rep,name=enum_values,json=enumValues,proto3" json:"enum_values,omitempty"`
+	ReferenceTypeId string   `protobuf:"bytes,9,opt,name=reference_type_id,json=referenceTypeId,proto3" json:"reference_type_id,omitempty"`
+	Description     string   `protobuf:"bytes,10,opt,name=description,proto3" json:"description,omitempty"`
+	// TEXT only: maximum Unicode code points, from 1 through 8192.
+	MaxLength     *uint32 `protobuf:"varint,11,opt,name=max_length,json=maxLength,proto3,oneof" json:"max_length,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *BusinessObjectTypeField) Reset() {
@@ -4370,21 +4457,142 @@ func (x *BusinessObjectTypeField) GetSourceMappable() bool {
 	return false
 }
 
+func (x *BusinessObjectTypeField) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *BusinessObjectTypeField) GetKind() BusinessFieldKind {
+	if x != nil {
+		return x.Kind
+	}
+	return BusinessFieldKind_BUSINESS_FIELD_KIND_UNSPECIFIED
+}
+
+func (x *BusinessObjectTypeField) GetRequired() bool {
+	if x != nil {
+		return x.Required
+	}
+	return false
+}
+
+func (x *BusinessObjectTypeField) GetUnique() bool {
+	if x != nil {
+		return x.Unique
+	}
+	return false
+}
+
+func (x *BusinessObjectTypeField) GetEnumValues() []string {
+	if x != nil {
+		return x.EnumValues
+	}
+	return nil
+}
+
+func (x *BusinessObjectTypeField) GetReferenceTypeId() string {
+	if x != nil {
+		return x.ReferenceTypeId
+	}
+	return ""
+}
+
+func (x *BusinessObjectTypeField) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *BusinessObjectTypeField) GetMaxLength() uint32 {
+	if x != nil && x.MaxLength != nil {
+		return *x.MaxLength
+	}
+	return 0
+}
+
+type BusinessObjectTypeRelationship struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	RelationshipId string                 `protobuf:"bytes,1,opt,name=relationship_id,json=relationshipId,proto3" json:"relationship_id,omitempty"`
+	Name           string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	TargetTypeId   string                 `protobuf:"bytes,3,opt,name=target_type_id,json=targetTypeId,proto3" json:"target_type_id,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *BusinessObjectTypeRelationship) Reset() {
+	*x = BusinessObjectTypeRelationship{}
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[45]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BusinessObjectTypeRelationship) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BusinessObjectTypeRelationship) ProtoMessage() {}
+
+func (x *BusinessObjectTypeRelationship) ProtoReflect() protoreflect.Message {
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[45]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BusinessObjectTypeRelationship.ProtoReflect.Descriptor instead.
+func (*BusinessObjectTypeRelationship) Descriptor() ([]byte, []int) {
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{45}
+}
+
+func (x *BusinessObjectTypeRelationship) GetRelationshipId() string {
+	if x != nil {
+		return x.RelationshipId
+	}
+	return ""
+}
+
+func (x *BusinessObjectTypeRelationship) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *BusinessObjectTypeRelationship) GetTargetTypeId() string {
+	if x != nil {
+		return x.TargetTypeId
+	}
+	return ""
+}
+
 type BusinessObjectType struct {
-	state           protoimpl.MessageState     `protogen:"open.v1"`
-	TypeId          string                     `protobuf:"bytes,1,opt,name=type_id,json=typeId,proto3" json:"type_id,omitempty"`
-	Name            string                     `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Revision        int64                      `protobuf:"varint,3,opt,name=revision,proto3" json:"revision,omitempty"`
-	BlueprintOrigin *BusinessBlueprintOrigin   `protobuf:"bytes,4,opt,name=blueprint_origin,json=blueprintOrigin,proto3" json:"blueprint_origin,omitempty"`
-	DisplayFieldId  string                     `protobuf:"bytes,5,opt,name=display_field_id,json=displayFieldId,proto3" json:"display_field_id,omitempty"`
-	Fields          []*BusinessObjectTypeField `protobuf:"bytes,6,rep,name=fields,proto3" json:"fields,omitempty"`
+	state  protoimpl.MessageState `protogen:"open.v1"`
+	TypeId string                 `protobuf:"bytes,1,opt,name=type_id,json=typeId,proto3" json:"type_id,omitempty"`
+	Name   string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// Output only: the published revision.
+	Revision int64 `protobuf:"varint,3,opt,name=revision,proto3" json:"revision,omitempty"`
+	// Output only: assigned when a built-in blueprint member is cloned.
+	BlueprintOrigin *BusinessBlueprintOrigin          `protobuf:"bytes,4,opt,name=blueprint_origin,json=blueprintOrigin,proto3" json:"blueprint_origin,omitempty"`
+	DisplayFieldId  string                            `protobuf:"bytes,5,opt,name=display_field_id,json=displayFieldId,proto3" json:"display_field_id,omitempty"`
+	Fields          []*BusinessObjectTypeField        `protobuf:"bytes,6,rep,name=fields,proto3" json:"fields,omitempty"`
+	Relationships   []*BusinessObjectTypeRelationship `protobuf:"bytes,7,rep,name=relationships,proto3" json:"relationships,omitempty"`
+	PluralName      string                            `protobuf:"bytes,8,opt,name=plural_name,json=pluralName,proto3" json:"plural_name,omitempty"`
+	Description     string                            `protobuf:"bytes,9,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
 
 func (x *BusinessObjectType) Reset() {
 	*x = BusinessObjectType{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[45]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4396,7 +4604,7 @@ func (x *BusinessObjectType) String() string {
 func (*BusinessObjectType) ProtoMessage() {}
 
 func (x *BusinessObjectType) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[45]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4409,7 +4617,7 @@ func (x *BusinessObjectType) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BusinessObjectType.ProtoReflect.Descriptor instead.
 func (*BusinessObjectType) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{45}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *BusinessObjectType) GetTypeId() string {
@@ -4454,6 +4662,408 @@ func (x *BusinessObjectType) GetFields() []*BusinessObjectTypeField {
 	return nil
 }
 
+func (x *BusinessObjectType) GetRelationships() []*BusinessObjectTypeRelationship {
+	if x != nil {
+		return x.Relationships
+	}
+	return nil
+}
+
+func (x *BusinessObjectType) GetPluralName() string {
+	if x != nil {
+		return x.PluralName
+	}
+	return ""
+}
+
+func (x *BusinessObjectType) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+type DefineBusinessObjectTypeRequest struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	OrganizationId string                 `protobuf:"bytes,1,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
+	WorkspaceId    string                 `protobuf:"bytes,2,opt,name=workspace_id,json=workspaceId,proto3" json:"workspace_id,omitempty"`
+	IdempotencyKey string                 `protobuf:"bytes,3,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`
+	Definition     *BusinessObjectType    `protobuf:"bytes,4,opt,name=definition,proto3" json:"definition,omitempty"`
+	// The revision this change replaces; 0 creates the type.
+	ExpectedRevision int64 `protobuf:"varint,5,opt,name=expected_revision,json=expectedRevision,proto3" json:"expected_revision,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *DefineBusinessObjectTypeRequest) Reset() {
+	*x = DefineBusinessObjectTypeRequest{}
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[47]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DefineBusinessObjectTypeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DefineBusinessObjectTypeRequest) ProtoMessage() {}
+
+func (x *DefineBusinessObjectTypeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[47]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DefineBusinessObjectTypeRequest.ProtoReflect.Descriptor instead.
+func (*DefineBusinessObjectTypeRequest) Descriptor() ([]byte, []int) {
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{47}
+}
+
+func (x *DefineBusinessObjectTypeRequest) GetOrganizationId() string {
+	if x != nil {
+		return x.OrganizationId
+	}
+	return ""
+}
+
+func (x *DefineBusinessObjectTypeRequest) GetWorkspaceId() string {
+	if x != nil {
+		return x.WorkspaceId
+	}
+	return ""
+}
+
+func (x *DefineBusinessObjectTypeRequest) GetIdempotencyKey() string {
+	if x != nil {
+		return x.IdempotencyKey
+	}
+	return ""
+}
+
+func (x *DefineBusinessObjectTypeRequest) GetDefinition() *BusinessObjectType {
+	if x != nil {
+		return x.Definition
+	}
+	return nil
+}
+
+func (x *DefineBusinessObjectTypeRequest) GetExpectedRevision() int64 {
+	if x != nil {
+		return x.ExpectedRevision
+	}
+	return 0
+}
+
+type DefineBusinessObjectTypeResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Definition    *BusinessObjectType    `protobuf:"bytes,1,opt,name=definition,proto3" json:"definition,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DefineBusinessObjectTypeResponse) Reset() {
+	*x = DefineBusinessObjectTypeResponse{}
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[48]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DefineBusinessObjectTypeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DefineBusinessObjectTypeResponse) ProtoMessage() {}
+
+func (x *DefineBusinessObjectTypeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[48]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DefineBusinessObjectTypeResponse.ProtoReflect.Descriptor instead.
+func (*DefineBusinessObjectTypeResponse) Descriptor() ([]byte, []int) {
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{48}
+}
+
+func (x *DefineBusinessObjectTypeResponse) GetDefinition() *BusinessObjectType {
+	if x != nil {
+		return x.Definition
+	}
+	return nil
+}
+
+type GetBusinessObjectTypeRequest struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	OrganizationId string                 `protobuf:"bytes,1,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
+	WorkspaceId    string                 `protobuf:"bytes,2,opt,name=workspace_id,json=workspaceId,proto3" json:"workspace_id,omitempty"`
+	TypeId         string                 `protobuf:"bytes,3,opt,name=type_id,json=typeId,proto3" json:"type_id,omitempty"`
+	// A published revision, from DefineBusinessObjectType or ListBusinessObjectTypes.
+	Revision      int64 `protobuf:"varint,4,opt,name=revision,proto3" json:"revision,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetBusinessObjectTypeRequest) Reset() {
+	*x = GetBusinessObjectTypeRequest{}
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[49]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetBusinessObjectTypeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetBusinessObjectTypeRequest) ProtoMessage() {}
+
+func (x *GetBusinessObjectTypeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[49]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetBusinessObjectTypeRequest.ProtoReflect.Descriptor instead.
+func (*GetBusinessObjectTypeRequest) Descriptor() ([]byte, []int) {
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{49}
+}
+
+func (x *GetBusinessObjectTypeRequest) GetOrganizationId() string {
+	if x != nil {
+		return x.OrganizationId
+	}
+	return ""
+}
+
+func (x *GetBusinessObjectTypeRequest) GetWorkspaceId() string {
+	if x != nil {
+		return x.WorkspaceId
+	}
+	return ""
+}
+
+func (x *GetBusinessObjectTypeRequest) GetTypeId() string {
+	if x != nil {
+		return x.TypeId
+	}
+	return ""
+}
+
+func (x *GetBusinessObjectTypeRequest) GetRevision() int64 {
+	if x != nil {
+		return x.Revision
+	}
+	return 0
+}
+
+type GetBusinessObjectTypeResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Definition    *BusinessObjectType    `protobuf:"bytes,1,opt,name=definition,proto3" json:"definition,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetBusinessObjectTypeResponse) Reset() {
+	*x = GetBusinessObjectTypeResponse{}
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[50]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetBusinessObjectTypeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetBusinessObjectTypeResponse) ProtoMessage() {}
+
+func (x *GetBusinessObjectTypeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[50]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetBusinessObjectTypeResponse.ProtoReflect.Descriptor instead.
+func (*GetBusinessObjectTypeResponse) Descriptor() ([]byte, []int) {
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{50}
+}
+
+func (x *GetBusinessObjectTypeResponse) GetDefinition() *BusinessObjectType {
+	if x != nil {
+		return x.Definition
+	}
+	return nil
+}
+
+type UpsertBusinessObjectRequest struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	OrganizationId string                 `protobuf:"bytes,1,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
+	WorkspaceId    string                 `protobuf:"bytes,2,opt,name=workspace_id,json=workspaceId,proto3" json:"workspace_id,omitempty"`
+	IdempotencyKey string                 `protobuf:"bytes,3,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`
+	TypeId         string                 `protobuf:"bytes,4,opt,name=type_id,json=typeId,proto3" json:"type_id,omitempty"`
+	// Published schema revision for a new record; zero keeps an existing record's.
+	SchemaRevision int64 `protobuf:"varint,5,opt,name=schema_revision,json=schemaRevision,proto3" json:"schema_revision,omitempty"`
+	// A field the type declares unique; `values` must carry it.
+	UniqueFieldId string                `protobuf:"bytes,6,opt,name=unique_field_id,json=uniqueFieldId,proto3" json:"unique_field_id,omitempty"`
+	Values        []*BusinessFieldValue `protobuf:"bytes,7,rep,name=values,proto3" json:"values,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpsertBusinessObjectRequest) Reset() {
+	*x = UpsertBusinessObjectRequest{}
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[51]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpsertBusinessObjectRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpsertBusinessObjectRequest) ProtoMessage() {}
+
+func (x *UpsertBusinessObjectRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[51]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpsertBusinessObjectRequest.ProtoReflect.Descriptor instead.
+func (*UpsertBusinessObjectRequest) Descriptor() ([]byte, []int) {
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{51}
+}
+
+func (x *UpsertBusinessObjectRequest) GetOrganizationId() string {
+	if x != nil {
+		return x.OrganizationId
+	}
+	return ""
+}
+
+func (x *UpsertBusinessObjectRequest) GetWorkspaceId() string {
+	if x != nil {
+		return x.WorkspaceId
+	}
+	return ""
+}
+
+func (x *UpsertBusinessObjectRequest) GetIdempotencyKey() string {
+	if x != nil {
+		return x.IdempotencyKey
+	}
+	return ""
+}
+
+func (x *UpsertBusinessObjectRequest) GetTypeId() string {
+	if x != nil {
+		return x.TypeId
+	}
+	return ""
+}
+
+func (x *UpsertBusinessObjectRequest) GetSchemaRevision() int64 {
+	if x != nil {
+		return x.SchemaRevision
+	}
+	return 0
+}
+
+func (x *UpsertBusinessObjectRequest) GetUniqueFieldId() string {
+	if x != nil {
+		return x.UniqueFieldId
+	}
+	return ""
+}
+
+func (x *UpsertBusinessObjectRequest) GetValues() []*BusinessFieldValue {
+	if x != nil {
+		return x.Values
+	}
+	return nil
+}
+
+type UpsertBusinessObjectResponse struct {
+	state  protoimpl.MessageState `protogen:"open.v1"`
+	Object *BusinessObject        `protobuf:"bytes,1,opt,name=object,proto3" json:"object,omitempty"`
+	// True when this call created the record, false when it updated one.
+	Created       bool `protobuf:"varint,2,opt,name=created,proto3" json:"created,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpsertBusinessObjectResponse) Reset() {
+	*x = UpsertBusinessObjectResponse{}
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[52]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpsertBusinessObjectResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpsertBusinessObjectResponse) ProtoMessage() {}
+
+func (x *UpsertBusinessObjectResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[52]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpsertBusinessObjectResponse.ProtoReflect.Descriptor instead.
+func (*UpsertBusinessObjectResponse) Descriptor() ([]byte, []int) {
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{52}
+}
+
+func (x *UpsertBusinessObjectResponse) GetObject() *BusinessObject {
+	if x != nil {
+		return x.Object
+	}
+	return nil
+}
+
+func (x *UpsertBusinessObjectResponse) GetCreated() bool {
+	if x != nil {
+		return x.Created
+	}
+	return false
+}
+
 type ListBusinessObjectTypesRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	OrganizationId string                 `protobuf:"bytes,1,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
@@ -4466,7 +5076,7 @@ type ListBusinessObjectTypesRequest struct {
 
 func (x *ListBusinessObjectTypesRequest) Reset() {
 	*x = ListBusinessObjectTypesRequest{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[46]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[53]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4478,7 +5088,7 @@ func (x *ListBusinessObjectTypesRequest) String() string {
 func (*ListBusinessObjectTypesRequest) ProtoMessage() {}
 
 func (x *ListBusinessObjectTypesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[46]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[53]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4491,7 +5101,7 @@ func (x *ListBusinessObjectTypesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListBusinessObjectTypesRequest.ProtoReflect.Descriptor instead.
 func (*ListBusinessObjectTypesRequest) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{46}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{53}
 }
 
 func (x *ListBusinessObjectTypesRequest) GetOrganizationId() string {
@@ -4532,7 +5142,7 @@ type ListBusinessObjectTypesResponse struct {
 
 func (x *ListBusinessObjectTypesResponse) Reset() {
 	*x = ListBusinessObjectTypesResponse{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[47]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[54]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4544,7 +5154,7 @@ func (x *ListBusinessObjectTypesResponse) String() string {
 func (*ListBusinessObjectTypesResponse) ProtoMessage() {}
 
 func (x *ListBusinessObjectTypesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[47]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[54]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4557,7 +5167,7 @@ func (x *ListBusinessObjectTypesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListBusinessObjectTypesResponse.ProtoReflect.Descriptor instead.
 func (*ListBusinessObjectTypesResponse) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{47}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{54}
 }
 
 func (x *ListBusinessObjectTypesResponse) GetObjectTypes() []*BusinessObjectType {
@@ -4587,7 +5197,7 @@ type BusinessBlueprint struct {
 
 func (x *BusinessBlueprint) Reset() {
 	*x = BusinessBlueprint{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[48]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[55]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4599,7 +5209,7 @@ func (x *BusinessBlueprint) String() string {
 func (*BusinessBlueprint) ProtoMessage() {}
 
 func (x *BusinessBlueprint) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[48]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[55]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4612,7 +5222,7 @@ func (x *BusinessBlueprint) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BusinessBlueprint.ProtoReflect.Descriptor instead.
 func (*BusinessBlueprint) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{48}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{55}
 }
 
 func (x *BusinessBlueprint) GetBlueprintId() string {
@@ -4660,7 +5270,7 @@ type ListBusinessBlueprintsRequest struct {
 
 func (x *ListBusinessBlueprintsRequest) Reset() {
 	*x = ListBusinessBlueprintsRequest{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[49]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[56]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4672,7 +5282,7 @@ func (x *ListBusinessBlueprintsRequest) String() string {
 func (*ListBusinessBlueprintsRequest) ProtoMessage() {}
 
 func (x *ListBusinessBlueprintsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[49]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[56]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4685,7 +5295,7 @@ func (x *ListBusinessBlueprintsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListBusinessBlueprintsRequest.ProtoReflect.Descriptor instead.
 func (*ListBusinessBlueprintsRequest) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{49}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{56}
 }
 
 func (x *ListBusinessBlueprintsRequest) GetOrganizationId() string {
@@ -4711,7 +5321,7 @@ type ListBusinessBlueprintsResponse struct {
 
 func (x *ListBusinessBlueprintsResponse) Reset() {
 	*x = ListBusinessBlueprintsResponse{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[50]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[57]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4723,7 +5333,7 @@ func (x *ListBusinessBlueprintsResponse) String() string {
 func (*ListBusinessBlueprintsResponse) ProtoMessage() {}
 
 func (x *ListBusinessBlueprintsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[50]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[57]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4736,7 +5346,7 @@ func (x *ListBusinessBlueprintsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListBusinessBlueprintsResponse.ProtoReflect.Descriptor instead.
 func (*ListBusinessBlueprintsResponse) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{50}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{57}
 }
 
 func (x *ListBusinessBlueprintsResponse) GetBlueprints() []*BusinessBlueprint {
@@ -4756,7 +5366,7 @@ type BusinessSourceFieldMapping struct {
 
 func (x *BusinessSourceFieldMapping) Reset() {
 	*x = BusinessSourceFieldMapping{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[51]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[58]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4768,7 +5378,7 @@ func (x *BusinessSourceFieldMapping) String() string {
 func (*BusinessSourceFieldMapping) ProtoMessage() {}
 
 func (x *BusinessSourceFieldMapping) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[51]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[58]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4781,7 +5391,7 @@ func (x *BusinessSourceFieldMapping) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BusinessSourceFieldMapping.ProtoReflect.Descriptor instead.
 func (*BusinessSourceFieldMapping) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{51}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{58}
 }
 
 func (x *BusinessSourceFieldMapping) GetFieldId() string {
@@ -4816,7 +5426,7 @@ type BindBusinessObjectSourceRequest struct {
 
 func (x *BindBusinessObjectSourceRequest) Reset() {
 	*x = BindBusinessObjectSourceRequest{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[52]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[59]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4828,7 +5438,7 @@ func (x *BindBusinessObjectSourceRequest) String() string {
 func (*BindBusinessObjectSourceRequest) ProtoMessage() {}
 
 func (x *BindBusinessObjectSourceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[52]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[59]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4841,7 +5451,7 @@ func (x *BindBusinessObjectSourceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BindBusinessObjectSourceRequest.ProtoReflect.Descriptor instead.
 func (*BindBusinessObjectSourceRequest) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{52}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{59}
 }
 
 func (x *BindBusinessObjectSourceRequest) GetOrganizationId() string {
@@ -4923,7 +5533,7 @@ type BindBusinessObjectSourceResponse struct {
 
 func (x *BindBusinessObjectSourceResponse) Reset() {
 	*x = BindBusinessObjectSourceResponse{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[53]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[60]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4935,7 +5545,7 @@ func (x *BindBusinessObjectSourceResponse) String() string {
 func (*BindBusinessObjectSourceResponse) ProtoMessage() {}
 
 func (x *BindBusinessObjectSourceResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[53]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[60]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4948,7 +5558,7 @@ func (x *BindBusinessObjectSourceResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BindBusinessObjectSourceResponse.ProtoReflect.Descriptor instead.
 func (*BindBusinessObjectSourceResponse) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{53}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{60}
 }
 
 func (x *BindBusinessObjectSourceResponse) GetObject() *BusinessObject {
@@ -4969,7 +5579,7 @@ type BusinessObjectRelationship struct {
 
 func (x *BusinessObjectRelationship) Reset() {
 	*x = BusinessObjectRelationship{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[54]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[61]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4981,7 +5591,7 @@ func (x *BusinessObjectRelationship) String() string {
 func (*BusinessObjectRelationship) ProtoMessage() {}
 
 func (x *BusinessObjectRelationship) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[54]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[61]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4994,7 +5604,7 @@ func (x *BusinessObjectRelationship) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BusinessObjectRelationship.ProtoReflect.Descriptor instead.
 func (*BusinessObjectRelationship) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{54}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{61}
 }
 
 func (x *BusinessObjectRelationship) GetSourceObjectId() string {
@@ -5033,7 +5643,7 @@ type ListBusinessObjectRelationshipsRequest struct {
 
 func (x *ListBusinessObjectRelationshipsRequest) Reset() {
 	*x = ListBusinessObjectRelationshipsRequest{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[55]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[62]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5045,7 +5655,7 @@ func (x *ListBusinessObjectRelationshipsRequest) String() string {
 func (*ListBusinessObjectRelationshipsRequest) ProtoMessage() {}
 
 func (x *ListBusinessObjectRelationshipsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[55]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[62]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5058,7 +5668,7 @@ func (x *ListBusinessObjectRelationshipsRequest) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use ListBusinessObjectRelationshipsRequest.ProtoReflect.Descriptor instead.
 func (*ListBusinessObjectRelationshipsRequest) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{55}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{62}
 }
 
 func (x *ListBusinessObjectRelationshipsRequest) GetOrganizationId() string {
@@ -5120,7 +5730,7 @@ type ListBusinessObjectRelationshipsResponse struct {
 
 func (x *ListBusinessObjectRelationshipsResponse) Reset() {
 	*x = ListBusinessObjectRelationshipsResponse{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[56]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[63]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5132,7 +5742,7 @@ func (x *ListBusinessObjectRelationshipsResponse) String() string {
 func (*ListBusinessObjectRelationshipsResponse) ProtoMessage() {}
 
 func (x *ListBusinessObjectRelationshipsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[56]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[63]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5145,7 +5755,7 @@ func (x *ListBusinessObjectRelationshipsResponse) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use ListBusinessObjectRelationshipsResponse.ProtoReflect.Descriptor instead.
 func (*ListBusinessObjectRelationshipsResponse) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{56}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{63}
 }
 
 func (x *ListBusinessObjectRelationshipsResponse) GetRelationships() []*BusinessObjectRelationship {
@@ -5175,7 +5785,7 @@ type CreateBusinessObjectRelationshipRequest struct {
 
 func (x *CreateBusinessObjectRelationshipRequest) Reset() {
 	*x = CreateBusinessObjectRelationshipRequest{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[57]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[64]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5187,7 +5797,7 @@ func (x *CreateBusinessObjectRelationshipRequest) String() string {
 func (*CreateBusinessObjectRelationshipRequest) ProtoMessage() {}
 
 func (x *CreateBusinessObjectRelationshipRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[57]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[64]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5200,7 +5810,7 @@ func (x *CreateBusinessObjectRelationshipRequest) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use CreateBusinessObjectRelationshipRequest.ProtoReflect.Descriptor instead.
 func (*CreateBusinessObjectRelationshipRequest) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{57}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{64}
 }
 
 func (x *CreateBusinessObjectRelationshipRequest) GetOrganizationId() string {
@@ -5247,7 +5857,7 @@ type CreateBusinessObjectRelationshipResponse struct {
 
 func (x *CreateBusinessObjectRelationshipResponse) Reset() {
 	*x = CreateBusinessObjectRelationshipResponse{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[58]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[65]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5259,7 +5869,7 @@ func (x *CreateBusinessObjectRelationshipResponse) String() string {
 func (*CreateBusinessObjectRelationshipResponse) ProtoMessage() {}
 
 func (x *CreateBusinessObjectRelationshipResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[58]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[65]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5272,7 +5882,7 @@ func (x *CreateBusinessObjectRelationshipResponse) ProtoReflect() protoreflect.M
 
 // Deprecated: Use CreateBusinessObjectRelationshipResponse.ProtoReflect.Descriptor instead.
 func (*CreateBusinessObjectRelationshipResponse) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{58}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{65}
 }
 
 func (x *CreateBusinessObjectRelationshipResponse) GetObject() *BusinessObject {
@@ -5295,7 +5905,7 @@ type DeleteBusinessObjectRelationshipRequest struct {
 
 func (x *DeleteBusinessObjectRelationshipRequest) Reset() {
 	*x = DeleteBusinessObjectRelationshipRequest{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[59]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[66]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5307,7 +5917,7 @@ func (x *DeleteBusinessObjectRelationshipRequest) String() string {
 func (*DeleteBusinessObjectRelationshipRequest) ProtoMessage() {}
 
 func (x *DeleteBusinessObjectRelationshipRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[59]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[66]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5320,7 +5930,7 @@ func (x *DeleteBusinessObjectRelationshipRequest) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use DeleteBusinessObjectRelationshipRequest.ProtoReflect.Descriptor instead.
 func (*DeleteBusinessObjectRelationshipRequest) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{59}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{66}
 }
 
 func (x *DeleteBusinessObjectRelationshipRequest) GetOrganizationId() string {
@@ -5367,7 +5977,7 @@ type DeleteBusinessObjectRelationshipResponse struct {
 
 func (x *DeleteBusinessObjectRelationshipResponse) Reset() {
 	*x = DeleteBusinessObjectRelationshipResponse{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[60]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[67]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5379,7 +5989,7 @@ func (x *DeleteBusinessObjectRelationshipResponse) String() string {
 func (*DeleteBusinessObjectRelationshipResponse) ProtoMessage() {}
 
 func (x *DeleteBusinessObjectRelationshipResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[60]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[67]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5392,7 +6002,7 @@ func (x *DeleteBusinessObjectRelationshipResponse) ProtoReflect() protoreflect.M
 
 // Deprecated: Use DeleteBusinessObjectRelationshipResponse.ProtoReflect.Descriptor instead.
 func (*DeleteBusinessObjectRelationshipResponse) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{60}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{67}
 }
 
 func (x *DeleteBusinessObjectRelationshipResponse) GetObject() *BusinessObject {
@@ -5418,7 +6028,7 @@ type Program struct {
 
 func (x *Program) Reset() {
 	*x = Program{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[61]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[68]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5430,7 +6040,7 @@ func (x *Program) String() string {
 func (*Program) ProtoMessage() {}
 
 func (x *Program) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[61]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[68]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5443,7 +6053,7 @@ func (x *Program) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Program.ProtoReflect.Descriptor instead.
 func (*Program) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{61}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{68}
 }
 
 func (x *Program) GetProgramId() string {
@@ -5506,7 +6116,7 @@ type GetProgramRequest struct {
 
 func (x *GetProgramRequest) Reset() {
 	*x = GetProgramRequest{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[62]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[69]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5518,7 +6128,7 @@ func (x *GetProgramRequest) String() string {
 func (*GetProgramRequest) ProtoMessage() {}
 
 func (x *GetProgramRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[62]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[69]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5531,7 +6141,7 @@ func (x *GetProgramRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetProgramRequest.ProtoReflect.Descriptor instead.
 func (*GetProgramRequest) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{62}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{69}
 }
 
 func (x *GetProgramRequest) GetOrganizationId() string {
@@ -5564,7 +6174,7 @@ type GetProgramResponse struct {
 
 func (x *GetProgramResponse) Reset() {
 	*x = GetProgramResponse{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[63]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[70]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5576,7 +6186,7 @@ func (x *GetProgramResponse) String() string {
 func (*GetProgramResponse) ProtoMessage() {}
 
 func (x *GetProgramResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[63]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[70]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5589,7 +6199,7 @@ func (x *GetProgramResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetProgramResponse.ProtoReflect.Descriptor instead.
 func (*GetProgramResponse) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{63}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{70}
 }
 
 func (x *GetProgramResponse) GetProgram() *Program {
@@ -5614,7 +6224,7 @@ type CreateProgramRequest struct {
 
 func (x *CreateProgramRequest) Reset() {
 	*x = CreateProgramRequest{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[64]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[71]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5626,7 +6236,7 @@ func (x *CreateProgramRequest) String() string {
 func (*CreateProgramRequest) ProtoMessage() {}
 
 func (x *CreateProgramRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[64]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[71]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5639,7 +6249,7 @@ func (x *CreateProgramRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateProgramRequest.ProtoReflect.Descriptor instead.
 func (*CreateProgramRequest) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{64}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{71}
 }
 
 func (x *CreateProgramRequest) GetOrganizationId() string {
@@ -5700,7 +6310,7 @@ type CreateProgramResponse struct {
 
 func (x *CreateProgramResponse) Reset() {
 	*x = CreateProgramResponse{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[65]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[72]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5712,7 +6322,7 @@ func (x *CreateProgramResponse) String() string {
 func (*CreateProgramResponse) ProtoMessage() {}
 
 func (x *CreateProgramResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[65]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[72]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5725,7 +6335,7 @@ func (x *CreateProgramResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateProgramResponse.ProtoReflect.Descriptor instead.
 func (*CreateProgramResponse) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{65}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{72}
 }
 
 func (x *CreateProgramResponse) GetProgram() *Program {
@@ -5754,7 +6364,7 @@ type UpdateProgramRequest struct {
 
 func (x *UpdateProgramRequest) Reset() {
 	*x = UpdateProgramRequest{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[66]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[73]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5766,7 +6376,7 @@ func (x *UpdateProgramRequest) String() string {
 func (*UpdateProgramRequest) ProtoMessage() {}
 
 func (x *UpdateProgramRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[66]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[73]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5779,7 +6389,7 @@ func (x *UpdateProgramRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateProgramRequest.ProtoReflect.Descriptor instead.
 func (*UpdateProgramRequest) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{66}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{73}
 }
 
 func (x *UpdateProgramRequest) GetOrganizationId() string {
@@ -5861,7 +6471,7 @@ type UpdateProgramResponse struct {
 
 func (x *UpdateProgramResponse) Reset() {
 	*x = UpdateProgramResponse{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[67]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[74]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5873,7 +6483,7 @@ func (x *UpdateProgramResponse) String() string {
 func (*UpdateProgramResponse) ProtoMessage() {}
 
 func (x *UpdateProgramResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[67]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[74]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5886,7 +6496,7 @@ func (x *UpdateProgramResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateProgramResponse.ProtoReflect.Descriptor instead.
 func (*UpdateProgramResponse) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{67}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{74}
 }
 
 func (x *UpdateProgramResponse) GetProgram() *Program {
@@ -5907,7 +6517,7 @@ type BlueprintSelection struct {
 
 func (x *BlueprintSelection) Reset() {
 	*x = BlueprintSelection{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[68]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[75]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5919,7 +6529,7 @@ func (x *BlueprintSelection) String() string {
 func (*BlueprintSelection) ProtoMessage() {}
 
 func (x *BlueprintSelection) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[68]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[75]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5932,7 +6542,7 @@ func (x *BlueprintSelection) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BlueprintSelection.ProtoReflect.Descriptor instead.
 func (*BlueprintSelection) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{68}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{75}
 }
 
 func (x *BlueprintSelection) GetBlueprintId() string {
@@ -5966,7 +6576,7 @@ type ComplianceLibraryChange struct {
 
 func (x *ComplianceLibraryChange) Reset() {
 	*x = ComplianceLibraryChange{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[69]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[76]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5978,7 +6588,7 @@ func (x *ComplianceLibraryChange) String() string {
 func (*ComplianceLibraryChange) ProtoMessage() {}
 
 func (x *ComplianceLibraryChange) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[69]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[76]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5991,7 +6601,7 @@ func (x *ComplianceLibraryChange) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ComplianceLibraryChange.ProtoReflect.Descriptor instead.
 func (*ComplianceLibraryChange) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{69}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{76}
 }
 
 func (x *ComplianceLibraryChange) GetKind() ComplianceLibraryChangeKind {
@@ -6025,7 +6635,7 @@ type ReconcileComplianceLibraryRequest struct {
 
 func (x *ReconcileComplianceLibraryRequest) Reset() {
 	*x = ReconcileComplianceLibraryRequest{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[70]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[77]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6037,7 +6647,7 @@ func (x *ReconcileComplianceLibraryRequest) String() string {
 func (*ReconcileComplianceLibraryRequest) ProtoMessage() {}
 
 func (x *ReconcileComplianceLibraryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[70]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[77]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6050,7 +6660,7 @@ func (x *ReconcileComplianceLibraryRequest) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use ReconcileComplianceLibraryRequest.ProtoReflect.Descriptor instead.
 func (*ReconcileComplianceLibraryRequest) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{70}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{77}
 }
 
 func (x *ReconcileComplianceLibraryRequest) GetOrganizationId() string {
@@ -6114,7 +6724,7 @@ type ReconcileComplianceLibraryResponse struct {
 
 func (x *ReconcileComplianceLibraryResponse) Reset() {
 	*x = ReconcileComplianceLibraryResponse{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[71]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[78]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6126,7 +6736,7 @@ func (x *ReconcileComplianceLibraryResponse) String() string {
 func (*ReconcileComplianceLibraryResponse) ProtoMessage() {}
 
 func (x *ReconcileComplianceLibraryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[71]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[78]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6139,7 +6749,7 @@ func (x *ReconcileComplianceLibraryResponse) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use ReconcileComplianceLibraryResponse.ProtoReflect.Descriptor instead.
 func (*ReconcileComplianceLibraryResponse) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{71}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{78}
 }
 
 func (x *ReconcileComplianceLibraryResponse) GetLibraryCloneId() string {
@@ -6182,7 +6792,7 @@ type GetThreadRequest struct {
 
 func (x *GetThreadRequest) Reset() {
 	*x = GetThreadRequest{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[72]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[79]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6194,7 +6804,7 @@ func (x *GetThreadRequest) String() string {
 func (*GetThreadRequest) ProtoMessage() {}
 
 func (x *GetThreadRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[72]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[79]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6207,7 +6817,7 @@ func (x *GetThreadRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetThreadRequest.ProtoReflect.Descriptor instead.
 func (*GetThreadRequest) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{72}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{79}
 }
 
 func (x *GetThreadRequest) GetScope() *Scope {
@@ -6253,7 +6863,7 @@ type GetThreadResponse struct {
 
 func (x *GetThreadResponse) Reset() {
 	*x = GetThreadResponse{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[73]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[80]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6265,7 +6875,7 @@ func (x *GetThreadResponse) String() string {
 func (*GetThreadResponse) ProtoMessage() {}
 
 func (x *GetThreadResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[73]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[80]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6278,7 +6888,7 @@ func (x *GetThreadResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetThreadResponse.ProtoReflect.Descriptor instead.
 func (*GetThreadResponse) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{73}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{80}
 }
 
 func (x *GetThreadResponse) GetThread() *Thread {
@@ -6340,7 +6950,7 @@ type ListThreadsRequest struct {
 
 func (x *ListThreadsRequest) Reset() {
 	*x = ListThreadsRequest{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[74]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[81]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6352,7 +6962,7 @@ func (x *ListThreadsRequest) String() string {
 func (*ListThreadsRequest) ProtoMessage() {}
 
 func (x *ListThreadsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[74]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[81]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6365,7 +6975,7 @@ func (x *ListThreadsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListThreadsRequest.ProtoReflect.Descriptor instead.
 func (*ListThreadsRequest) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{74}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{81}
 }
 
 func (x *ListThreadsRequest) GetScope() *Scope {
@@ -6391,7 +7001,7 @@ type ListThreadsResponse struct {
 
 func (x *ListThreadsResponse) Reset() {
 	*x = ListThreadsResponse{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[75]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[82]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6403,7 +7013,7 @@ func (x *ListThreadsResponse) String() string {
 func (*ListThreadsResponse) ProtoMessage() {}
 
 func (x *ListThreadsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[75]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[82]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6416,7 +7026,7 @@ func (x *ListThreadsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListThreadsResponse.ProtoReflect.Descriptor instead.
 func (*ListThreadsResponse) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{75}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{82}
 }
 
 func (x *ListThreadsResponse) GetThreads() []*Thread {
@@ -6437,7 +7047,7 @@ type RenameThreadRequest struct {
 
 func (x *RenameThreadRequest) Reset() {
 	*x = RenameThreadRequest{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[76]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[83]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6449,7 +7059,7 @@ func (x *RenameThreadRequest) String() string {
 func (*RenameThreadRequest) ProtoMessage() {}
 
 func (x *RenameThreadRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[76]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[83]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6462,7 +7072,7 @@ func (x *RenameThreadRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RenameThreadRequest.ProtoReflect.Descriptor instead.
 func (*RenameThreadRequest) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{76}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{83}
 }
 
 func (x *RenameThreadRequest) GetScope() *Scope {
@@ -6496,7 +7106,7 @@ type RenameThreadResponse struct {
 
 func (x *RenameThreadResponse) Reset() {
 	*x = RenameThreadResponse{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[77]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[84]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6508,7 +7118,7 @@ func (x *RenameThreadResponse) String() string {
 func (*RenameThreadResponse) ProtoMessage() {}
 
 func (x *RenameThreadResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[77]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[84]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6521,7 +7131,7 @@ func (x *RenameThreadResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RenameThreadResponse.ProtoReflect.Descriptor instead.
 func (*RenameThreadResponse) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{77}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{84}
 }
 
 func (x *RenameThreadResponse) GetThread() *Thread {
@@ -6550,7 +7160,7 @@ type ArchiveThreadRequest struct {
 
 func (x *ArchiveThreadRequest) Reset() {
 	*x = ArchiveThreadRequest{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[78]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[85]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6562,7 +7172,7 @@ func (x *ArchiveThreadRequest) String() string {
 func (*ArchiveThreadRequest) ProtoMessage() {}
 
 func (x *ArchiveThreadRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[78]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[85]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6575,7 +7185,7 @@ func (x *ArchiveThreadRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ArchiveThreadRequest.ProtoReflect.Descriptor instead.
 func (*ArchiveThreadRequest) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{78}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{85}
 }
 
 func (x *ArchiveThreadRequest) GetScope() *Scope {
@@ -6617,7 +7227,7 @@ type ArchiveThreadResponse struct {
 
 func (x *ArchiveThreadResponse) Reset() {
 	*x = ArchiveThreadResponse{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[79]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[86]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6629,7 +7239,7 @@ func (x *ArchiveThreadResponse) String() string {
 func (*ArchiveThreadResponse) ProtoMessage() {}
 
 func (x *ArchiveThreadResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[79]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[86]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6642,7 +7252,7 @@ func (x *ArchiveThreadResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ArchiveThreadResponse.ProtoReflect.Descriptor instead.
 func (*ArchiveThreadResponse) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{79}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{86}
 }
 
 func (x *ArchiveThreadResponse) GetThread() *Thread {
@@ -6678,7 +7288,7 @@ type ListEventsRequest struct {
 
 func (x *ListEventsRequest) Reset() {
 	*x = ListEventsRequest{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[80]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[87]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6690,7 +7300,7 @@ func (x *ListEventsRequest) String() string {
 func (*ListEventsRequest) ProtoMessage() {}
 
 func (x *ListEventsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[80]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[87]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6703,7 +7313,7 @@ func (x *ListEventsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListEventsRequest.ProtoReflect.Descriptor instead.
 func (*ListEventsRequest) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{80}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{87}
 }
 
 func (x *ListEventsRequest) GetScope() *Scope {
@@ -6748,7 +7358,7 @@ type ListEventsResponse struct {
 
 func (x *ListEventsResponse) Reset() {
 	*x = ListEventsResponse{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[81]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[88]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6760,7 +7370,7 @@ func (x *ListEventsResponse) String() string {
 func (*ListEventsResponse) ProtoMessage() {}
 
 func (x *ListEventsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[81]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[88]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6773,7 +7383,7 @@ func (x *ListEventsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListEventsResponse.ProtoReflect.Descriptor instead.
 func (*ListEventsResponse) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{81}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{88}
 }
 
 func (x *ListEventsResponse) GetEvents() []*TaskEvent {
@@ -6829,7 +7439,7 @@ type WatchEventsRequest struct {
 
 func (x *WatchEventsRequest) Reset() {
 	*x = WatchEventsRequest{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[82]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[89]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6841,7 +7451,7 @@ func (x *WatchEventsRequest) String() string {
 func (*WatchEventsRequest) ProtoMessage() {}
 
 func (x *WatchEventsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[82]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[89]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6854,7 +7464,7 @@ func (x *WatchEventsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WatchEventsRequest.ProtoReflect.Descriptor instead.
 func (*WatchEventsRequest) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{82}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{89}
 }
 
 func (x *WatchEventsRequest) GetScope() *Scope {
@@ -6891,7 +7501,7 @@ type WatchEventsResponse struct {
 
 func (x *WatchEventsResponse) Reset() {
 	*x = WatchEventsResponse{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[83]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[90]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6903,7 +7513,7 @@ func (x *WatchEventsResponse) String() string {
 func (*WatchEventsResponse) ProtoMessage() {}
 
 func (x *WatchEventsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[83]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[90]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6916,7 +7526,7 @@ func (x *WatchEventsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WatchEventsResponse.ProtoReflect.Descriptor instead.
 func (*WatchEventsResponse) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{83}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{90}
 }
 
 func (x *WatchEventsResponse) GetEvents() []*TaskEvent {
@@ -6971,7 +7581,7 @@ type CodingContract struct {
 
 func (x *CodingContract) Reset() {
 	*x = CodingContract{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[84]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[91]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6983,7 +7593,7 @@ func (x *CodingContract) String() string {
 func (*CodingContract) ProtoMessage() {}
 
 func (x *CodingContract) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[84]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[91]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6996,7 +7606,7 @@ func (x *CodingContract) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CodingContract.ProtoReflect.Descriptor instead.
 func (*CodingContract) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{84}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{91}
 }
 
 func (x *CodingContract) GetRepositoryId() string {
@@ -7079,7 +7689,7 @@ type SubmitTaskRequest struct {
 
 func (x *SubmitTaskRequest) Reset() {
 	*x = SubmitTaskRequest{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[85]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[92]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7091,7 +7701,7 @@ func (x *SubmitTaskRequest) String() string {
 func (*SubmitTaskRequest) ProtoMessage() {}
 
 func (x *SubmitTaskRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[85]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[92]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7104,7 +7714,7 @@ func (x *SubmitTaskRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubmitTaskRequest.ProtoReflect.Descriptor instead.
 func (*SubmitTaskRequest) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{85}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{92}
 }
 
 func (x *SubmitTaskRequest) GetScope() *Scope {
@@ -7182,7 +7792,7 @@ type SubmitTaskResponse struct {
 
 func (x *SubmitTaskResponse) Reset() {
 	*x = SubmitTaskResponse{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[86]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[93]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7194,7 +7804,7 @@ func (x *SubmitTaskResponse) String() string {
 func (*SubmitTaskResponse) ProtoMessage() {}
 
 func (x *SubmitTaskResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[86]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[93]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7207,7 +7817,7 @@ func (x *SubmitTaskResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubmitTaskResponse.ProtoReflect.Descriptor instead.
 func (*SubmitTaskResponse) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{86}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{93}
 }
 
 func (x *SubmitTaskResponse) GetMessage() *TaskMessage {
@@ -7251,7 +7861,7 @@ type InterruptTaskRequest struct {
 
 func (x *InterruptTaskRequest) Reset() {
 	*x = InterruptTaskRequest{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[87]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[94]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7263,7 +7873,7 @@ func (x *InterruptTaskRequest) String() string {
 func (*InterruptTaskRequest) ProtoMessage() {}
 
 func (x *InterruptTaskRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[87]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[94]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7276,7 +7886,7 @@ func (x *InterruptTaskRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InterruptTaskRequest.ProtoReflect.Descriptor instead.
 func (*InterruptTaskRequest) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{87}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{94}
 }
 
 func (x *InterruptTaskRequest) GetScope() *Scope {
@@ -7326,7 +7936,7 @@ type InterruptTaskResponse struct {
 
 func (x *InterruptTaskResponse) Reset() {
 	*x = InterruptTaskResponse{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[88]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[95]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7338,7 +7948,7 @@ func (x *InterruptTaskResponse) String() string {
 func (*InterruptTaskResponse) ProtoMessage() {}
 
 func (x *InterruptTaskResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[88]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[95]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7351,7 +7961,7 @@ func (x *InterruptTaskResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InterruptTaskResponse.ProtoReflect.Descriptor instead.
 func (*InterruptTaskResponse) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{88}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{95}
 }
 
 func (x *InterruptTaskResponse) GetTurnId() string {
@@ -7400,7 +8010,7 @@ type RespondToRequestRequest struct {
 
 func (x *RespondToRequestRequest) Reset() {
 	*x = RespondToRequestRequest{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[89]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[96]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7412,7 +8022,7 @@ func (x *RespondToRequestRequest) String() string {
 func (*RespondToRequestRequest) ProtoMessage() {}
 
 func (x *RespondToRequestRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[89]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[96]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7425,7 +8035,7 @@ func (x *RespondToRequestRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RespondToRequestRequest.ProtoReflect.Descriptor instead.
 func (*RespondToRequestRequest) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{89}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{96}
 }
 
 func (x *RespondToRequestRequest) GetScope() *Scope {
@@ -7509,7 +8119,7 @@ type RespondToRequestResponse struct {
 
 func (x *RespondToRequestResponse) Reset() {
 	*x = RespondToRequestResponse{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[90]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[97]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7521,7 +8131,7 @@ func (x *RespondToRequestResponse) String() string {
 func (*RespondToRequestResponse) ProtoMessage() {}
 
 func (x *RespondToRequestResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[90]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[97]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7534,7 +8144,7 @@ func (x *RespondToRequestResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RespondToRequestResponse.ProtoReflect.Descriptor instead.
 func (*RespondToRequestResponse) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{90}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{97}
 }
 
 func (x *RespondToRequestResponse) GetReplayed() bool {
@@ -7570,7 +8180,7 @@ type GetReceiptRequest struct {
 
 func (x *GetReceiptRequest) Reset() {
 	*x = GetReceiptRequest{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[91]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[98]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7582,7 +8192,7 @@ func (x *GetReceiptRequest) String() string {
 func (*GetReceiptRequest) ProtoMessage() {}
 
 func (x *GetReceiptRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[91]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[98]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7595,7 +8205,7 @@ func (x *GetReceiptRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetReceiptRequest.ProtoReflect.Descriptor instead.
 func (*GetReceiptRequest) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{91}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{98}
 }
 
 func (x *GetReceiptRequest) GetScope() *Scope {
@@ -7635,7 +8245,7 @@ type GetReceiptResponse struct {
 
 func (x *GetReceiptResponse) Reset() {
 	*x = GetReceiptResponse{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[92]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[99]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7647,7 +8257,7 @@ func (x *GetReceiptResponse) String() string {
 func (*GetReceiptResponse) ProtoMessage() {}
 
 func (x *GetReceiptResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[92]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[99]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7660,7 +8270,7 @@ func (x *GetReceiptResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetReceiptResponse.ProtoReflect.Descriptor instead.
 func (*GetReceiptResponse) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{92}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{99}
 }
 
 func (x *GetReceiptResponse) GetReceipt() *Receipt {
@@ -7682,7 +8292,7 @@ type ResolveReceiptActionRequest struct {
 
 func (x *ResolveReceiptActionRequest) Reset() {
 	*x = ResolveReceiptActionRequest{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[93]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[100]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7694,7 +8304,7 @@ func (x *ResolveReceiptActionRequest) String() string {
 func (*ResolveReceiptActionRequest) ProtoMessage() {}
 
 func (x *ResolveReceiptActionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[93]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[100]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7707,7 +8317,7 @@ func (x *ResolveReceiptActionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResolveReceiptActionRequest.ProtoReflect.Descriptor instead.
 func (*ResolveReceiptActionRequest) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{93}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{100}
 }
 
 func (x *ResolveReceiptActionRequest) GetScope() *Scope {
@@ -7747,7 +8357,7 @@ type ResolveReceiptActionResponse struct {
 
 func (x *ResolveReceiptActionResponse) Reset() {
 	*x = ResolveReceiptActionResponse{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[94]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[101]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7759,7 +8369,7 @@ func (x *ResolveReceiptActionResponse) String() string {
 func (*ResolveReceiptActionResponse) ProtoMessage() {}
 
 func (x *ResolveReceiptActionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[94]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[101]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7772,7 +8382,7 @@ func (x *ResolveReceiptActionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResolveReceiptActionResponse.ProtoReflect.Descriptor instead.
 func (*ResolveReceiptActionResponse) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{94}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{101}
 }
 
 func (x *ResolveReceiptActionResponse) GetReceipt() *Receipt {
@@ -7794,7 +8404,7 @@ type VoiceSelection struct {
 
 func (x *VoiceSelection) Reset() {
 	*x = VoiceSelection{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[95]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[102]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7806,7 +8416,7 @@ func (x *VoiceSelection) String() string {
 func (*VoiceSelection) ProtoMessage() {}
 
 func (x *VoiceSelection) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[95]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[102]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7819,7 +8429,7 @@ func (x *VoiceSelection) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VoiceSelection.ProtoReflect.Descriptor instead.
 func (*VoiceSelection) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{95}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{102}
 }
 
 func (x *VoiceSelection) GetMode() VoiceMode {
@@ -7853,7 +8463,7 @@ type SubmitVoicedTaskRequest struct {
 
 func (x *SubmitVoicedTaskRequest) Reset() {
 	*x = SubmitVoicedTaskRequest{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[96]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[103]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7865,7 +8475,7 @@ func (x *SubmitVoicedTaskRequest) String() string {
 func (*SubmitVoicedTaskRequest) ProtoMessage() {}
 
 func (x *SubmitVoicedTaskRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[96]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[103]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7878,7 +8488,7 @@ func (x *SubmitVoicedTaskRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubmitVoicedTaskRequest.ProtoReflect.Descriptor instead.
 func (*SubmitVoicedTaskRequest) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{96}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{103}
 }
 
 func (x *SubmitVoicedTaskRequest) GetTask() *SubmitTaskRequest {
@@ -7904,7 +8514,7 @@ type SubmitVoicedTaskResponse struct {
 
 func (x *SubmitVoicedTaskResponse) Reset() {
 	*x = SubmitVoicedTaskResponse{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[97]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[104]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7916,7 +8526,7 @@ func (x *SubmitVoicedTaskResponse) String() string {
 func (*SubmitVoicedTaskResponse) ProtoMessage() {}
 
 func (x *SubmitVoicedTaskResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[97]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[104]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7929,7 +8539,7 @@ func (x *SubmitVoicedTaskResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubmitVoicedTaskResponse.ProtoReflect.Descriptor instead.
 func (*SubmitVoicedTaskResponse) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{97}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{104}
 }
 
 func (x *SubmitVoicedTaskResponse) GetResult() *SubmitTaskResponse {
@@ -7948,7 +8558,7 @@ type GetVoiceCatalogRequest struct {
 
 func (x *GetVoiceCatalogRequest) Reset() {
 	*x = GetVoiceCatalogRequest{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[98]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[105]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7960,7 +8570,7 @@ func (x *GetVoiceCatalogRequest) String() string {
 func (*GetVoiceCatalogRequest) ProtoMessage() {}
 
 func (x *GetVoiceCatalogRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[98]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[105]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7973,7 +8583,7 @@ func (x *GetVoiceCatalogRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetVoiceCatalogRequest.ProtoReflect.Descriptor instead.
 func (*GetVoiceCatalogRequest) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{98}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{105}
 }
 
 func (x *GetVoiceCatalogRequest) GetScope() *Scope {
@@ -7995,7 +8605,7 @@ type BrandVoice struct {
 
 func (x *BrandVoice) Reset() {
 	*x = BrandVoice{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[99]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[106]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8007,7 +8617,7 @@ func (x *BrandVoice) String() string {
 func (*BrandVoice) ProtoMessage() {}
 
 func (x *BrandVoice) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[99]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[106]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8020,7 +8630,7 @@ func (x *BrandVoice) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BrandVoice.ProtoReflect.Descriptor instead.
 func (*BrandVoice) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{99}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{106}
 }
 
 func (x *BrandVoice) GetVoiceId() string {
@@ -8063,7 +8673,7 @@ type GetVoiceCatalogResponse struct {
 
 func (x *GetVoiceCatalogResponse) Reset() {
 	*x = GetVoiceCatalogResponse{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[100]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[107]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8075,7 +8685,7 @@ func (x *GetVoiceCatalogResponse) String() string {
 func (*GetVoiceCatalogResponse) ProtoMessage() {}
 
 func (x *GetVoiceCatalogResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[100]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[107]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8088,7 +8698,7 @@ func (x *GetVoiceCatalogResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetVoiceCatalogResponse.ProtoReflect.Descriptor instead.
 func (*GetVoiceCatalogResponse) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{100}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{107}
 }
 
 func (x *GetVoiceCatalogResponse) GetScope() *Scope {
@@ -8136,7 +8746,7 @@ type Control struct {
 
 func (x *Control) Reset() {
 	*x = Control{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[101]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[108]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8148,7 +8758,7 @@ func (x *Control) String() string {
 func (*Control) ProtoMessage() {}
 
 func (x *Control) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[101]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[108]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8161,7 +8771,7 @@ func (x *Control) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Control.ProtoReflect.Descriptor instead.
 func (*Control) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{101}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{108}
 }
 
 func (x *Control) GetControlId() string {
@@ -8234,7 +8844,7 @@ type ListControlsRequest struct {
 
 func (x *ListControlsRequest) Reset() {
 	*x = ListControlsRequest{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[102]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[109]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8246,7 +8856,7 @@ func (x *ListControlsRequest) String() string {
 func (*ListControlsRequest) ProtoMessage() {}
 
 func (x *ListControlsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[102]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[109]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8259,7 +8869,7 @@ func (x *ListControlsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListControlsRequest.ProtoReflect.Descriptor instead.
 func (*ListControlsRequest) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{102}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{109}
 }
 
 func (x *ListControlsRequest) GetOrganizationId() string {
@@ -8300,7 +8910,7 @@ type ListControlsResponse struct {
 
 func (x *ListControlsResponse) Reset() {
 	*x = ListControlsResponse{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[103]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[110]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8312,7 +8922,7 @@ func (x *ListControlsResponse) String() string {
 func (*ListControlsResponse) ProtoMessage() {}
 
 func (x *ListControlsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[103]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[110]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8325,7 +8935,7 @@ func (x *ListControlsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListControlsResponse.ProtoReflect.Descriptor instead.
 func (*ListControlsResponse) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{103}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{110}
 }
 
 func (x *ListControlsResponse) GetControls() []*Control {
@@ -8353,7 +8963,7 @@ type GetControlRequest struct {
 
 func (x *GetControlRequest) Reset() {
 	*x = GetControlRequest{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[104]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[111]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8365,7 +8975,7 @@ func (x *GetControlRequest) String() string {
 func (*GetControlRequest) ProtoMessage() {}
 
 func (x *GetControlRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[104]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[111]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8378,7 +8988,7 @@ func (x *GetControlRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetControlRequest.ProtoReflect.Descriptor instead.
 func (*GetControlRequest) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{104}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{111}
 }
 
 func (x *GetControlRequest) GetOrganizationId() string {
@@ -8415,7 +9025,7 @@ type ControlRequirement struct {
 
 func (x *ControlRequirement) Reset() {
 	*x = ControlRequirement{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[105]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[112]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8427,7 +9037,7 @@ func (x *ControlRequirement) String() string {
 func (*ControlRequirement) ProtoMessage() {}
 
 func (x *ControlRequirement) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[105]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[112]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8440,7 +9050,7 @@ func (x *ControlRequirement) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ControlRequirement.ProtoReflect.Descriptor instead.
 func (*ControlRequirement) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{105}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{112}
 }
 
 func (x *ControlRequirement) GetFrameworkId() string {
@@ -8477,7 +9087,7 @@ type ControlTestState struct {
 
 func (x *ControlTestState) Reset() {
 	*x = ControlTestState{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[106]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[113]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8489,7 +9099,7 @@ func (x *ControlTestState) String() string {
 func (*ControlTestState) ProtoMessage() {}
 
 func (x *ControlTestState) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[106]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[113]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8502,7 +9112,7 @@ func (x *ControlTestState) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ControlTestState.ProtoReflect.Descriptor instead.
 func (*ControlTestState) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{106}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{113}
 }
 
 func (x *ControlTestState) GetTestId() string {
@@ -8547,7 +9157,7 @@ type GetControlResponse struct {
 
 func (x *GetControlResponse) Reset() {
 	*x = GetControlResponse{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[107]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[114]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8559,7 +9169,7 @@ func (x *GetControlResponse) String() string {
 func (*GetControlResponse) ProtoMessage() {}
 
 func (x *GetControlResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[107]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[114]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8572,7 +9182,7 @@ func (x *GetControlResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetControlResponse.ProtoReflect.Descriptor instead.
 func (*GetControlResponse) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{107}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{114}
 }
 
 func (x *GetControlResponse) GetControl() *Control {
@@ -8628,7 +9238,7 @@ type Test struct {
 
 func (x *Test) Reset() {
 	*x = Test{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[108]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[115]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8640,7 +9250,7 @@ func (x *Test) String() string {
 func (*Test) ProtoMessage() {}
 
 func (x *Test) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[108]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[115]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8653,7 +9263,7 @@ func (x *Test) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Test.ProtoReflect.Descriptor instead.
 func (*Test) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{108}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{115}
 }
 
 func (x *Test) GetTestId() string {
@@ -8730,7 +9340,7 @@ type ListTestsRequest struct {
 
 func (x *ListTestsRequest) Reset() {
 	*x = ListTestsRequest{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[109]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[116]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8742,7 +9352,7 @@ func (x *ListTestsRequest) String() string {
 func (*ListTestsRequest) ProtoMessage() {}
 
 func (x *ListTestsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[109]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[116]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8755,7 +9365,7 @@ func (x *ListTestsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListTestsRequest.ProtoReflect.Descriptor instead.
 func (*ListTestsRequest) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{109}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{116}
 }
 
 func (x *ListTestsRequest) GetOrganizationId() string {
@@ -8814,7 +9424,7 @@ type ListTestsResponse struct {
 
 func (x *ListTestsResponse) Reset() {
 	*x = ListTestsResponse{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[110]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[117]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8826,7 +9436,7 @@ func (x *ListTestsResponse) String() string {
 func (*ListTestsResponse) ProtoMessage() {}
 
 func (x *ListTestsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[110]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[117]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8839,7 +9449,7 @@ func (x *ListTestsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListTestsResponse.ProtoReflect.Descriptor instead.
 func (*ListTestsResponse) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{110}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{117}
 }
 
 func (x *ListTestsResponse) GetTests() []*Test {
@@ -8884,7 +9494,7 @@ type TestResourceResult struct {
 
 func (x *TestResourceResult) Reset() {
 	*x = TestResourceResult{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[111]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[118]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8896,7 +9506,7 @@ func (x *TestResourceResult) String() string {
 func (*TestResourceResult) ProtoMessage() {}
 
 func (x *TestResourceResult) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[111]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[118]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8909,7 +9519,7 @@ func (x *TestResourceResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TestResourceResult.ProtoReflect.Descriptor instead.
 func (*TestResourceResult) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{111}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{118}
 }
 
 func (x *TestResourceResult) GetResourceId() string {
@@ -8965,7 +9575,7 @@ type GetTestRequest struct {
 
 func (x *GetTestRequest) Reset() {
 	*x = GetTestRequest{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[112]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[119]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8977,7 +9587,7 @@ func (x *GetTestRequest) String() string {
 func (*GetTestRequest) ProtoMessage() {}
 
 func (x *GetTestRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[112]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[119]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8990,7 +9600,7 @@ func (x *GetTestRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTestRequest.ProtoReflect.Descriptor instead.
 func (*GetTestRequest) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{112}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{119}
 }
 
 func (x *GetTestRequest) GetOrganizationId() string {
@@ -9027,7 +9637,7 @@ type GetTestResponse struct {
 
 func (x *GetTestResponse) Reset() {
 	*x = GetTestResponse{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[113]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[120]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9039,7 +9649,7 @@ func (x *GetTestResponse) String() string {
 func (*GetTestResponse) ProtoMessage() {}
 
 func (x *GetTestResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[113]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[120]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9052,7 +9662,7 @@ func (x *GetTestResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTestResponse.ProtoReflect.Descriptor instead.
 func (*GetTestResponse) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{113}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{120}
 }
 
 func (x *GetTestResponse) GetTest() *Test {
@@ -9106,7 +9716,7 @@ type Evidence struct {
 
 func (x *Evidence) Reset() {
 	*x = Evidence{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[114]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[121]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9118,7 +9728,7 @@ func (x *Evidence) String() string {
 func (*Evidence) ProtoMessage() {}
 
 func (x *Evidence) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[114]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[121]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9131,7 +9741,7 @@ func (x *Evidence) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Evidence.ProtoReflect.Descriptor instead.
 func (*Evidence) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{114}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{121}
 }
 
 func (x *Evidence) GetEvidenceId() string {
@@ -9227,7 +9837,7 @@ type ListEvidenceRequest struct {
 
 func (x *ListEvidenceRequest) Reset() {
 	*x = ListEvidenceRequest{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[115]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[122]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9239,7 +9849,7 @@ func (x *ListEvidenceRequest) String() string {
 func (*ListEvidenceRequest) ProtoMessage() {}
 
 func (x *ListEvidenceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[115]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[122]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9252,7 +9862,7 @@ func (x *ListEvidenceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListEvidenceRequest.ProtoReflect.Descriptor instead.
 func (*ListEvidenceRequest) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{115}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{122}
 }
 
 func (x *ListEvidenceRequest) GetOrganizationId() string {
@@ -9304,7 +9914,7 @@ type ListEvidenceResponse struct {
 
 func (x *ListEvidenceResponse) Reset() {
 	*x = ListEvidenceResponse{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[116]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[123]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9316,7 +9926,7 @@ func (x *ListEvidenceResponse) String() string {
 func (*ListEvidenceResponse) ProtoMessage() {}
 
 func (x *ListEvidenceResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[116]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[123]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9329,7 +9939,7 @@ func (x *ListEvidenceResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListEvidenceResponse.ProtoReflect.Descriptor instead.
 func (*ListEvidenceResponse) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{116}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{123}
 }
 
 func (x *ListEvidenceResponse) GetEvidence() []*Evidence {
@@ -9375,7 +9985,7 @@ type EvidenceVersion struct {
 
 func (x *EvidenceVersion) Reset() {
 	*x = EvidenceVersion{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[117]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[124]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9387,7 +9997,7 @@ func (x *EvidenceVersion) String() string {
 func (*EvidenceVersion) ProtoMessage() {}
 
 func (x *EvidenceVersion) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[117]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[124]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9400,7 +10010,7 @@ func (x *EvidenceVersion) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EvidenceVersion.ProtoReflect.Descriptor instead.
 func (*EvidenceVersion) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{117}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{124}
 }
 
 func (x *EvidenceVersion) GetVersionId() string {
@@ -9459,7 +10069,7 @@ type ListEvidenceVersionsRequest struct {
 
 func (x *ListEvidenceVersionsRequest) Reset() {
 	*x = ListEvidenceVersionsRequest{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[118]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[125]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9471,7 +10081,7 @@ func (x *ListEvidenceVersionsRequest) String() string {
 func (*ListEvidenceVersionsRequest) ProtoMessage() {}
 
 func (x *ListEvidenceVersionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[118]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[125]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9484,7 +10094,7 @@ func (x *ListEvidenceVersionsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListEvidenceVersionsRequest.ProtoReflect.Descriptor instead.
 func (*ListEvidenceVersionsRequest) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{118}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{125}
 }
 
 func (x *ListEvidenceVersionsRequest) GetOrganizationId() string {
@@ -9533,7 +10143,7 @@ type ListEvidenceVersionsResponse struct {
 
 func (x *ListEvidenceVersionsResponse) Reset() {
 	*x = ListEvidenceVersionsResponse{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[119]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[126]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9545,7 +10155,7 @@ func (x *ListEvidenceVersionsResponse) String() string {
 func (*ListEvidenceVersionsResponse) ProtoMessage() {}
 
 func (x *ListEvidenceVersionsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[119]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[126]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9558,7 +10168,7 @@ func (x *ListEvidenceVersionsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListEvidenceVersionsResponse.ProtoReflect.Descriptor instead.
 func (*ListEvidenceVersionsResponse) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{119}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{126}
 }
 
 func (x *ListEvidenceVersionsResponse) GetVersions() []*EvidenceVersion {
@@ -9594,7 +10204,7 @@ type GetEvidenceContentRequest struct {
 
 func (x *GetEvidenceContentRequest) Reset() {
 	*x = GetEvidenceContentRequest{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[120]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[127]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9606,7 +10216,7 @@ func (x *GetEvidenceContentRequest) String() string {
 func (*GetEvidenceContentRequest) ProtoMessage() {}
 
 func (x *GetEvidenceContentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[120]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[127]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9619,7 +10229,7 @@ func (x *GetEvidenceContentRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetEvidenceContentRequest.ProtoReflect.Descriptor instead.
 func (*GetEvidenceContentRequest) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{120}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{127}
 }
 
 func (x *GetEvidenceContentRequest) GetOrganizationId() string {
@@ -9664,7 +10274,7 @@ type GetEvidenceContentResponse struct {
 
 func (x *GetEvidenceContentResponse) Reset() {
 	*x = GetEvidenceContentResponse{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[121]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[128]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9676,7 +10286,7 @@ func (x *GetEvidenceContentResponse) String() string {
 func (*GetEvidenceContentResponse) ProtoMessage() {}
 
 func (x *GetEvidenceContentResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[121]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[128]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9689,7 +10299,7 @@ func (x *GetEvidenceContentResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetEvidenceContentResponse.ProtoReflect.Descriptor instead.
 func (*GetEvidenceContentResponse) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{121}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{128}
 }
 
 func (x *GetEvidenceContentResponse) GetVersionId() string {
@@ -9753,7 +10363,7 @@ type Asset struct {
 
 func (x *Asset) Reset() {
 	*x = Asset{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[122]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[129]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9765,7 +10375,7 @@ func (x *Asset) String() string {
 func (*Asset) ProtoMessage() {}
 
 func (x *Asset) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[122]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[129]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9778,7 +10388,7 @@ func (x *Asset) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Asset.ProtoReflect.Descriptor instead.
 func (*Asset) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{122}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{129}
 }
 
 func (x *Asset) GetAssetId() string {
@@ -9886,7 +10496,7 @@ type ListAssetsRequest struct {
 
 func (x *ListAssetsRequest) Reset() {
 	*x = ListAssetsRequest{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[123]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[130]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9898,7 +10508,7 @@ func (x *ListAssetsRequest) String() string {
 func (*ListAssetsRequest) ProtoMessage() {}
 
 func (x *ListAssetsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[123]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[130]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9911,7 +10521,7 @@ func (x *ListAssetsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAssetsRequest.ProtoReflect.Descriptor instead.
 func (*ListAssetsRequest) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{123}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{130}
 }
 
 func (x *ListAssetsRequest) GetOrganizationId() string {
@@ -9955,7 +10565,7 @@ type ListAssetsResponse struct {
 
 func (x *ListAssetsResponse) Reset() {
 	*x = ListAssetsResponse{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[124]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[131]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9967,7 +10577,7 @@ func (x *ListAssetsResponse) String() string {
 func (*ListAssetsResponse) ProtoMessage() {}
 
 func (x *ListAssetsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[124]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[131]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9980,7 +10590,7 @@ func (x *ListAssetsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAssetsResponse.ProtoReflect.Descriptor instead.
 func (*ListAssetsResponse) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{124}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{131}
 }
 
 func (x *ListAssetsResponse) GetAssets() []*Asset {
@@ -10022,7 +10632,7 @@ type GetAssetRequest struct {
 
 func (x *GetAssetRequest) Reset() {
 	*x = GetAssetRequest{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[125]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[132]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10034,7 +10644,7 @@ func (x *GetAssetRequest) String() string {
 func (*GetAssetRequest) ProtoMessage() {}
 
 func (x *GetAssetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[125]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[132]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10047,7 +10657,7 @@ func (x *GetAssetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAssetRequest.ProtoReflect.Descriptor instead.
 func (*GetAssetRequest) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{125}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{132}
 }
 
 func (x *GetAssetRequest) GetOrganizationId() string {
@@ -10080,7 +10690,7 @@ type GetAssetResponse struct {
 
 func (x *GetAssetResponse) Reset() {
 	*x = GetAssetResponse{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[126]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[133]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10092,7 +10702,7 @@ func (x *GetAssetResponse) String() string {
 func (*GetAssetResponse) ProtoMessage() {}
 
 func (x *GetAssetResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[126]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[133]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10105,7 +10715,7 @@ func (x *GetAssetResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAssetResponse.ProtoReflect.Descriptor instead.
 func (*GetAssetResponse) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{126}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{133}
 }
 
 func (x *GetAssetResponse) GetAsset() *Asset {
@@ -10140,7 +10750,7 @@ type Audit struct {
 
 func (x *Audit) Reset() {
 	*x = Audit{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[127]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[134]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10152,7 +10762,7 @@ func (x *Audit) String() string {
 func (*Audit) ProtoMessage() {}
 
 func (x *Audit) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[127]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[134]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10165,7 +10775,7 @@ func (x *Audit) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Audit.ProtoReflect.Descriptor instead.
 func (*Audit) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{127}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{134}
 }
 
 func (x *Audit) GetAuditId() string {
@@ -10280,7 +10890,7 @@ type ListAuditsRequest struct {
 
 func (x *ListAuditsRequest) Reset() {
 	*x = ListAuditsRequest{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[128]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[135]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10292,7 +10902,7 @@ func (x *ListAuditsRequest) String() string {
 func (*ListAuditsRequest) ProtoMessage() {}
 
 func (x *ListAuditsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[128]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[135]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10305,7 +10915,7 @@ func (x *ListAuditsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAuditsRequest.ProtoReflect.Descriptor instead.
 func (*ListAuditsRequest) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{128}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{135}
 }
 
 func (x *ListAuditsRequest) GetOrganizationId() string {
@@ -10353,7 +10963,7 @@ type ListAuditsResponse struct {
 
 func (x *ListAuditsResponse) Reset() {
 	*x = ListAuditsResponse{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[129]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[136]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10365,7 +10975,7 @@ func (x *ListAuditsResponse) String() string {
 func (*ListAuditsResponse) ProtoMessage() {}
 
 func (x *ListAuditsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[129]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[136]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10378,7 +10988,7 @@ func (x *ListAuditsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAuditsResponse.ProtoReflect.Descriptor instead.
 func (*ListAuditsResponse) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{129}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{136}
 }
 
 func (x *ListAuditsResponse) GetAudits() []*Audit {
@@ -10406,7 +11016,7 @@ type GetAuditRequest struct {
 
 func (x *GetAuditRequest) Reset() {
 	*x = GetAuditRequest{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[130]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[137]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10418,7 +11028,7 @@ func (x *GetAuditRequest) String() string {
 func (*GetAuditRequest) ProtoMessage() {}
 
 func (x *GetAuditRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[130]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[137]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10431,7 +11041,7 @@ func (x *GetAuditRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAuditRequest.ProtoReflect.Descriptor instead.
 func (*GetAuditRequest) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{130}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{137}
 }
 
 func (x *GetAuditRequest) GetOrganizationId() string {
@@ -10464,7 +11074,7 @@ type GetAuditResponse struct {
 
 func (x *GetAuditResponse) Reset() {
 	*x = GetAuditResponse{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[131]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[138]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10476,7 +11086,7 @@ func (x *GetAuditResponse) String() string {
 func (*GetAuditResponse) ProtoMessage() {}
 
 func (x *GetAuditResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[131]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[138]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10489,7 +11099,7 @@ func (x *GetAuditResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAuditResponse.ProtoReflect.Descriptor instead.
 func (*GetAuditResponse) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{131}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{138}
 }
 
 func (x *GetAuditResponse) GetAudit() *Audit {
@@ -10524,7 +11134,7 @@ type AuditRequestItem struct {
 
 func (x *AuditRequestItem) Reset() {
 	*x = AuditRequestItem{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[132]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[139]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10536,7 +11146,7 @@ func (x *AuditRequestItem) String() string {
 func (*AuditRequestItem) ProtoMessage() {}
 
 func (x *AuditRequestItem) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[132]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[139]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10549,7 +11159,7 @@ func (x *AuditRequestItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AuditRequestItem.ProtoReflect.Descriptor instead.
 func (*AuditRequestItem) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{132}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{139}
 }
 
 func (x *AuditRequestItem) GetItemId() string {
@@ -10663,7 +11273,7 @@ type AuditRequestCounts struct {
 
 func (x *AuditRequestCounts) Reset() {
 	*x = AuditRequestCounts{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[133]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[140]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10675,7 +11285,7 @@ func (x *AuditRequestCounts) String() string {
 func (*AuditRequestCounts) ProtoMessage() {}
 
 func (x *AuditRequestCounts) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[133]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[140]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10688,7 +11298,7 @@ func (x *AuditRequestCounts) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AuditRequestCounts.ProtoReflect.Descriptor instead.
 func (*AuditRequestCounts) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{133}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{140}
 }
 
 func (x *AuditRequestCounts) GetTotal() uint32 {
@@ -10737,7 +11347,7 @@ type ListAuditRequestsRequest struct {
 
 func (x *ListAuditRequestsRequest) Reset() {
 	*x = ListAuditRequestsRequest{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[134]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[141]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10749,7 +11359,7 @@ func (x *ListAuditRequestsRequest) String() string {
 func (*ListAuditRequestsRequest) ProtoMessage() {}
 
 func (x *ListAuditRequestsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[134]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[141]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10762,7 +11372,7 @@ func (x *ListAuditRequestsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAuditRequestsRequest.ProtoReflect.Descriptor instead.
 func (*ListAuditRequestsRequest) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{134}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{141}
 }
 
 func (x *ListAuditRequestsRequest) GetOrganizationId() string {
@@ -10796,7 +11406,7 @@ type ListAuditRequestsResponse struct {
 
 func (x *ListAuditRequestsResponse) Reset() {
 	*x = ListAuditRequestsResponse{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[135]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[142]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10808,7 +11418,7 @@ func (x *ListAuditRequestsResponse) String() string {
 func (*ListAuditRequestsResponse) ProtoMessage() {}
 
 func (x *ListAuditRequestsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[135]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[142]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10821,7 +11431,7 @@ func (x *ListAuditRequestsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAuditRequestsResponse.ProtoReflect.Descriptor instead.
 func (*ListAuditRequestsResponse) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{135}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{142}
 }
 
 func (x *ListAuditRequestsResponse) GetRequests() []*AuditRequestItem {
@@ -10850,7 +11460,7 @@ type GetAuditRequestItemRequest struct {
 
 func (x *GetAuditRequestItemRequest) Reset() {
 	*x = GetAuditRequestItemRequest{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[136]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[143]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10862,7 +11472,7 @@ func (x *GetAuditRequestItemRequest) String() string {
 func (*GetAuditRequestItemRequest) ProtoMessage() {}
 
 func (x *GetAuditRequestItemRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[136]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[143]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10875,7 +11485,7 @@ func (x *GetAuditRequestItemRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAuditRequestItemRequest.ProtoReflect.Descriptor instead.
 func (*GetAuditRequestItemRequest) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{136}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{143}
 }
 
 func (x *GetAuditRequestItemRequest) GetOrganizationId() string {
@@ -10915,7 +11525,7 @@ type GetAuditRequestItemResponse struct {
 
 func (x *GetAuditRequestItemResponse) Reset() {
 	*x = GetAuditRequestItemResponse{}
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[137]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[144]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10927,7 +11537,7 @@ func (x *GetAuditRequestItemResponse) String() string {
 func (*GetAuditRequestItemResponse) ProtoMessage() {}
 
 func (x *GetAuditRequestItemResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[137]
+	mi := &file_deixicpublic_v1_sdk_proto_msgTypes[144]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10940,7 +11550,7 @@ func (x *GetAuditRequestItemResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAuditRequestItemResponse.ProtoReflect.Descriptor instead.
 func (*GetAuditRequestItemResponse) Descriptor() ([]byte, []int) {
-	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{137}
+	return file_deixicpublic_v1_sdk_proto_rawDescGZIP(), []int{144}
 }
 
 func (x *GetAuditRequestItemResponse) GetRequest() *AuditRequestItem {
@@ -11216,18 +11826,70 @@ const file_deixicpublic_v1_sdk_proto_rawDesc = "" +
 	"\x17BusinessBlueprintOrigin\x12!\n" +
 	"\fblueprint_id\x18\x01 \x01(\tR\vblueprintId\x12\x18\n" +
 	"\aversion\x18\x02 \x01(\x03R\aversion\x12$\n" +
-	"\x0esource_type_id\x18\x03 \x01(\tR\fsourceTypeId\"x\n" +
+	"\x0esource_type_id\x18\x03 \x01(\tR\fsourceTypeId\"\x9a\x03\n" +
 	"\x17BusinessObjectTypeField\x12\x19\n" +
 	"\bfield_id\x18\x01 \x01(\tR\afieldId\x12\x19\n" +
 	"\bgroup_id\x18\x02 \x01(\tR\agroupId\x12'\n" +
-	"\x0fsource_mappable\x18\x03 \x01(\bR\x0esourceMappable\"\x9e\x02\n" +
+	"\x0fsource_mappable\x18\x03 \x01(\bR\x0esourceMappable\x12\x12\n" +
+	"\x04name\x18\x04 \x01(\tR\x04name\x126\n" +
+	"\x04kind\x18\x05 \x01(\x0e2\".deixicpublic.v1.BusinessFieldKindR\x04kind\x12\x1a\n" +
+	"\brequired\x18\x06 \x01(\bR\brequired\x12\x16\n" +
+	"\x06unique\x18\a \x01(\bR\x06unique\x12\x1f\n" +
+	"\venum_values\x18\b \x03(\tR\n" +
+	"enumValues\x12*\n" +
+	"\x11reference_type_id\x18\t \x01(\tR\x0freferenceTypeId\x12 \n" +
+	"\vdescription\x18\n" +
+	" \x01(\tR\vdescription\x12\"\n" +
+	"\n" +
+	"max_length\x18\v \x01(\rH\x00R\tmaxLength\x88\x01\x01B\r\n" +
+	"\v_max_length\"\x83\x01\n" +
+	"\x1eBusinessObjectTypeRelationship\x12'\n" +
+	"\x0frelationship_id\x18\x01 \x01(\tR\x0erelationshipId\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12$\n" +
+	"\x0etarget_type_id\x18\x03 \x01(\tR\ftargetTypeId\"\xb8\x03\n" +
 	"\x12BusinessObjectType\x12\x17\n" +
 	"\atype_id\x18\x01 \x01(\tR\x06typeId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1a\n" +
 	"\brevision\x18\x03 \x01(\x03R\brevision\x12S\n" +
 	"\x10blueprint_origin\x18\x04 \x01(\v2(.deixicpublic.v1.BusinessBlueprintOriginR\x0fblueprintOrigin\x12(\n" +
 	"\x10display_field_id\x18\x05 \x01(\tR\x0edisplayFieldId\x12@\n" +
-	"\x06fields\x18\x06 \x03(\v2(.deixicpublic.v1.BusinessObjectTypeFieldR\x06fields\"\xa6\x01\n" +
+	"\x06fields\x18\x06 \x03(\v2(.deixicpublic.v1.BusinessObjectTypeFieldR\x06fields\x12U\n" +
+	"\rrelationships\x18\a \x03(\v2/.deixicpublic.v1.BusinessObjectTypeRelationshipR\rrelationships\x12\x1f\n" +
+	"\vplural_name\x18\b \x01(\tR\n" +
+	"pluralName\x12 \n" +
+	"\vdescription\x18\t \x01(\tR\vdescription\"\x88\x02\n" +
+	"\x1fDefineBusinessObjectTypeRequest\x12'\n" +
+	"\x0forganization_id\x18\x01 \x01(\tR\x0eorganizationId\x12!\n" +
+	"\fworkspace_id\x18\x02 \x01(\tR\vworkspaceId\x12'\n" +
+	"\x0fidempotency_key\x18\x03 \x01(\tR\x0eidempotencyKey\x12C\n" +
+	"\n" +
+	"definition\x18\x04 \x01(\v2#.deixicpublic.v1.BusinessObjectTypeR\n" +
+	"definition\x12+\n" +
+	"\x11expected_revision\x18\x05 \x01(\x03R\x10expectedRevision\"g\n" +
+	" DefineBusinessObjectTypeResponse\x12C\n" +
+	"\n" +
+	"definition\x18\x01 \x01(\v2#.deixicpublic.v1.BusinessObjectTypeR\n" +
+	"definition\"\x9f\x01\n" +
+	"\x1cGetBusinessObjectTypeRequest\x12'\n" +
+	"\x0forganization_id\x18\x01 \x01(\tR\x0eorganizationId\x12!\n" +
+	"\fworkspace_id\x18\x02 \x01(\tR\vworkspaceId\x12\x17\n" +
+	"\atype_id\x18\x03 \x01(\tR\x06typeId\x12\x1a\n" +
+	"\brevision\x18\x04 \x01(\x03R\brevision\"d\n" +
+	"\x1dGetBusinessObjectTypeResponse\x12C\n" +
+	"\n" +
+	"definition\x18\x01 \x01(\v2#.deixicpublic.v1.BusinessObjectTypeR\n" +
+	"definition\"\xb9\x02\n" +
+	"\x1bUpsertBusinessObjectRequest\x12'\n" +
+	"\x0forganization_id\x18\x01 \x01(\tR\x0eorganizationId\x12!\n" +
+	"\fworkspace_id\x18\x02 \x01(\tR\vworkspaceId\x12'\n" +
+	"\x0fidempotency_key\x18\x03 \x01(\tR\x0eidempotencyKey\x12\x17\n" +
+	"\atype_id\x18\x04 \x01(\tR\x06typeId\x12'\n" +
+	"\x0fschema_revision\x18\x05 \x01(\x03R\x0eschemaRevision\x12&\n" +
+	"\x0funique_field_id\x18\x06 \x01(\tR\runiqueFieldId\x12;\n" +
+	"\x06values\x18\a \x03(\v2#.deixicpublic.v1.BusinessFieldValueR\x06values\"q\n" +
+	"\x1cUpsertBusinessObjectResponse\x127\n" +
+	"\x06object\x18\x01 \x01(\v2\x1f.deixicpublic.v1.BusinessObjectR\x06object\x12\x18\n" +
+	"\acreated\x18\x02 \x01(\bR\acreated\"\xa6\x01\n" +
 	"\x1eListBusinessObjectTypesRequest\x12'\n" +
 	"\x0forganization_id\x18\x01 \x01(\tR\x0eorganizationId\x12!\n" +
 	"\fworkspace_id\x18\x02 \x01(\tR\vworkspaceId\x12\x14\n" +
@@ -11861,7 +12523,21 @@ const file_deixicpublic_v1_sdk_proto_rawDesc = "" +
 	"\x1bCLIENT_MCP_MODE_UNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x14CLIENT_MCP_MODE_OPEN\x10\x01\x12\x1d\n" +
 	"\x19CLIENT_MCP_MODE_ALLOWLIST\x10\x02\x12\x1c\n" +
-	"\x18CLIENT_MCP_MODE_DENYLIST\x10\x03*\xae\x01\n" +
+	"\x18CLIENT_MCP_MODE_DENYLIST\x10\x03*\x9f\x03\n" +
+	"\x11BusinessFieldKind\x12#\n" +
+	"\x1fBUSINESS_FIELD_KIND_UNSPECIFIED\x10\x00\x12\x1c\n" +
+	"\x18BUSINESS_FIELD_KIND_TEXT\x10\x01\x12\x1f\n" +
+	"\x1bBUSINESS_FIELD_KIND_INTEGER\x10\x02\x12\x1f\n" +
+	"\x1bBUSINESS_FIELD_KIND_BOOLEAN\x10\x03\x12\x1f\n" +
+	"\x1bBUSINESS_FIELD_KIND_DECIMAL\x10\x04\x12\x1d\n" +
+	"\x19BUSINESS_FIELD_KIND_MONEY\x10\x05\x12\x1c\n" +
+	"\x18BUSINESS_FIELD_KIND_ENUM\x10\x06\x12\x1c\n" +
+	"\x18BUSINESS_FIELD_KIND_DATE\x10\a\x12!\n" +
+	"\x1dBUSINESS_FIELD_KIND_TIMESTAMP\x10\b\x12!\n" +
+	"\x1dBUSINESS_FIELD_KIND_REFERENCE\x10\t\x12 \n" +
+	"\x1cBUSINESS_FIELD_KIND_ARTIFACT\x10\n" +
+	"\x12!\n" +
+	"\x1dBUSINESS_FIELD_KIND_TEXT_LIST\x10\v*\xae\x01\n" +
 	"\x1bBusinessSourceFieldProperty\x12.\n" +
 	"*BUSINESS_SOURCE_FIELD_PROPERTY_UNSPECIFIED\x10\x00\x12/\n" +
 	"+BUSINESS_SOURCE_FIELD_PROPERTY_DISPLAY_NAME\x10\x01\x12.\n" +
@@ -11912,7 +12588,7 @@ const file_deixicpublic_v1_sdk_proto_rawDesc = "" +
 	"\x19TEST_RESULT_STATE_NOT_RUN\x10\x04\x12$\n" +
 	" TEST_RESULT_STATE_NOT_APPLICABLE\x10\x05\x12\x1e\n" +
 	"\x1aTEST_RESULT_STATE_EXCEPTED\x10\x06\x12!\n" +
-	"\x1dTEST_RESULT_STATE_NOT_RUNNING\x10\a2\x8f$\n" +
+	"\x1dTEST_RESULT_STATE_NOT_RUNNING\x10\a2\xfd&\n" +
 	"\x13DeixicPublicService\x12R\n" +
 	"\tGetThread\x12!.deixicpublic.v1.GetThreadRequest\x1a\".deixicpublic.v1.GetThreadResponse\x12X\n" +
 	"\vListThreads\x12#.deixicpublic.v1.ListThreadsRequest\x1a$.deixicpublic.v1.ListThreadsResponse\x12[\n" +
@@ -11938,7 +12614,10 @@ const file_deixicpublic_v1_sdk_proto_rawDesc = "" +
 	"\x14UpdateBusinessObject\x12,.deixicpublic.v1.UpdateBusinessObjectRequest\x1a-.deixicpublic.v1.UpdateBusinessObjectResponse\x12s\n" +
 	"\x14DeleteBusinessObject\x12,.deixicpublic.v1.DeleteBusinessObjectRequest\x1a-.deixicpublic.v1.DeleteBusinessObjectResponse\x12p\n" +
 	"\x13ListBusinessObjects\x12+.deixicpublic.v1.ListBusinessObjectsRequest\x1a,.deixicpublic.v1.ListBusinessObjectsResponse\x12|\n" +
-	"\x17ListBusinessObjectTypes\x12/.deixicpublic.v1.ListBusinessObjectTypesRequest\x1a0.deixicpublic.v1.ListBusinessObjectTypesResponse\x12y\n" +
+	"\x17ListBusinessObjectTypes\x12/.deixicpublic.v1.ListBusinessObjectTypesRequest\x1a0.deixicpublic.v1.ListBusinessObjectTypesResponse\x12\x7f\n" +
+	"\x18DefineBusinessObjectType\x120.deixicpublic.v1.DefineBusinessObjectTypeRequest\x1a1.deixicpublic.v1.DefineBusinessObjectTypeResponse\x12v\n" +
+	"\x15GetBusinessObjectType\x12-.deixicpublic.v1.GetBusinessObjectTypeRequest\x1a..deixicpublic.v1.GetBusinessObjectTypeResponse\x12s\n" +
+	"\x14UpsertBusinessObject\x12,.deixicpublic.v1.UpsertBusinessObjectRequest\x1a-.deixicpublic.v1.UpsertBusinessObjectResponse\x12y\n" +
 	"\x16ListBusinessBlueprints\x12..deixicpublic.v1.ListBusinessBlueprintsRequest\x1a/.deixicpublic.v1.ListBusinessBlueprintsResponse\x12\x7f\n" +
 	"\x18BindBusinessObjectSource\x120.deixicpublic.v1.BindBusinessObjectSourceRequest\x1a1.deixicpublic.v1.BindBusinessObjectSourceResponse\x12\x94\x01\n" +
 	"\x1fListBusinessObjectRelationships\x127.deixicpublic.v1.ListBusinessObjectRelationshipsRequest\x1a8.deixicpublic.v1.ListBusinessObjectRelationshipsResponse\x12\x97\x01\n" +
@@ -11978,8 +12657,8 @@ func file_deixicpublic_v1_sdk_proto_rawDescGZIP() []byte {
 	return file_deixicpublic_v1_sdk_proto_rawDescData
 }
 
-var file_deixicpublic_v1_sdk_proto_enumTypes = make([]protoimpl.EnumInfo, 18)
-var file_deixicpublic_v1_sdk_proto_msgTypes = make([]protoimpl.MessageInfo, 138)
+var file_deixicpublic_v1_sdk_proto_enumTypes = make([]protoimpl.EnumInfo, 19)
+var file_deixicpublic_v1_sdk_proto_msgTypes = make([]protoimpl.MessageInfo, 145)
 var file_deixicpublic_v1_sdk_proto_goTypes = []any{
 	(TurnState)(0),                                   // 0: deixicpublic.v1.TurnState
 	(WaitingReason)(0),                               // 1: deixicpublic.v1.WaitingReason
@@ -11991,398 +12670,419 @@ var file_deixicpublic_v1_sdk_proto_goTypes = []any{
 	(ModelNextAction)(0),                             // 7: deixicpublic.v1.ModelNextAction
 	(ClientRuleScope)(0),                             // 8: deixicpublic.v1.ClientRuleScope
 	(ClientMcpMode)(0),                               // 9: deixicpublic.v1.ClientMcpMode
-	(BusinessSourceFieldProperty)(0),                 // 10: deixicpublic.v1.BusinessSourceFieldProperty
-	(ComplianceLibraryReconcileMode)(0),              // 11: deixicpublic.v1.ComplianceLibraryReconcileMode
-	(ComplianceLibraryChangeKind)(0),                 // 12: deixicpublic.v1.ComplianceLibraryChangeKind
-	(ResponseAction)(0),                              // 13: deixicpublic.v1.ResponseAction
-	(VoiceMode)(0),                                   // 14: deixicpublic.v1.VoiceMode
-	(VoiceTone)(0),                                   // 15: deixicpublic.v1.VoiceTone
-	(ControlState)(0),                                // 16: deixicpublic.v1.ControlState
-	(TestResultState)(0),                             // 17: deixicpublic.v1.TestResultState
-	(*Scope)(nil),                                    // 18: deixicpublic.v1.Scope
-	(*ErrorDetail)(nil),                              // 19: deixicpublic.v1.ErrorDetail
-	(*TaskTurn)(nil),                                 // 20: deixicpublic.v1.TaskTurn
-	(*Thread)(nil),                                   // 21: deixicpublic.v1.Thread
-	(*TaskMessage)(nil),                              // 22: deixicpublic.v1.TaskMessage
-	(*EvidenceReference)(nil),                        // 23: deixicpublic.v1.EvidenceReference
-	(*TaskEvent)(nil),                                // 24: deixicpublic.v1.TaskEvent
-	(*ReceiptAction)(nil),                            // 25: deixicpublic.v1.ReceiptAction
-	(*CodingOutput)(nil),                             // 26: deixicpublic.v1.CodingOutput
-	(*CodingAcceptance)(nil),                         // 27: deixicpublic.v1.CodingAcceptance
-	(*Receipt)(nil),                                  // 28: deixicpublic.v1.Receipt
-	(*ModelSelection)(nil),                           // 29: deixicpublic.v1.ModelSelection
-	(*AvailableModel)(nil),                           // 30: deixicpublic.v1.AvailableModel
-	(*SetupReadiness)(nil),                           // 31: deixicpublic.v1.SetupReadiness
-	(*GetModelReadinessRequest)(nil),                 // 32: deixicpublic.v1.GetModelReadinessRequest
-	(*GetModelReadinessResponse)(nil),                // 33: deixicpublic.v1.GetModelReadinessResponse
-	(*ClientRule)(nil),                               // 34: deixicpublic.v1.ClientRule
-	(*ClientSkill)(nil),                              // 35: deixicpublic.v1.ClientSkill
-	(*ClientMcpServer)(nil),                          // 36: deixicpublic.v1.ClientMcpServer
-	(*ClientMcpPolicy)(nil),                          // 37: deixicpublic.v1.ClientMcpPolicy
-	(*GetClientSetupRequest)(nil),                    // 38: deixicpublic.v1.GetClientSetupRequest
-	(*GetClientSetupResponse)(nil),                   // 39: deixicpublic.v1.GetClientSetupResponse
-	(*IssueEvidence)(nil),                            // 40: deixicpublic.v1.IssueEvidence
-	(*IssueContext)(nil),                             // 41: deixicpublic.v1.IssueContext
-	(*SubmitIssueReportRequest)(nil),                 // 42: deixicpublic.v1.SubmitIssueReportRequest
-	(*IssueReport)(nil),                              // 43: deixicpublic.v1.IssueReport
-	(*SubmitIssueReportResponse)(nil),                // 44: deixicpublic.v1.SubmitIssueReportResponse
-	(*BusinessMoney)(nil),                            // 45: deixicpublic.v1.BusinessMoney
-	(*BusinessObjectReference)(nil),                  // 46: deixicpublic.v1.BusinessObjectReference
-	(*BusinessArtifactReference)(nil),                // 47: deixicpublic.v1.BusinessArtifactReference
-	(*BusinessTextList)(nil),                         // 48: deixicpublic.v1.BusinessTextList
-	(*BusinessFieldValue)(nil),                       // 49: deixicpublic.v1.BusinessFieldValue
-	(*BusinessObject)(nil),                           // 50: deixicpublic.v1.BusinessObject
-	(*CreateBusinessObjectRequest)(nil),              // 51: deixicpublic.v1.CreateBusinessObjectRequest
-	(*CreateBusinessObjectResponse)(nil),             // 52: deixicpublic.v1.CreateBusinessObjectResponse
-	(*GetBusinessObjectRequest)(nil),                 // 53: deixicpublic.v1.GetBusinessObjectRequest
-	(*GetBusinessObjectResponse)(nil),                // 54: deixicpublic.v1.GetBusinessObjectResponse
-	(*UpdateBusinessObjectRequest)(nil),              // 55: deixicpublic.v1.UpdateBusinessObjectRequest
-	(*UpdateBusinessObjectResponse)(nil),             // 56: deixicpublic.v1.UpdateBusinessObjectResponse
-	(*DeleteBusinessObjectRequest)(nil),              // 57: deixicpublic.v1.DeleteBusinessObjectRequest
-	(*DeleteBusinessObjectResponse)(nil),             // 58: deixicpublic.v1.DeleteBusinessObjectResponse
-	(*ListBusinessObjectsRequest)(nil),               // 59: deixicpublic.v1.ListBusinessObjectsRequest
-	(*ListBusinessObjectsResponse)(nil),              // 60: deixicpublic.v1.ListBusinessObjectsResponse
-	(*BusinessBlueprintOrigin)(nil),                  // 61: deixicpublic.v1.BusinessBlueprintOrigin
-	(*BusinessObjectTypeField)(nil),                  // 62: deixicpublic.v1.BusinessObjectTypeField
-	(*BusinessObjectType)(nil),                       // 63: deixicpublic.v1.BusinessObjectType
-	(*ListBusinessObjectTypesRequest)(nil),           // 64: deixicpublic.v1.ListBusinessObjectTypesRequest
-	(*ListBusinessObjectTypesResponse)(nil),          // 65: deixicpublic.v1.ListBusinessObjectTypesResponse
-	(*BusinessBlueprint)(nil),                        // 66: deixicpublic.v1.BusinessBlueprint
-	(*ListBusinessBlueprintsRequest)(nil),            // 67: deixicpublic.v1.ListBusinessBlueprintsRequest
-	(*ListBusinessBlueprintsResponse)(nil),           // 68: deixicpublic.v1.ListBusinessBlueprintsResponse
-	(*BusinessSourceFieldMapping)(nil),               // 69: deixicpublic.v1.BusinessSourceFieldMapping
-	(*BindBusinessObjectSourceRequest)(nil),          // 70: deixicpublic.v1.BindBusinessObjectSourceRequest
-	(*BindBusinessObjectSourceResponse)(nil),         // 71: deixicpublic.v1.BindBusinessObjectSourceResponse
-	(*BusinessObjectRelationship)(nil),               // 72: deixicpublic.v1.BusinessObjectRelationship
-	(*ListBusinessObjectRelationshipsRequest)(nil),   // 73: deixicpublic.v1.ListBusinessObjectRelationshipsRequest
-	(*ListBusinessObjectRelationshipsResponse)(nil),  // 74: deixicpublic.v1.ListBusinessObjectRelationshipsResponse
-	(*CreateBusinessObjectRelationshipRequest)(nil),  // 75: deixicpublic.v1.CreateBusinessObjectRelationshipRequest
-	(*CreateBusinessObjectRelationshipResponse)(nil), // 76: deixicpublic.v1.CreateBusinessObjectRelationshipResponse
-	(*DeleteBusinessObjectRelationshipRequest)(nil),  // 77: deixicpublic.v1.DeleteBusinessObjectRelationshipRequest
-	(*DeleteBusinessObjectRelationshipResponse)(nil), // 78: deixicpublic.v1.DeleteBusinessObjectRelationshipResponse
-	(*Program)(nil),                                  // 79: deixicpublic.v1.Program
-	(*GetProgramRequest)(nil),                        // 80: deixicpublic.v1.GetProgramRequest
-	(*GetProgramResponse)(nil),                       // 81: deixicpublic.v1.GetProgramResponse
-	(*CreateProgramRequest)(nil),                     // 82: deixicpublic.v1.CreateProgramRequest
-	(*CreateProgramResponse)(nil),                    // 83: deixicpublic.v1.CreateProgramResponse
-	(*UpdateProgramRequest)(nil),                     // 84: deixicpublic.v1.UpdateProgramRequest
-	(*UpdateProgramResponse)(nil),                    // 85: deixicpublic.v1.UpdateProgramResponse
-	(*BlueprintSelection)(nil),                       // 86: deixicpublic.v1.BlueprintSelection
-	(*ComplianceLibraryChange)(nil),                  // 87: deixicpublic.v1.ComplianceLibraryChange
-	(*ReconcileComplianceLibraryRequest)(nil),        // 88: deixicpublic.v1.ReconcileComplianceLibraryRequest
-	(*ReconcileComplianceLibraryResponse)(nil),       // 89: deixicpublic.v1.ReconcileComplianceLibraryResponse
-	(*GetThreadRequest)(nil),                         // 90: deixicpublic.v1.GetThreadRequest
-	(*GetThreadResponse)(nil),                        // 91: deixicpublic.v1.GetThreadResponse
-	(*ListThreadsRequest)(nil),                       // 92: deixicpublic.v1.ListThreadsRequest
-	(*ListThreadsResponse)(nil),                      // 93: deixicpublic.v1.ListThreadsResponse
-	(*RenameThreadRequest)(nil),                      // 94: deixicpublic.v1.RenameThreadRequest
-	(*RenameThreadResponse)(nil),                     // 95: deixicpublic.v1.RenameThreadResponse
-	(*ArchiveThreadRequest)(nil),                     // 96: deixicpublic.v1.ArchiveThreadRequest
-	(*ArchiveThreadResponse)(nil),                    // 97: deixicpublic.v1.ArchiveThreadResponse
-	(*ListEventsRequest)(nil),                        // 98: deixicpublic.v1.ListEventsRequest
-	(*ListEventsResponse)(nil),                       // 99: deixicpublic.v1.ListEventsResponse
-	(*WatchEventsRequest)(nil),                       // 100: deixicpublic.v1.WatchEventsRequest
-	(*WatchEventsResponse)(nil),                      // 101: deixicpublic.v1.WatchEventsResponse
-	(*CodingContract)(nil),                           // 102: deixicpublic.v1.CodingContract
-	(*SubmitTaskRequest)(nil),                        // 103: deixicpublic.v1.SubmitTaskRequest
-	(*SubmitTaskResponse)(nil),                       // 104: deixicpublic.v1.SubmitTaskResponse
-	(*InterruptTaskRequest)(nil),                     // 105: deixicpublic.v1.InterruptTaskRequest
-	(*InterruptTaskResponse)(nil),                    // 106: deixicpublic.v1.InterruptTaskResponse
-	(*RespondToRequestRequest)(nil),                  // 107: deixicpublic.v1.RespondToRequestRequest
-	(*RespondToRequestResponse)(nil),                 // 108: deixicpublic.v1.RespondToRequestResponse
-	(*GetReceiptRequest)(nil),                        // 109: deixicpublic.v1.GetReceiptRequest
-	(*GetReceiptResponse)(nil),                       // 110: deixicpublic.v1.GetReceiptResponse
-	(*ResolveReceiptActionRequest)(nil),              // 111: deixicpublic.v1.ResolveReceiptActionRequest
-	(*ResolveReceiptActionResponse)(nil),             // 112: deixicpublic.v1.ResolveReceiptActionResponse
-	(*VoiceSelection)(nil),                           // 113: deixicpublic.v1.VoiceSelection
-	(*SubmitVoicedTaskRequest)(nil),                  // 114: deixicpublic.v1.SubmitVoicedTaskRequest
-	(*SubmitVoicedTaskResponse)(nil),                 // 115: deixicpublic.v1.SubmitVoicedTaskResponse
-	(*GetVoiceCatalogRequest)(nil),                   // 116: deixicpublic.v1.GetVoiceCatalogRequest
-	(*BrandVoice)(nil),                               // 117: deixicpublic.v1.BrandVoice
-	(*GetVoiceCatalogResponse)(nil),                  // 118: deixicpublic.v1.GetVoiceCatalogResponse
-	(*Control)(nil),                                  // 119: deixicpublic.v1.Control
-	(*ListControlsRequest)(nil),                      // 120: deixicpublic.v1.ListControlsRequest
-	(*ListControlsResponse)(nil),                     // 121: deixicpublic.v1.ListControlsResponse
-	(*GetControlRequest)(nil),                        // 122: deixicpublic.v1.GetControlRequest
-	(*ControlRequirement)(nil),                       // 123: deixicpublic.v1.ControlRequirement
-	(*ControlTestState)(nil),                         // 124: deixicpublic.v1.ControlTestState
-	(*GetControlResponse)(nil),                       // 125: deixicpublic.v1.GetControlResponse
-	(*Test)(nil),                                     // 126: deixicpublic.v1.Test
-	(*ListTestsRequest)(nil),                         // 127: deixicpublic.v1.ListTestsRequest
-	(*ListTestsResponse)(nil),                        // 128: deixicpublic.v1.ListTestsResponse
-	(*TestResourceResult)(nil),                       // 129: deixicpublic.v1.TestResourceResult
-	(*GetTestRequest)(nil),                           // 130: deixicpublic.v1.GetTestRequest
-	(*GetTestResponse)(nil),                          // 131: deixicpublic.v1.GetTestResponse
-	(*Evidence)(nil),                                 // 132: deixicpublic.v1.Evidence
-	(*ListEvidenceRequest)(nil),                      // 133: deixicpublic.v1.ListEvidenceRequest
-	(*ListEvidenceResponse)(nil),                     // 134: deixicpublic.v1.ListEvidenceResponse
-	(*EvidenceVersion)(nil),                          // 135: deixicpublic.v1.EvidenceVersion
-	(*ListEvidenceVersionsRequest)(nil),              // 136: deixicpublic.v1.ListEvidenceVersionsRequest
-	(*ListEvidenceVersionsResponse)(nil),             // 137: deixicpublic.v1.ListEvidenceVersionsResponse
-	(*GetEvidenceContentRequest)(nil),                // 138: deixicpublic.v1.GetEvidenceContentRequest
-	(*GetEvidenceContentResponse)(nil),               // 139: deixicpublic.v1.GetEvidenceContentResponse
-	(*Asset)(nil),                                    // 140: deixicpublic.v1.Asset
-	(*ListAssetsRequest)(nil),                        // 141: deixicpublic.v1.ListAssetsRequest
-	(*ListAssetsResponse)(nil),                       // 142: deixicpublic.v1.ListAssetsResponse
-	(*GetAssetRequest)(nil),                          // 143: deixicpublic.v1.GetAssetRequest
-	(*GetAssetResponse)(nil),                         // 144: deixicpublic.v1.GetAssetResponse
-	(*Audit)(nil),                                    // 145: deixicpublic.v1.Audit
-	(*ListAuditsRequest)(nil),                        // 146: deixicpublic.v1.ListAuditsRequest
-	(*ListAuditsResponse)(nil),                       // 147: deixicpublic.v1.ListAuditsResponse
-	(*GetAuditRequest)(nil),                          // 148: deixicpublic.v1.GetAuditRequest
-	(*GetAuditResponse)(nil),                         // 149: deixicpublic.v1.GetAuditResponse
-	(*AuditRequestItem)(nil),                         // 150: deixicpublic.v1.AuditRequestItem
-	(*AuditRequestCounts)(nil),                       // 151: deixicpublic.v1.AuditRequestCounts
-	(*ListAuditRequestsRequest)(nil),                 // 152: deixicpublic.v1.ListAuditRequestsRequest
-	(*ListAuditRequestsResponse)(nil),                // 153: deixicpublic.v1.ListAuditRequestsResponse
-	(*GetAuditRequestItemRequest)(nil),               // 154: deixicpublic.v1.GetAuditRequestItemRequest
-	(*GetAuditRequestItemResponse)(nil),              // 155: deixicpublic.v1.GetAuditRequestItemResponse
-	(*timestamppb.Timestamp)(nil),                    // 156: google.protobuf.Timestamp
+	(BusinessFieldKind)(0),                           // 10: deixicpublic.v1.BusinessFieldKind
+	(BusinessSourceFieldProperty)(0),                 // 11: deixicpublic.v1.BusinessSourceFieldProperty
+	(ComplianceLibraryReconcileMode)(0),              // 12: deixicpublic.v1.ComplianceLibraryReconcileMode
+	(ComplianceLibraryChangeKind)(0),                 // 13: deixicpublic.v1.ComplianceLibraryChangeKind
+	(ResponseAction)(0),                              // 14: deixicpublic.v1.ResponseAction
+	(VoiceMode)(0),                                   // 15: deixicpublic.v1.VoiceMode
+	(VoiceTone)(0),                                   // 16: deixicpublic.v1.VoiceTone
+	(ControlState)(0),                                // 17: deixicpublic.v1.ControlState
+	(TestResultState)(0),                             // 18: deixicpublic.v1.TestResultState
+	(*Scope)(nil),                                    // 19: deixicpublic.v1.Scope
+	(*ErrorDetail)(nil),                              // 20: deixicpublic.v1.ErrorDetail
+	(*TaskTurn)(nil),                                 // 21: deixicpublic.v1.TaskTurn
+	(*Thread)(nil),                                   // 22: deixicpublic.v1.Thread
+	(*TaskMessage)(nil),                              // 23: deixicpublic.v1.TaskMessage
+	(*EvidenceReference)(nil),                        // 24: deixicpublic.v1.EvidenceReference
+	(*TaskEvent)(nil),                                // 25: deixicpublic.v1.TaskEvent
+	(*ReceiptAction)(nil),                            // 26: deixicpublic.v1.ReceiptAction
+	(*CodingOutput)(nil),                             // 27: deixicpublic.v1.CodingOutput
+	(*CodingAcceptance)(nil),                         // 28: deixicpublic.v1.CodingAcceptance
+	(*Receipt)(nil),                                  // 29: deixicpublic.v1.Receipt
+	(*ModelSelection)(nil),                           // 30: deixicpublic.v1.ModelSelection
+	(*AvailableModel)(nil),                           // 31: deixicpublic.v1.AvailableModel
+	(*SetupReadiness)(nil),                           // 32: deixicpublic.v1.SetupReadiness
+	(*GetModelReadinessRequest)(nil),                 // 33: deixicpublic.v1.GetModelReadinessRequest
+	(*GetModelReadinessResponse)(nil),                // 34: deixicpublic.v1.GetModelReadinessResponse
+	(*ClientRule)(nil),                               // 35: deixicpublic.v1.ClientRule
+	(*ClientSkill)(nil),                              // 36: deixicpublic.v1.ClientSkill
+	(*ClientMcpServer)(nil),                          // 37: deixicpublic.v1.ClientMcpServer
+	(*ClientMcpPolicy)(nil),                          // 38: deixicpublic.v1.ClientMcpPolicy
+	(*GetClientSetupRequest)(nil),                    // 39: deixicpublic.v1.GetClientSetupRequest
+	(*GetClientSetupResponse)(nil),                   // 40: deixicpublic.v1.GetClientSetupResponse
+	(*IssueEvidence)(nil),                            // 41: deixicpublic.v1.IssueEvidence
+	(*IssueContext)(nil),                             // 42: deixicpublic.v1.IssueContext
+	(*SubmitIssueReportRequest)(nil),                 // 43: deixicpublic.v1.SubmitIssueReportRequest
+	(*IssueReport)(nil),                              // 44: deixicpublic.v1.IssueReport
+	(*SubmitIssueReportResponse)(nil),                // 45: deixicpublic.v1.SubmitIssueReportResponse
+	(*BusinessMoney)(nil),                            // 46: deixicpublic.v1.BusinessMoney
+	(*BusinessObjectReference)(nil),                  // 47: deixicpublic.v1.BusinessObjectReference
+	(*BusinessArtifactReference)(nil),                // 48: deixicpublic.v1.BusinessArtifactReference
+	(*BusinessTextList)(nil),                         // 49: deixicpublic.v1.BusinessTextList
+	(*BusinessFieldValue)(nil),                       // 50: deixicpublic.v1.BusinessFieldValue
+	(*BusinessObject)(nil),                           // 51: deixicpublic.v1.BusinessObject
+	(*CreateBusinessObjectRequest)(nil),              // 52: deixicpublic.v1.CreateBusinessObjectRequest
+	(*CreateBusinessObjectResponse)(nil),             // 53: deixicpublic.v1.CreateBusinessObjectResponse
+	(*GetBusinessObjectRequest)(nil),                 // 54: deixicpublic.v1.GetBusinessObjectRequest
+	(*GetBusinessObjectResponse)(nil),                // 55: deixicpublic.v1.GetBusinessObjectResponse
+	(*UpdateBusinessObjectRequest)(nil),              // 56: deixicpublic.v1.UpdateBusinessObjectRequest
+	(*UpdateBusinessObjectResponse)(nil),             // 57: deixicpublic.v1.UpdateBusinessObjectResponse
+	(*DeleteBusinessObjectRequest)(nil),              // 58: deixicpublic.v1.DeleteBusinessObjectRequest
+	(*DeleteBusinessObjectResponse)(nil),             // 59: deixicpublic.v1.DeleteBusinessObjectResponse
+	(*ListBusinessObjectsRequest)(nil),               // 60: deixicpublic.v1.ListBusinessObjectsRequest
+	(*ListBusinessObjectsResponse)(nil),              // 61: deixicpublic.v1.ListBusinessObjectsResponse
+	(*BusinessBlueprintOrigin)(nil),                  // 62: deixicpublic.v1.BusinessBlueprintOrigin
+	(*BusinessObjectTypeField)(nil),                  // 63: deixicpublic.v1.BusinessObjectTypeField
+	(*BusinessObjectTypeRelationship)(nil),           // 64: deixicpublic.v1.BusinessObjectTypeRelationship
+	(*BusinessObjectType)(nil),                       // 65: deixicpublic.v1.BusinessObjectType
+	(*DefineBusinessObjectTypeRequest)(nil),          // 66: deixicpublic.v1.DefineBusinessObjectTypeRequest
+	(*DefineBusinessObjectTypeResponse)(nil),         // 67: deixicpublic.v1.DefineBusinessObjectTypeResponse
+	(*GetBusinessObjectTypeRequest)(nil),             // 68: deixicpublic.v1.GetBusinessObjectTypeRequest
+	(*GetBusinessObjectTypeResponse)(nil),            // 69: deixicpublic.v1.GetBusinessObjectTypeResponse
+	(*UpsertBusinessObjectRequest)(nil),              // 70: deixicpublic.v1.UpsertBusinessObjectRequest
+	(*UpsertBusinessObjectResponse)(nil),             // 71: deixicpublic.v1.UpsertBusinessObjectResponse
+	(*ListBusinessObjectTypesRequest)(nil),           // 72: deixicpublic.v1.ListBusinessObjectTypesRequest
+	(*ListBusinessObjectTypesResponse)(nil),          // 73: deixicpublic.v1.ListBusinessObjectTypesResponse
+	(*BusinessBlueprint)(nil),                        // 74: deixicpublic.v1.BusinessBlueprint
+	(*ListBusinessBlueprintsRequest)(nil),            // 75: deixicpublic.v1.ListBusinessBlueprintsRequest
+	(*ListBusinessBlueprintsResponse)(nil),           // 76: deixicpublic.v1.ListBusinessBlueprintsResponse
+	(*BusinessSourceFieldMapping)(nil),               // 77: deixicpublic.v1.BusinessSourceFieldMapping
+	(*BindBusinessObjectSourceRequest)(nil),          // 78: deixicpublic.v1.BindBusinessObjectSourceRequest
+	(*BindBusinessObjectSourceResponse)(nil),         // 79: deixicpublic.v1.BindBusinessObjectSourceResponse
+	(*BusinessObjectRelationship)(nil),               // 80: deixicpublic.v1.BusinessObjectRelationship
+	(*ListBusinessObjectRelationshipsRequest)(nil),   // 81: deixicpublic.v1.ListBusinessObjectRelationshipsRequest
+	(*ListBusinessObjectRelationshipsResponse)(nil),  // 82: deixicpublic.v1.ListBusinessObjectRelationshipsResponse
+	(*CreateBusinessObjectRelationshipRequest)(nil),  // 83: deixicpublic.v1.CreateBusinessObjectRelationshipRequest
+	(*CreateBusinessObjectRelationshipResponse)(nil), // 84: deixicpublic.v1.CreateBusinessObjectRelationshipResponse
+	(*DeleteBusinessObjectRelationshipRequest)(nil),  // 85: deixicpublic.v1.DeleteBusinessObjectRelationshipRequest
+	(*DeleteBusinessObjectRelationshipResponse)(nil), // 86: deixicpublic.v1.DeleteBusinessObjectRelationshipResponse
+	(*Program)(nil),                                  // 87: deixicpublic.v1.Program
+	(*GetProgramRequest)(nil),                        // 88: deixicpublic.v1.GetProgramRequest
+	(*GetProgramResponse)(nil),                       // 89: deixicpublic.v1.GetProgramResponse
+	(*CreateProgramRequest)(nil),                     // 90: deixicpublic.v1.CreateProgramRequest
+	(*CreateProgramResponse)(nil),                    // 91: deixicpublic.v1.CreateProgramResponse
+	(*UpdateProgramRequest)(nil),                     // 92: deixicpublic.v1.UpdateProgramRequest
+	(*UpdateProgramResponse)(nil),                    // 93: deixicpublic.v1.UpdateProgramResponse
+	(*BlueprintSelection)(nil),                       // 94: deixicpublic.v1.BlueprintSelection
+	(*ComplianceLibraryChange)(nil),                  // 95: deixicpublic.v1.ComplianceLibraryChange
+	(*ReconcileComplianceLibraryRequest)(nil),        // 96: deixicpublic.v1.ReconcileComplianceLibraryRequest
+	(*ReconcileComplianceLibraryResponse)(nil),       // 97: deixicpublic.v1.ReconcileComplianceLibraryResponse
+	(*GetThreadRequest)(nil),                         // 98: deixicpublic.v1.GetThreadRequest
+	(*GetThreadResponse)(nil),                        // 99: deixicpublic.v1.GetThreadResponse
+	(*ListThreadsRequest)(nil),                       // 100: deixicpublic.v1.ListThreadsRequest
+	(*ListThreadsResponse)(nil),                      // 101: deixicpublic.v1.ListThreadsResponse
+	(*RenameThreadRequest)(nil),                      // 102: deixicpublic.v1.RenameThreadRequest
+	(*RenameThreadResponse)(nil),                     // 103: deixicpublic.v1.RenameThreadResponse
+	(*ArchiveThreadRequest)(nil),                     // 104: deixicpublic.v1.ArchiveThreadRequest
+	(*ArchiveThreadResponse)(nil),                    // 105: deixicpublic.v1.ArchiveThreadResponse
+	(*ListEventsRequest)(nil),                        // 106: deixicpublic.v1.ListEventsRequest
+	(*ListEventsResponse)(nil),                       // 107: deixicpublic.v1.ListEventsResponse
+	(*WatchEventsRequest)(nil),                       // 108: deixicpublic.v1.WatchEventsRequest
+	(*WatchEventsResponse)(nil),                      // 109: deixicpublic.v1.WatchEventsResponse
+	(*CodingContract)(nil),                           // 110: deixicpublic.v1.CodingContract
+	(*SubmitTaskRequest)(nil),                        // 111: deixicpublic.v1.SubmitTaskRequest
+	(*SubmitTaskResponse)(nil),                       // 112: deixicpublic.v1.SubmitTaskResponse
+	(*InterruptTaskRequest)(nil),                     // 113: deixicpublic.v1.InterruptTaskRequest
+	(*InterruptTaskResponse)(nil),                    // 114: deixicpublic.v1.InterruptTaskResponse
+	(*RespondToRequestRequest)(nil),                  // 115: deixicpublic.v1.RespondToRequestRequest
+	(*RespondToRequestResponse)(nil),                 // 116: deixicpublic.v1.RespondToRequestResponse
+	(*GetReceiptRequest)(nil),                        // 117: deixicpublic.v1.GetReceiptRequest
+	(*GetReceiptResponse)(nil),                       // 118: deixicpublic.v1.GetReceiptResponse
+	(*ResolveReceiptActionRequest)(nil),              // 119: deixicpublic.v1.ResolveReceiptActionRequest
+	(*ResolveReceiptActionResponse)(nil),             // 120: deixicpublic.v1.ResolveReceiptActionResponse
+	(*VoiceSelection)(nil),                           // 121: deixicpublic.v1.VoiceSelection
+	(*SubmitVoicedTaskRequest)(nil),                  // 122: deixicpublic.v1.SubmitVoicedTaskRequest
+	(*SubmitVoicedTaskResponse)(nil),                 // 123: deixicpublic.v1.SubmitVoicedTaskResponse
+	(*GetVoiceCatalogRequest)(nil),                   // 124: deixicpublic.v1.GetVoiceCatalogRequest
+	(*BrandVoice)(nil),                               // 125: deixicpublic.v1.BrandVoice
+	(*GetVoiceCatalogResponse)(nil),                  // 126: deixicpublic.v1.GetVoiceCatalogResponse
+	(*Control)(nil),                                  // 127: deixicpublic.v1.Control
+	(*ListControlsRequest)(nil),                      // 128: deixicpublic.v1.ListControlsRequest
+	(*ListControlsResponse)(nil),                     // 129: deixicpublic.v1.ListControlsResponse
+	(*GetControlRequest)(nil),                        // 130: deixicpublic.v1.GetControlRequest
+	(*ControlRequirement)(nil),                       // 131: deixicpublic.v1.ControlRequirement
+	(*ControlTestState)(nil),                         // 132: deixicpublic.v1.ControlTestState
+	(*GetControlResponse)(nil),                       // 133: deixicpublic.v1.GetControlResponse
+	(*Test)(nil),                                     // 134: deixicpublic.v1.Test
+	(*ListTestsRequest)(nil),                         // 135: deixicpublic.v1.ListTestsRequest
+	(*ListTestsResponse)(nil),                        // 136: deixicpublic.v1.ListTestsResponse
+	(*TestResourceResult)(nil),                       // 137: deixicpublic.v1.TestResourceResult
+	(*GetTestRequest)(nil),                           // 138: deixicpublic.v1.GetTestRequest
+	(*GetTestResponse)(nil),                          // 139: deixicpublic.v1.GetTestResponse
+	(*Evidence)(nil),                                 // 140: deixicpublic.v1.Evidence
+	(*ListEvidenceRequest)(nil),                      // 141: deixicpublic.v1.ListEvidenceRequest
+	(*ListEvidenceResponse)(nil),                     // 142: deixicpublic.v1.ListEvidenceResponse
+	(*EvidenceVersion)(nil),                          // 143: deixicpublic.v1.EvidenceVersion
+	(*ListEvidenceVersionsRequest)(nil),              // 144: deixicpublic.v1.ListEvidenceVersionsRequest
+	(*ListEvidenceVersionsResponse)(nil),             // 145: deixicpublic.v1.ListEvidenceVersionsResponse
+	(*GetEvidenceContentRequest)(nil),                // 146: deixicpublic.v1.GetEvidenceContentRequest
+	(*GetEvidenceContentResponse)(nil),               // 147: deixicpublic.v1.GetEvidenceContentResponse
+	(*Asset)(nil),                                    // 148: deixicpublic.v1.Asset
+	(*ListAssetsRequest)(nil),                        // 149: deixicpublic.v1.ListAssetsRequest
+	(*ListAssetsResponse)(nil),                       // 150: deixicpublic.v1.ListAssetsResponse
+	(*GetAssetRequest)(nil),                          // 151: deixicpublic.v1.GetAssetRequest
+	(*GetAssetResponse)(nil),                         // 152: deixicpublic.v1.GetAssetResponse
+	(*Audit)(nil),                                    // 153: deixicpublic.v1.Audit
+	(*ListAuditsRequest)(nil),                        // 154: deixicpublic.v1.ListAuditsRequest
+	(*ListAuditsResponse)(nil),                       // 155: deixicpublic.v1.ListAuditsResponse
+	(*GetAuditRequest)(nil),                          // 156: deixicpublic.v1.GetAuditRequest
+	(*GetAuditResponse)(nil),                         // 157: deixicpublic.v1.GetAuditResponse
+	(*AuditRequestItem)(nil),                         // 158: deixicpublic.v1.AuditRequestItem
+	(*AuditRequestCounts)(nil),                       // 159: deixicpublic.v1.AuditRequestCounts
+	(*ListAuditRequestsRequest)(nil),                 // 160: deixicpublic.v1.ListAuditRequestsRequest
+	(*ListAuditRequestsResponse)(nil),                // 161: deixicpublic.v1.ListAuditRequestsResponse
+	(*GetAuditRequestItemRequest)(nil),               // 162: deixicpublic.v1.GetAuditRequestItemRequest
+	(*GetAuditRequestItemResponse)(nil),              // 163: deixicpublic.v1.GetAuditRequestItemResponse
+	(*timestamppb.Timestamp)(nil),                    // 164: google.protobuf.Timestamp
 }
 var file_deixicpublic_v1_sdk_proto_depIdxs = []int32{
 	0,   // 0: deixicpublic.v1.TaskTurn.state:type_name -> deixicpublic.v1.TurnState
 	1,   // 1: deixicpublic.v1.TaskTurn.waiting_reason:type_name -> deixicpublic.v1.WaitingReason
-	19,  // 2: deixicpublic.v1.TaskTurn.terminal_error:type_name -> deixicpublic.v1.ErrorDetail
-	156, // 3: deixicpublic.v1.TaskTurn.created_at:type_name -> google.protobuf.Timestamp
-	156, // 4: deixicpublic.v1.TaskTurn.updated_at:type_name -> google.protobuf.Timestamp
-	156, // 5: deixicpublic.v1.TaskTurn.completed_at:type_name -> google.protobuf.Timestamp
-	156, // 6: deixicpublic.v1.Thread.updated_at:type_name -> google.protobuf.Timestamp
+	20,  // 2: deixicpublic.v1.TaskTurn.terminal_error:type_name -> deixicpublic.v1.ErrorDetail
+	164, // 3: deixicpublic.v1.TaskTurn.created_at:type_name -> google.protobuf.Timestamp
+	164, // 4: deixicpublic.v1.TaskTurn.updated_at:type_name -> google.protobuf.Timestamp
+	164, // 5: deixicpublic.v1.TaskTurn.completed_at:type_name -> google.protobuf.Timestamp
+	164, // 6: deixicpublic.v1.Thread.updated_at:type_name -> google.protobuf.Timestamp
 	2,   // 7: deixicpublic.v1.TaskMessage.role:type_name -> deixicpublic.v1.MessageRole
-	156, // 8: deixicpublic.v1.TaskMessage.created_at:type_name -> google.protobuf.Timestamp
+	164, // 8: deixicpublic.v1.TaskMessage.created_at:type_name -> google.protobuf.Timestamp
 	3,   // 9: deixicpublic.v1.TaskEvent.kind:type_name -> deixicpublic.v1.EventKind
-	23,  // 10: deixicpublic.v1.TaskEvent.evidence:type_name -> deixicpublic.v1.EvidenceReference
-	156, // 11: deixicpublic.v1.TaskEvent.created_at:type_name -> google.protobuf.Timestamp
+	24,  // 10: deixicpublic.v1.TaskEvent.evidence:type_name -> deixicpublic.v1.EvidenceReference
+	164, // 11: deixicpublic.v1.TaskEvent.created_at:type_name -> google.protobuf.Timestamp
 	4,   // 12: deixicpublic.v1.TaskEvent.request_kind:type_name -> deixicpublic.v1.RequestKind
-	19,  // 13: deixicpublic.v1.TaskEvent.terminal_error:type_name -> deixicpublic.v1.ErrorDetail
-	26,  // 14: deixicpublic.v1.CodingAcceptance.outputs:type_name -> deixicpublic.v1.CodingOutput
+	20,  // 13: deixicpublic.v1.TaskEvent.terminal_error:type_name -> deixicpublic.v1.ErrorDetail
+	27,  // 14: deixicpublic.v1.CodingAcceptance.outputs:type_name -> deixicpublic.v1.CodingOutput
 	5,   // 15: deixicpublic.v1.Receipt.state:type_name -> deixicpublic.v1.ReceiptState
-	156, // 16: deixicpublic.v1.Receipt.updated_at:type_name -> google.protobuf.Timestamp
-	25,  // 17: deixicpublic.v1.Receipt.allowed_actions:type_name -> deixicpublic.v1.ReceiptAction
-	23,  // 18: deixicpublic.v1.Receipt.evidence:type_name -> deixicpublic.v1.EvidenceReference
-	27,  // 19: deixicpublic.v1.Receipt.coding_acceptance:type_name -> deixicpublic.v1.CodingAcceptance
-	29,  // 20: deixicpublic.v1.SetupReadiness.selection:type_name -> deixicpublic.v1.ModelSelection
-	30,  // 21: deixicpublic.v1.SetupReadiness.default_model:type_name -> deixicpublic.v1.AvailableModel
-	30,  // 22: deixicpublic.v1.SetupReadiness.available_models:type_name -> deixicpublic.v1.AvailableModel
-	18,  // 23: deixicpublic.v1.GetModelReadinessRequest.scope:type_name -> deixicpublic.v1.Scope
-	29,  // 24: deixicpublic.v1.GetModelReadinessRequest.selection:type_name -> deixicpublic.v1.ModelSelection
-	18,  // 25: deixicpublic.v1.GetModelReadinessResponse.scope:type_name -> deixicpublic.v1.Scope
-	29,  // 26: deixicpublic.v1.GetModelReadinessResponse.selection:type_name -> deixicpublic.v1.ModelSelection
+	164, // 16: deixicpublic.v1.Receipt.updated_at:type_name -> google.protobuf.Timestamp
+	26,  // 17: deixicpublic.v1.Receipt.allowed_actions:type_name -> deixicpublic.v1.ReceiptAction
+	24,  // 18: deixicpublic.v1.Receipt.evidence:type_name -> deixicpublic.v1.EvidenceReference
+	28,  // 19: deixicpublic.v1.Receipt.coding_acceptance:type_name -> deixicpublic.v1.CodingAcceptance
+	30,  // 20: deixicpublic.v1.SetupReadiness.selection:type_name -> deixicpublic.v1.ModelSelection
+	31,  // 21: deixicpublic.v1.SetupReadiness.default_model:type_name -> deixicpublic.v1.AvailableModel
+	31,  // 22: deixicpublic.v1.SetupReadiness.available_models:type_name -> deixicpublic.v1.AvailableModel
+	19,  // 23: deixicpublic.v1.GetModelReadinessRequest.scope:type_name -> deixicpublic.v1.Scope
+	30,  // 24: deixicpublic.v1.GetModelReadinessRequest.selection:type_name -> deixicpublic.v1.ModelSelection
+	19,  // 25: deixicpublic.v1.GetModelReadinessResponse.scope:type_name -> deixicpublic.v1.Scope
+	30,  // 26: deixicpublic.v1.GetModelReadinessResponse.selection:type_name -> deixicpublic.v1.ModelSelection
 	6,   // 27: deixicpublic.v1.GetModelReadinessResponse.state:type_name -> deixicpublic.v1.ModelReadinessState
 	7,   // 28: deixicpublic.v1.GetModelReadinessResponse.next_actions:type_name -> deixicpublic.v1.ModelNextAction
-	156, // 29: deixicpublic.v1.GetModelReadinessResponse.evaluated_at:type_name -> google.protobuf.Timestamp
+	164, // 29: deixicpublic.v1.GetModelReadinessResponse.evaluated_at:type_name -> google.protobuf.Timestamp
 	8,   // 30: deixicpublic.v1.ClientRule.scope:type_name -> deixicpublic.v1.ClientRuleScope
 	9,   // 31: deixicpublic.v1.ClientMcpPolicy.mode:type_name -> deixicpublic.v1.ClientMcpMode
-	36,  // 32: deixicpublic.v1.ClientMcpPolicy.servers:type_name -> deixicpublic.v1.ClientMcpServer
-	18,  // 33: deixicpublic.v1.GetClientSetupRequest.scope:type_name -> deixicpublic.v1.Scope
-	18,  // 34: deixicpublic.v1.GetClientSetupResponse.scope:type_name -> deixicpublic.v1.Scope
-	156, // 35: deixicpublic.v1.GetClientSetupResponse.issued_at:type_name -> google.protobuf.Timestamp
-	34,  // 36: deixicpublic.v1.GetClientSetupResponse.rules:type_name -> deixicpublic.v1.ClientRule
-	35,  // 37: deixicpublic.v1.GetClientSetupResponse.skills:type_name -> deixicpublic.v1.ClientSkill
-	37,  // 38: deixicpublic.v1.GetClientSetupResponse.mcp:type_name -> deixicpublic.v1.ClientMcpPolicy
-	40,  // 39: deixicpublic.v1.IssueContext.evidence:type_name -> deixicpublic.v1.IssueEvidence
-	18,  // 40: deixicpublic.v1.SubmitIssueReportRequest.scope:type_name -> deixicpublic.v1.Scope
-	41,  // 41: deixicpublic.v1.SubmitIssueReportRequest.context:type_name -> deixicpublic.v1.IssueContext
-	43,  // 42: deixicpublic.v1.SubmitIssueReportResponse.report:type_name -> deixicpublic.v1.IssueReport
-	45,  // 43: deixicpublic.v1.BusinessFieldValue.money:type_name -> deixicpublic.v1.BusinessMoney
-	46,  // 44: deixicpublic.v1.BusinessFieldValue.reference:type_name -> deixicpublic.v1.BusinessObjectReference
-	47,  // 45: deixicpublic.v1.BusinessFieldValue.artifact:type_name -> deixicpublic.v1.BusinessArtifactReference
-	48,  // 46: deixicpublic.v1.BusinessFieldValue.text_list:type_name -> deixicpublic.v1.BusinessTextList
-	49,  // 47: deixicpublic.v1.BusinessObject.values:type_name -> deixicpublic.v1.BusinessFieldValue
-	49,  // 48: deixicpublic.v1.CreateBusinessObjectRequest.values:type_name -> deixicpublic.v1.BusinessFieldValue
-	50,  // 49: deixicpublic.v1.CreateBusinessObjectResponse.object:type_name -> deixicpublic.v1.BusinessObject
-	50,  // 50: deixicpublic.v1.GetBusinessObjectResponse.object:type_name -> deixicpublic.v1.BusinessObject
-	49,  // 51: deixicpublic.v1.UpdateBusinessObjectRequest.values:type_name -> deixicpublic.v1.BusinessFieldValue
-	50,  // 52: deixicpublic.v1.UpdateBusinessObjectResponse.object:type_name -> deixicpublic.v1.BusinessObject
-	50,  // 53: deixicpublic.v1.DeleteBusinessObjectResponse.object:type_name -> deixicpublic.v1.BusinessObject
-	50,  // 54: deixicpublic.v1.ListBusinessObjectsResponse.objects:type_name -> deixicpublic.v1.BusinessObject
-	61,  // 55: deixicpublic.v1.BusinessObjectType.blueprint_origin:type_name -> deixicpublic.v1.BusinessBlueprintOrigin
-	62,  // 56: deixicpublic.v1.BusinessObjectType.fields:type_name -> deixicpublic.v1.BusinessObjectTypeField
-	63,  // 57: deixicpublic.v1.ListBusinessObjectTypesResponse.object_types:type_name -> deixicpublic.v1.BusinessObjectType
-	66,  // 58: deixicpublic.v1.ListBusinessBlueprintsResponse.blueprints:type_name -> deixicpublic.v1.BusinessBlueprint
-	10,  // 59: deixicpublic.v1.BusinessSourceFieldMapping.property:type_name -> deixicpublic.v1.BusinessSourceFieldProperty
-	69,  // 60: deixicpublic.v1.BindBusinessObjectSourceRequest.fields:type_name -> deixicpublic.v1.BusinessSourceFieldMapping
-	50,  // 61: deixicpublic.v1.BindBusinessObjectSourceResponse.object:type_name -> deixicpublic.v1.BusinessObject
-	72,  // 62: deixicpublic.v1.ListBusinessObjectRelationshipsResponse.relationships:type_name -> deixicpublic.v1.BusinessObjectRelationship
-	72,  // 63: deixicpublic.v1.CreateBusinessObjectRelationshipRequest.relationship:type_name -> deixicpublic.v1.BusinessObjectRelationship
-	50,  // 64: deixicpublic.v1.CreateBusinessObjectRelationshipResponse.object:type_name -> deixicpublic.v1.BusinessObject
-	72,  // 65: deixicpublic.v1.DeleteBusinessObjectRelationshipRequest.relationship:type_name -> deixicpublic.v1.BusinessObjectRelationship
-	50,  // 66: deixicpublic.v1.DeleteBusinessObjectRelationshipResponse.object:type_name -> deixicpublic.v1.BusinessObject
-	79,  // 67: deixicpublic.v1.GetProgramResponse.program:type_name -> deixicpublic.v1.Program
-	79,  // 68: deixicpublic.v1.CreateProgramResponse.program:type_name -> deixicpublic.v1.Program
-	79,  // 69: deixicpublic.v1.UpdateProgramResponse.program:type_name -> deixicpublic.v1.Program
-	12,  // 70: deixicpublic.v1.ComplianceLibraryChange.kind:type_name -> deixicpublic.v1.ComplianceLibraryChangeKind
-	86,  // 71: deixicpublic.v1.ReconcileComplianceLibraryRequest.selections:type_name -> deixicpublic.v1.BlueprintSelection
-	11,  // 72: deixicpublic.v1.ReconcileComplianceLibraryRequest.mode:type_name -> deixicpublic.v1.ComplianceLibraryReconcileMode
-	87,  // 73: deixicpublic.v1.ReconcileComplianceLibraryResponse.changes:type_name -> deixicpublic.v1.ComplianceLibraryChange
-	18,  // 74: deixicpublic.v1.GetThreadRequest.scope:type_name -> deixicpublic.v1.Scope
-	21,  // 75: deixicpublic.v1.GetThreadResponse.thread:type_name -> deixicpublic.v1.Thread
-	22,  // 76: deixicpublic.v1.GetThreadResponse.messages:type_name -> deixicpublic.v1.TaskMessage
-	28,  // 77: deixicpublic.v1.GetThreadResponse.receipts:type_name -> deixicpublic.v1.Receipt
-	20,  // 78: deixicpublic.v1.GetThreadResponse.turns:type_name -> deixicpublic.v1.TaskTurn
-	31,  // 79: deixicpublic.v1.GetThreadResponse.setup:type_name -> deixicpublic.v1.SetupReadiness
-	18,  // 80: deixicpublic.v1.ListThreadsRequest.scope:type_name -> deixicpublic.v1.Scope
-	21,  // 81: deixicpublic.v1.ListThreadsResponse.threads:type_name -> deixicpublic.v1.Thread
-	18,  // 82: deixicpublic.v1.RenameThreadRequest.scope:type_name -> deixicpublic.v1.Scope
-	21,  // 83: deixicpublic.v1.RenameThreadResponse.thread:type_name -> deixicpublic.v1.Thread
-	18,  // 84: deixicpublic.v1.ArchiveThreadRequest.scope:type_name -> deixicpublic.v1.Scope
-	21,  // 85: deixicpublic.v1.ArchiveThreadResponse.thread:type_name -> deixicpublic.v1.Thread
-	18,  // 86: deixicpublic.v1.ListEventsRequest.scope:type_name -> deixicpublic.v1.Scope
-	24,  // 87: deixicpublic.v1.ListEventsResponse.events:type_name -> deixicpublic.v1.TaskEvent
-	21,  // 88: deixicpublic.v1.ListEventsResponse.snapshot:type_name -> deixicpublic.v1.Thread
-	20,  // 89: deixicpublic.v1.ListEventsResponse.snapshot_turns:type_name -> deixicpublic.v1.TaskTurn
-	18,  // 90: deixicpublic.v1.WatchEventsRequest.scope:type_name -> deixicpublic.v1.Scope
-	24,  // 91: deixicpublic.v1.WatchEventsResponse.events:type_name -> deixicpublic.v1.TaskEvent
-	21,  // 92: deixicpublic.v1.WatchEventsResponse.snapshot:type_name -> deixicpublic.v1.Thread
-	20,  // 93: deixicpublic.v1.WatchEventsResponse.snapshot_turns:type_name -> deixicpublic.v1.TaskTurn
-	18,  // 94: deixicpublic.v1.SubmitTaskRequest.scope:type_name -> deixicpublic.v1.Scope
-	29,  // 95: deixicpublic.v1.SubmitTaskRequest.model_selection:type_name -> deixicpublic.v1.ModelSelection
-	102, // 96: deixicpublic.v1.SubmitTaskRequest.coding_contract:type_name -> deixicpublic.v1.CodingContract
-	22,  // 97: deixicpublic.v1.SubmitTaskResponse.message:type_name -> deixicpublic.v1.TaskMessage
-	20,  // 98: deixicpublic.v1.SubmitTaskResponse.accepted_turn:type_name -> deixicpublic.v1.TaskTurn
-	28,  // 99: deixicpublic.v1.SubmitTaskResponse.receipts:type_name -> deixicpublic.v1.Receipt
-	18,  // 100: deixicpublic.v1.InterruptTaskRequest.scope:type_name -> deixicpublic.v1.Scope
-	20,  // 101: deixicpublic.v1.InterruptTaskResponse.turns:type_name -> deixicpublic.v1.TaskTurn
-	18,  // 102: deixicpublic.v1.RespondToRequestRequest.scope:type_name -> deixicpublic.v1.Scope
-	4,   // 103: deixicpublic.v1.RespondToRequestRequest.request_kind:type_name -> deixicpublic.v1.RequestKind
-	13,  // 104: deixicpublic.v1.RespondToRequestRequest.action:type_name -> deixicpublic.v1.ResponseAction
-	20,  // 105: deixicpublic.v1.RespondToRequestResponse.turns:type_name -> deixicpublic.v1.TaskTurn
-	18,  // 106: deixicpublic.v1.GetReceiptRequest.scope:type_name -> deixicpublic.v1.Scope
-	28,  // 107: deixicpublic.v1.GetReceiptResponse.receipt:type_name -> deixicpublic.v1.Receipt
-	18,  // 108: deixicpublic.v1.ResolveReceiptActionRequest.scope:type_name -> deixicpublic.v1.Scope
-	28,  // 109: deixicpublic.v1.ResolveReceiptActionResponse.receipt:type_name -> deixicpublic.v1.Receipt
-	14,  // 110: deixicpublic.v1.VoiceSelection.mode:type_name -> deixicpublic.v1.VoiceMode
-	15,  // 111: deixicpublic.v1.VoiceSelection.tone_adjustments:type_name -> deixicpublic.v1.VoiceTone
-	103, // 112: deixicpublic.v1.SubmitVoicedTaskRequest.task:type_name -> deixicpublic.v1.SubmitTaskRequest
-	113, // 113: deixicpublic.v1.SubmitVoicedTaskRequest.voice_selection:type_name -> deixicpublic.v1.VoiceSelection
-	104, // 114: deixicpublic.v1.SubmitVoicedTaskResponse.result:type_name -> deixicpublic.v1.SubmitTaskResponse
-	18,  // 115: deixicpublic.v1.GetVoiceCatalogRequest.scope:type_name -> deixicpublic.v1.Scope
-	18,  // 116: deixicpublic.v1.GetVoiceCatalogResponse.scope:type_name -> deixicpublic.v1.Scope
-	117, // 117: deixicpublic.v1.GetVoiceCatalogResponse.voices:type_name -> deixicpublic.v1.BrandVoice
-	16,  // 118: deixicpublic.v1.Control.state:type_name -> deixicpublic.v1.ControlState
-	156, // 119: deixicpublic.v1.Control.assessed_at:type_name -> google.protobuf.Timestamp
-	119, // 120: deixicpublic.v1.ListControlsResponse.controls:type_name -> deixicpublic.v1.Control
-	16,  // 121: deixicpublic.v1.ControlTestState.state:type_name -> deixicpublic.v1.ControlState
-	156, // 122: deixicpublic.v1.ControlTestState.assessed_at:type_name -> google.protobuf.Timestamp
-	119, // 123: deixicpublic.v1.GetControlResponse.control:type_name -> deixicpublic.v1.Control
-	123, // 124: deixicpublic.v1.GetControlResponse.requirements:type_name -> deixicpublic.v1.ControlRequirement
-	124, // 125: deixicpublic.v1.GetControlResponse.tests:type_name -> deixicpublic.v1.ControlTestState
-	16,  // 126: deixicpublic.v1.Test.state:type_name -> deixicpublic.v1.ControlState
-	156, // 127: deixicpublic.v1.Test.assessed_at:type_name -> google.protobuf.Timestamp
-	126, // 128: deixicpublic.v1.ListTestsResponse.tests:type_name -> deixicpublic.v1.Test
-	17,  // 129: deixicpublic.v1.TestResourceResult.state:type_name -> deixicpublic.v1.TestResultState
-	156, // 130: deixicpublic.v1.TestResourceResult.evaluated_at:type_name -> google.protobuf.Timestamp
-	156, // 131: deixicpublic.v1.TestResourceResult.state_since:type_name -> google.protobuf.Timestamp
-	126, // 132: deixicpublic.v1.GetTestResponse.test:type_name -> deixicpublic.v1.Test
-	129, // 133: deixicpublic.v1.GetTestResponse.resources:type_name -> deixicpublic.v1.TestResourceResult
-	156, // 134: deixicpublic.v1.GetTestResponse.last_evaluated_at:type_name -> google.protobuf.Timestamp
-	16,  // 135: deixicpublic.v1.Evidence.state:type_name -> deixicpublic.v1.ControlState
-	156, // 136: deixicpublic.v1.Evidence.due_at:type_name -> google.protobuf.Timestamp
-	132, // 137: deixicpublic.v1.ListEvidenceResponse.evidence:type_name -> deixicpublic.v1.Evidence
-	156, // 138: deixicpublic.v1.EvidenceVersion.collected_at:type_name -> google.protobuf.Timestamp
-	156, // 139: deixicpublic.v1.EvidenceVersion.covers_start:type_name -> google.protobuf.Timestamp
-	156, // 140: deixicpublic.v1.EvidenceVersion.covers_end:type_name -> google.protobuf.Timestamp
-	135, // 141: deixicpublic.v1.ListEvidenceVersionsResponse.versions:type_name -> deixicpublic.v1.EvidenceVersion
-	156, // 142: deixicpublic.v1.Asset.last_seen_at:type_name -> google.protobuf.Timestamp
-	140, // 143: deixicpublic.v1.ListAssetsResponse.assets:type_name -> deixicpublic.v1.Asset
-	140, // 144: deixicpublic.v1.GetAssetResponse.asset:type_name -> deixicpublic.v1.Asset
-	145, // 145: deixicpublic.v1.ListAuditsResponse.audits:type_name -> deixicpublic.v1.Audit
-	145, // 146: deixicpublic.v1.GetAuditResponse.audit:type_name -> deixicpublic.v1.Audit
-	150, // 147: deixicpublic.v1.ListAuditRequestsResponse.requests:type_name -> deixicpublic.v1.AuditRequestItem
-	151, // 148: deixicpublic.v1.ListAuditRequestsResponse.counts:type_name -> deixicpublic.v1.AuditRequestCounts
-	150, // 149: deixicpublic.v1.GetAuditRequestItemResponse.request:type_name -> deixicpublic.v1.AuditRequestItem
-	90,  // 150: deixicpublic.v1.DeixicPublicService.GetThread:input_type -> deixicpublic.v1.GetThreadRequest
-	92,  // 151: deixicpublic.v1.DeixicPublicService.ListThreads:input_type -> deixicpublic.v1.ListThreadsRequest
-	94,  // 152: deixicpublic.v1.DeixicPublicService.RenameThread:input_type -> deixicpublic.v1.RenameThreadRequest
-	96,  // 153: deixicpublic.v1.DeixicPublicService.ArchiveThread:input_type -> deixicpublic.v1.ArchiveThreadRequest
-	98,  // 154: deixicpublic.v1.DeixicPublicService.ListEvents:input_type -> deixicpublic.v1.ListEventsRequest
-	100, // 155: deixicpublic.v1.DeixicPublicService.WatchEvents:input_type -> deixicpublic.v1.WatchEventsRequest
-	103, // 156: deixicpublic.v1.DeixicPublicService.SubmitTask:input_type -> deixicpublic.v1.SubmitTaskRequest
-	114, // 157: deixicpublic.v1.DeixicPublicService.SubmitVoicedTask:input_type -> deixicpublic.v1.SubmitVoicedTaskRequest
-	116, // 158: deixicpublic.v1.DeixicPublicService.GetVoiceCatalog:input_type -> deixicpublic.v1.GetVoiceCatalogRequest
-	105, // 159: deixicpublic.v1.DeixicPublicService.InterruptTask:input_type -> deixicpublic.v1.InterruptTaskRequest
-	107, // 160: deixicpublic.v1.DeixicPublicService.RespondToRequest:input_type -> deixicpublic.v1.RespondToRequestRequest
-	109, // 161: deixicpublic.v1.DeixicPublicService.GetReceipt:input_type -> deixicpublic.v1.GetReceiptRequest
-	111, // 162: deixicpublic.v1.DeixicPublicService.ResolveReceiptAction:input_type -> deixicpublic.v1.ResolveReceiptActionRequest
-	32,  // 163: deixicpublic.v1.DeixicPublicService.GetModelReadiness:input_type -> deixicpublic.v1.GetModelReadinessRequest
-	38,  // 164: deixicpublic.v1.DeixicPublicService.GetClientSetup:input_type -> deixicpublic.v1.GetClientSetupRequest
-	42,  // 165: deixicpublic.v1.DeixicPublicService.SubmitIssueReport:input_type -> deixicpublic.v1.SubmitIssueReportRequest
-	51,  // 166: deixicpublic.v1.DeixicPublicService.CreateBusinessObject:input_type -> deixicpublic.v1.CreateBusinessObjectRequest
-	53,  // 167: deixicpublic.v1.DeixicPublicService.GetBusinessObject:input_type -> deixicpublic.v1.GetBusinessObjectRequest
-	55,  // 168: deixicpublic.v1.DeixicPublicService.UpdateBusinessObject:input_type -> deixicpublic.v1.UpdateBusinessObjectRequest
-	57,  // 169: deixicpublic.v1.DeixicPublicService.DeleteBusinessObject:input_type -> deixicpublic.v1.DeleteBusinessObjectRequest
-	59,  // 170: deixicpublic.v1.DeixicPublicService.ListBusinessObjects:input_type -> deixicpublic.v1.ListBusinessObjectsRequest
-	64,  // 171: deixicpublic.v1.DeixicPublicService.ListBusinessObjectTypes:input_type -> deixicpublic.v1.ListBusinessObjectTypesRequest
-	67,  // 172: deixicpublic.v1.DeixicPublicService.ListBusinessBlueprints:input_type -> deixicpublic.v1.ListBusinessBlueprintsRequest
-	70,  // 173: deixicpublic.v1.DeixicPublicService.BindBusinessObjectSource:input_type -> deixicpublic.v1.BindBusinessObjectSourceRequest
-	73,  // 174: deixicpublic.v1.DeixicPublicService.ListBusinessObjectRelationships:input_type -> deixicpublic.v1.ListBusinessObjectRelationshipsRequest
-	75,  // 175: deixicpublic.v1.DeixicPublicService.CreateBusinessObjectRelationship:input_type -> deixicpublic.v1.CreateBusinessObjectRelationshipRequest
-	77,  // 176: deixicpublic.v1.DeixicPublicService.DeleteBusinessObjectRelationship:input_type -> deixicpublic.v1.DeleteBusinessObjectRelationshipRequest
-	80,  // 177: deixicpublic.v1.DeixicPublicService.GetProgram:input_type -> deixicpublic.v1.GetProgramRequest
-	82,  // 178: deixicpublic.v1.DeixicPublicService.CreateProgram:input_type -> deixicpublic.v1.CreateProgramRequest
-	84,  // 179: deixicpublic.v1.DeixicPublicService.UpdateProgram:input_type -> deixicpublic.v1.UpdateProgramRequest
-	88,  // 180: deixicpublic.v1.DeixicPublicService.ReconcileComplianceLibrary:input_type -> deixicpublic.v1.ReconcileComplianceLibraryRequest
-	120, // 181: deixicpublic.v1.DeixicPublicService.ListControls:input_type -> deixicpublic.v1.ListControlsRequest
-	122, // 182: deixicpublic.v1.DeixicPublicService.GetControl:input_type -> deixicpublic.v1.GetControlRequest
-	127, // 183: deixicpublic.v1.DeixicPublicService.ListTests:input_type -> deixicpublic.v1.ListTestsRequest
-	130, // 184: deixicpublic.v1.DeixicPublicService.GetTest:input_type -> deixicpublic.v1.GetTestRequest
-	133, // 185: deixicpublic.v1.DeixicPublicService.ListEvidence:input_type -> deixicpublic.v1.ListEvidenceRequest
-	136, // 186: deixicpublic.v1.DeixicPublicService.ListEvidenceVersions:input_type -> deixicpublic.v1.ListEvidenceVersionsRequest
-	138, // 187: deixicpublic.v1.DeixicPublicService.GetEvidenceContent:input_type -> deixicpublic.v1.GetEvidenceContentRequest
-	141, // 188: deixicpublic.v1.DeixicPublicService.ListAssets:input_type -> deixicpublic.v1.ListAssetsRequest
-	143, // 189: deixicpublic.v1.DeixicPublicService.GetAsset:input_type -> deixicpublic.v1.GetAssetRequest
-	146, // 190: deixicpublic.v1.DeixicPublicService.ListAudits:input_type -> deixicpublic.v1.ListAuditsRequest
-	148, // 191: deixicpublic.v1.DeixicPublicService.GetAudit:input_type -> deixicpublic.v1.GetAuditRequest
-	152, // 192: deixicpublic.v1.DeixicPublicService.ListAuditRequests:input_type -> deixicpublic.v1.ListAuditRequestsRequest
-	154, // 193: deixicpublic.v1.DeixicPublicService.GetAuditRequestItem:input_type -> deixicpublic.v1.GetAuditRequestItemRequest
-	91,  // 194: deixicpublic.v1.DeixicPublicService.GetThread:output_type -> deixicpublic.v1.GetThreadResponse
-	93,  // 195: deixicpublic.v1.DeixicPublicService.ListThreads:output_type -> deixicpublic.v1.ListThreadsResponse
-	95,  // 196: deixicpublic.v1.DeixicPublicService.RenameThread:output_type -> deixicpublic.v1.RenameThreadResponse
-	97,  // 197: deixicpublic.v1.DeixicPublicService.ArchiveThread:output_type -> deixicpublic.v1.ArchiveThreadResponse
-	99,  // 198: deixicpublic.v1.DeixicPublicService.ListEvents:output_type -> deixicpublic.v1.ListEventsResponse
-	101, // 199: deixicpublic.v1.DeixicPublicService.WatchEvents:output_type -> deixicpublic.v1.WatchEventsResponse
-	104, // 200: deixicpublic.v1.DeixicPublicService.SubmitTask:output_type -> deixicpublic.v1.SubmitTaskResponse
-	115, // 201: deixicpublic.v1.DeixicPublicService.SubmitVoicedTask:output_type -> deixicpublic.v1.SubmitVoicedTaskResponse
-	118, // 202: deixicpublic.v1.DeixicPublicService.GetVoiceCatalog:output_type -> deixicpublic.v1.GetVoiceCatalogResponse
-	106, // 203: deixicpublic.v1.DeixicPublicService.InterruptTask:output_type -> deixicpublic.v1.InterruptTaskResponse
-	108, // 204: deixicpublic.v1.DeixicPublicService.RespondToRequest:output_type -> deixicpublic.v1.RespondToRequestResponse
-	110, // 205: deixicpublic.v1.DeixicPublicService.GetReceipt:output_type -> deixicpublic.v1.GetReceiptResponse
-	112, // 206: deixicpublic.v1.DeixicPublicService.ResolveReceiptAction:output_type -> deixicpublic.v1.ResolveReceiptActionResponse
-	33,  // 207: deixicpublic.v1.DeixicPublicService.GetModelReadiness:output_type -> deixicpublic.v1.GetModelReadinessResponse
-	39,  // 208: deixicpublic.v1.DeixicPublicService.GetClientSetup:output_type -> deixicpublic.v1.GetClientSetupResponse
-	44,  // 209: deixicpublic.v1.DeixicPublicService.SubmitIssueReport:output_type -> deixicpublic.v1.SubmitIssueReportResponse
-	52,  // 210: deixicpublic.v1.DeixicPublicService.CreateBusinessObject:output_type -> deixicpublic.v1.CreateBusinessObjectResponse
-	54,  // 211: deixicpublic.v1.DeixicPublicService.GetBusinessObject:output_type -> deixicpublic.v1.GetBusinessObjectResponse
-	56,  // 212: deixicpublic.v1.DeixicPublicService.UpdateBusinessObject:output_type -> deixicpublic.v1.UpdateBusinessObjectResponse
-	58,  // 213: deixicpublic.v1.DeixicPublicService.DeleteBusinessObject:output_type -> deixicpublic.v1.DeleteBusinessObjectResponse
-	60,  // 214: deixicpublic.v1.DeixicPublicService.ListBusinessObjects:output_type -> deixicpublic.v1.ListBusinessObjectsResponse
-	65,  // 215: deixicpublic.v1.DeixicPublicService.ListBusinessObjectTypes:output_type -> deixicpublic.v1.ListBusinessObjectTypesResponse
-	68,  // 216: deixicpublic.v1.DeixicPublicService.ListBusinessBlueprints:output_type -> deixicpublic.v1.ListBusinessBlueprintsResponse
-	71,  // 217: deixicpublic.v1.DeixicPublicService.BindBusinessObjectSource:output_type -> deixicpublic.v1.BindBusinessObjectSourceResponse
-	74,  // 218: deixicpublic.v1.DeixicPublicService.ListBusinessObjectRelationships:output_type -> deixicpublic.v1.ListBusinessObjectRelationshipsResponse
-	76,  // 219: deixicpublic.v1.DeixicPublicService.CreateBusinessObjectRelationship:output_type -> deixicpublic.v1.CreateBusinessObjectRelationshipResponse
-	78,  // 220: deixicpublic.v1.DeixicPublicService.DeleteBusinessObjectRelationship:output_type -> deixicpublic.v1.DeleteBusinessObjectRelationshipResponse
-	81,  // 221: deixicpublic.v1.DeixicPublicService.GetProgram:output_type -> deixicpublic.v1.GetProgramResponse
-	83,  // 222: deixicpublic.v1.DeixicPublicService.CreateProgram:output_type -> deixicpublic.v1.CreateProgramResponse
-	85,  // 223: deixicpublic.v1.DeixicPublicService.UpdateProgram:output_type -> deixicpublic.v1.UpdateProgramResponse
-	89,  // 224: deixicpublic.v1.DeixicPublicService.ReconcileComplianceLibrary:output_type -> deixicpublic.v1.ReconcileComplianceLibraryResponse
-	121, // 225: deixicpublic.v1.DeixicPublicService.ListControls:output_type -> deixicpublic.v1.ListControlsResponse
-	125, // 226: deixicpublic.v1.DeixicPublicService.GetControl:output_type -> deixicpublic.v1.GetControlResponse
-	128, // 227: deixicpublic.v1.DeixicPublicService.ListTests:output_type -> deixicpublic.v1.ListTestsResponse
-	131, // 228: deixicpublic.v1.DeixicPublicService.GetTest:output_type -> deixicpublic.v1.GetTestResponse
-	134, // 229: deixicpublic.v1.DeixicPublicService.ListEvidence:output_type -> deixicpublic.v1.ListEvidenceResponse
-	137, // 230: deixicpublic.v1.DeixicPublicService.ListEvidenceVersions:output_type -> deixicpublic.v1.ListEvidenceVersionsResponse
-	139, // 231: deixicpublic.v1.DeixicPublicService.GetEvidenceContent:output_type -> deixicpublic.v1.GetEvidenceContentResponse
-	142, // 232: deixicpublic.v1.DeixicPublicService.ListAssets:output_type -> deixicpublic.v1.ListAssetsResponse
-	144, // 233: deixicpublic.v1.DeixicPublicService.GetAsset:output_type -> deixicpublic.v1.GetAssetResponse
-	147, // 234: deixicpublic.v1.DeixicPublicService.ListAudits:output_type -> deixicpublic.v1.ListAuditsResponse
-	149, // 235: deixicpublic.v1.DeixicPublicService.GetAudit:output_type -> deixicpublic.v1.GetAuditResponse
-	153, // 236: deixicpublic.v1.DeixicPublicService.ListAuditRequests:output_type -> deixicpublic.v1.ListAuditRequestsResponse
-	155, // 237: deixicpublic.v1.DeixicPublicService.GetAuditRequestItem:output_type -> deixicpublic.v1.GetAuditRequestItemResponse
-	194, // [194:238] is the sub-list for method output_type
-	150, // [150:194] is the sub-list for method input_type
-	150, // [150:150] is the sub-list for extension type_name
-	150, // [150:150] is the sub-list for extension extendee
-	0,   // [0:150] is the sub-list for field type_name
+	37,  // 32: deixicpublic.v1.ClientMcpPolicy.servers:type_name -> deixicpublic.v1.ClientMcpServer
+	19,  // 33: deixicpublic.v1.GetClientSetupRequest.scope:type_name -> deixicpublic.v1.Scope
+	19,  // 34: deixicpublic.v1.GetClientSetupResponse.scope:type_name -> deixicpublic.v1.Scope
+	164, // 35: deixicpublic.v1.GetClientSetupResponse.issued_at:type_name -> google.protobuf.Timestamp
+	35,  // 36: deixicpublic.v1.GetClientSetupResponse.rules:type_name -> deixicpublic.v1.ClientRule
+	36,  // 37: deixicpublic.v1.GetClientSetupResponse.skills:type_name -> deixicpublic.v1.ClientSkill
+	38,  // 38: deixicpublic.v1.GetClientSetupResponse.mcp:type_name -> deixicpublic.v1.ClientMcpPolicy
+	41,  // 39: deixicpublic.v1.IssueContext.evidence:type_name -> deixicpublic.v1.IssueEvidence
+	19,  // 40: deixicpublic.v1.SubmitIssueReportRequest.scope:type_name -> deixicpublic.v1.Scope
+	42,  // 41: deixicpublic.v1.SubmitIssueReportRequest.context:type_name -> deixicpublic.v1.IssueContext
+	44,  // 42: deixicpublic.v1.SubmitIssueReportResponse.report:type_name -> deixicpublic.v1.IssueReport
+	46,  // 43: deixicpublic.v1.BusinessFieldValue.money:type_name -> deixicpublic.v1.BusinessMoney
+	47,  // 44: deixicpublic.v1.BusinessFieldValue.reference:type_name -> deixicpublic.v1.BusinessObjectReference
+	48,  // 45: deixicpublic.v1.BusinessFieldValue.artifact:type_name -> deixicpublic.v1.BusinessArtifactReference
+	49,  // 46: deixicpublic.v1.BusinessFieldValue.text_list:type_name -> deixicpublic.v1.BusinessTextList
+	50,  // 47: deixicpublic.v1.BusinessObject.values:type_name -> deixicpublic.v1.BusinessFieldValue
+	50,  // 48: deixicpublic.v1.CreateBusinessObjectRequest.values:type_name -> deixicpublic.v1.BusinessFieldValue
+	51,  // 49: deixicpublic.v1.CreateBusinessObjectResponse.object:type_name -> deixicpublic.v1.BusinessObject
+	51,  // 50: deixicpublic.v1.GetBusinessObjectResponse.object:type_name -> deixicpublic.v1.BusinessObject
+	50,  // 51: deixicpublic.v1.UpdateBusinessObjectRequest.values:type_name -> deixicpublic.v1.BusinessFieldValue
+	51,  // 52: deixicpublic.v1.UpdateBusinessObjectResponse.object:type_name -> deixicpublic.v1.BusinessObject
+	51,  // 53: deixicpublic.v1.DeleteBusinessObjectResponse.object:type_name -> deixicpublic.v1.BusinessObject
+	51,  // 54: deixicpublic.v1.ListBusinessObjectsResponse.objects:type_name -> deixicpublic.v1.BusinessObject
+	10,  // 55: deixicpublic.v1.BusinessObjectTypeField.kind:type_name -> deixicpublic.v1.BusinessFieldKind
+	62,  // 56: deixicpublic.v1.BusinessObjectType.blueprint_origin:type_name -> deixicpublic.v1.BusinessBlueprintOrigin
+	63,  // 57: deixicpublic.v1.BusinessObjectType.fields:type_name -> deixicpublic.v1.BusinessObjectTypeField
+	64,  // 58: deixicpublic.v1.BusinessObjectType.relationships:type_name -> deixicpublic.v1.BusinessObjectTypeRelationship
+	65,  // 59: deixicpublic.v1.DefineBusinessObjectTypeRequest.definition:type_name -> deixicpublic.v1.BusinessObjectType
+	65,  // 60: deixicpublic.v1.DefineBusinessObjectTypeResponse.definition:type_name -> deixicpublic.v1.BusinessObjectType
+	65,  // 61: deixicpublic.v1.GetBusinessObjectTypeResponse.definition:type_name -> deixicpublic.v1.BusinessObjectType
+	50,  // 62: deixicpublic.v1.UpsertBusinessObjectRequest.values:type_name -> deixicpublic.v1.BusinessFieldValue
+	51,  // 63: deixicpublic.v1.UpsertBusinessObjectResponse.object:type_name -> deixicpublic.v1.BusinessObject
+	65,  // 64: deixicpublic.v1.ListBusinessObjectTypesResponse.object_types:type_name -> deixicpublic.v1.BusinessObjectType
+	74,  // 65: deixicpublic.v1.ListBusinessBlueprintsResponse.blueprints:type_name -> deixicpublic.v1.BusinessBlueprint
+	11,  // 66: deixicpublic.v1.BusinessSourceFieldMapping.property:type_name -> deixicpublic.v1.BusinessSourceFieldProperty
+	77,  // 67: deixicpublic.v1.BindBusinessObjectSourceRequest.fields:type_name -> deixicpublic.v1.BusinessSourceFieldMapping
+	51,  // 68: deixicpublic.v1.BindBusinessObjectSourceResponse.object:type_name -> deixicpublic.v1.BusinessObject
+	80,  // 69: deixicpublic.v1.ListBusinessObjectRelationshipsResponse.relationships:type_name -> deixicpublic.v1.BusinessObjectRelationship
+	80,  // 70: deixicpublic.v1.CreateBusinessObjectRelationshipRequest.relationship:type_name -> deixicpublic.v1.BusinessObjectRelationship
+	51,  // 71: deixicpublic.v1.CreateBusinessObjectRelationshipResponse.object:type_name -> deixicpublic.v1.BusinessObject
+	80,  // 72: deixicpublic.v1.DeleteBusinessObjectRelationshipRequest.relationship:type_name -> deixicpublic.v1.BusinessObjectRelationship
+	51,  // 73: deixicpublic.v1.DeleteBusinessObjectRelationshipResponse.object:type_name -> deixicpublic.v1.BusinessObject
+	87,  // 74: deixicpublic.v1.GetProgramResponse.program:type_name -> deixicpublic.v1.Program
+	87,  // 75: deixicpublic.v1.CreateProgramResponse.program:type_name -> deixicpublic.v1.Program
+	87,  // 76: deixicpublic.v1.UpdateProgramResponse.program:type_name -> deixicpublic.v1.Program
+	13,  // 77: deixicpublic.v1.ComplianceLibraryChange.kind:type_name -> deixicpublic.v1.ComplianceLibraryChangeKind
+	94,  // 78: deixicpublic.v1.ReconcileComplianceLibraryRequest.selections:type_name -> deixicpublic.v1.BlueprintSelection
+	12,  // 79: deixicpublic.v1.ReconcileComplianceLibraryRequest.mode:type_name -> deixicpublic.v1.ComplianceLibraryReconcileMode
+	95,  // 80: deixicpublic.v1.ReconcileComplianceLibraryResponse.changes:type_name -> deixicpublic.v1.ComplianceLibraryChange
+	19,  // 81: deixicpublic.v1.GetThreadRequest.scope:type_name -> deixicpublic.v1.Scope
+	22,  // 82: deixicpublic.v1.GetThreadResponse.thread:type_name -> deixicpublic.v1.Thread
+	23,  // 83: deixicpublic.v1.GetThreadResponse.messages:type_name -> deixicpublic.v1.TaskMessage
+	29,  // 84: deixicpublic.v1.GetThreadResponse.receipts:type_name -> deixicpublic.v1.Receipt
+	21,  // 85: deixicpublic.v1.GetThreadResponse.turns:type_name -> deixicpublic.v1.TaskTurn
+	32,  // 86: deixicpublic.v1.GetThreadResponse.setup:type_name -> deixicpublic.v1.SetupReadiness
+	19,  // 87: deixicpublic.v1.ListThreadsRequest.scope:type_name -> deixicpublic.v1.Scope
+	22,  // 88: deixicpublic.v1.ListThreadsResponse.threads:type_name -> deixicpublic.v1.Thread
+	19,  // 89: deixicpublic.v1.RenameThreadRequest.scope:type_name -> deixicpublic.v1.Scope
+	22,  // 90: deixicpublic.v1.RenameThreadResponse.thread:type_name -> deixicpublic.v1.Thread
+	19,  // 91: deixicpublic.v1.ArchiveThreadRequest.scope:type_name -> deixicpublic.v1.Scope
+	22,  // 92: deixicpublic.v1.ArchiveThreadResponse.thread:type_name -> deixicpublic.v1.Thread
+	19,  // 93: deixicpublic.v1.ListEventsRequest.scope:type_name -> deixicpublic.v1.Scope
+	25,  // 94: deixicpublic.v1.ListEventsResponse.events:type_name -> deixicpublic.v1.TaskEvent
+	22,  // 95: deixicpublic.v1.ListEventsResponse.snapshot:type_name -> deixicpublic.v1.Thread
+	21,  // 96: deixicpublic.v1.ListEventsResponse.snapshot_turns:type_name -> deixicpublic.v1.TaskTurn
+	19,  // 97: deixicpublic.v1.WatchEventsRequest.scope:type_name -> deixicpublic.v1.Scope
+	25,  // 98: deixicpublic.v1.WatchEventsResponse.events:type_name -> deixicpublic.v1.TaskEvent
+	22,  // 99: deixicpublic.v1.WatchEventsResponse.snapshot:type_name -> deixicpublic.v1.Thread
+	21,  // 100: deixicpublic.v1.WatchEventsResponse.snapshot_turns:type_name -> deixicpublic.v1.TaskTurn
+	19,  // 101: deixicpublic.v1.SubmitTaskRequest.scope:type_name -> deixicpublic.v1.Scope
+	30,  // 102: deixicpublic.v1.SubmitTaskRequest.model_selection:type_name -> deixicpublic.v1.ModelSelection
+	110, // 103: deixicpublic.v1.SubmitTaskRequest.coding_contract:type_name -> deixicpublic.v1.CodingContract
+	23,  // 104: deixicpublic.v1.SubmitTaskResponse.message:type_name -> deixicpublic.v1.TaskMessage
+	21,  // 105: deixicpublic.v1.SubmitTaskResponse.accepted_turn:type_name -> deixicpublic.v1.TaskTurn
+	29,  // 106: deixicpublic.v1.SubmitTaskResponse.receipts:type_name -> deixicpublic.v1.Receipt
+	19,  // 107: deixicpublic.v1.InterruptTaskRequest.scope:type_name -> deixicpublic.v1.Scope
+	21,  // 108: deixicpublic.v1.InterruptTaskResponse.turns:type_name -> deixicpublic.v1.TaskTurn
+	19,  // 109: deixicpublic.v1.RespondToRequestRequest.scope:type_name -> deixicpublic.v1.Scope
+	4,   // 110: deixicpublic.v1.RespondToRequestRequest.request_kind:type_name -> deixicpublic.v1.RequestKind
+	14,  // 111: deixicpublic.v1.RespondToRequestRequest.action:type_name -> deixicpublic.v1.ResponseAction
+	21,  // 112: deixicpublic.v1.RespondToRequestResponse.turns:type_name -> deixicpublic.v1.TaskTurn
+	19,  // 113: deixicpublic.v1.GetReceiptRequest.scope:type_name -> deixicpublic.v1.Scope
+	29,  // 114: deixicpublic.v1.GetReceiptResponse.receipt:type_name -> deixicpublic.v1.Receipt
+	19,  // 115: deixicpublic.v1.ResolveReceiptActionRequest.scope:type_name -> deixicpublic.v1.Scope
+	29,  // 116: deixicpublic.v1.ResolveReceiptActionResponse.receipt:type_name -> deixicpublic.v1.Receipt
+	15,  // 117: deixicpublic.v1.VoiceSelection.mode:type_name -> deixicpublic.v1.VoiceMode
+	16,  // 118: deixicpublic.v1.VoiceSelection.tone_adjustments:type_name -> deixicpublic.v1.VoiceTone
+	111, // 119: deixicpublic.v1.SubmitVoicedTaskRequest.task:type_name -> deixicpublic.v1.SubmitTaskRequest
+	121, // 120: deixicpublic.v1.SubmitVoicedTaskRequest.voice_selection:type_name -> deixicpublic.v1.VoiceSelection
+	112, // 121: deixicpublic.v1.SubmitVoicedTaskResponse.result:type_name -> deixicpublic.v1.SubmitTaskResponse
+	19,  // 122: deixicpublic.v1.GetVoiceCatalogRequest.scope:type_name -> deixicpublic.v1.Scope
+	19,  // 123: deixicpublic.v1.GetVoiceCatalogResponse.scope:type_name -> deixicpublic.v1.Scope
+	125, // 124: deixicpublic.v1.GetVoiceCatalogResponse.voices:type_name -> deixicpublic.v1.BrandVoice
+	17,  // 125: deixicpublic.v1.Control.state:type_name -> deixicpublic.v1.ControlState
+	164, // 126: deixicpublic.v1.Control.assessed_at:type_name -> google.protobuf.Timestamp
+	127, // 127: deixicpublic.v1.ListControlsResponse.controls:type_name -> deixicpublic.v1.Control
+	17,  // 128: deixicpublic.v1.ControlTestState.state:type_name -> deixicpublic.v1.ControlState
+	164, // 129: deixicpublic.v1.ControlTestState.assessed_at:type_name -> google.protobuf.Timestamp
+	127, // 130: deixicpublic.v1.GetControlResponse.control:type_name -> deixicpublic.v1.Control
+	131, // 131: deixicpublic.v1.GetControlResponse.requirements:type_name -> deixicpublic.v1.ControlRequirement
+	132, // 132: deixicpublic.v1.GetControlResponse.tests:type_name -> deixicpublic.v1.ControlTestState
+	17,  // 133: deixicpublic.v1.Test.state:type_name -> deixicpublic.v1.ControlState
+	164, // 134: deixicpublic.v1.Test.assessed_at:type_name -> google.protobuf.Timestamp
+	134, // 135: deixicpublic.v1.ListTestsResponse.tests:type_name -> deixicpublic.v1.Test
+	18,  // 136: deixicpublic.v1.TestResourceResult.state:type_name -> deixicpublic.v1.TestResultState
+	164, // 137: deixicpublic.v1.TestResourceResult.evaluated_at:type_name -> google.protobuf.Timestamp
+	164, // 138: deixicpublic.v1.TestResourceResult.state_since:type_name -> google.protobuf.Timestamp
+	134, // 139: deixicpublic.v1.GetTestResponse.test:type_name -> deixicpublic.v1.Test
+	137, // 140: deixicpublic.v1.GetTestResponse.resources:type_name -> deixicpublic.v1.TestResourceResult
+	164, // 141: deixicpublic.v1.GetTestResponse.last_evaluated_at:type_name -> google.protobuf.Timestamp
+	17,  // 142: deixicpublic.v1.Evidence.state:type_name -> deixicpublic.v1.ControlState
+	164, // 143: deixicpublic.v1.Evidence.due_at:type_name -> google.protobuf.Timestamp
+	140, // 144: deixicpublic.v1.ListEvidenceResponse.evidence:type_name -> deixicpublic.v1.Evidence
+	164, // 145: deixicpublic.v1.EvidenceVersion.collected_at:type_name -> google.protobuf.Timestamp
+	164, // 146: deixicpublic.v1.EvidenceVersion.covers_start:type_name -> google.protobuf.Timestamp
+	164, // 147: deixicpublic.v1.EvidenceVersion.covers_end:type_name -> google.protobuf.Timestamp
+	143, // 148: deixicpublic.v1.ListEvidenceVersionsResponse.versions:type_name -> deixicpublic.v1.EvidenceVersion
+	164, // 149: deixicpublic.v1.Asset.last_seen_at:type_name -> google.protobuf.Timestamp
+	148, // 150: deixicpublic.v1.ListAssetsResponse.assets:type_name -> deixicpublic.v1.Asset
+	148, // 151: deixicpublic.v1.GetAssetResponse.asset:type_name -> deixicpublic.v1.Asset
+	153, // 152: deixicpublic.v1.ListAuditsResponse.audits:type_name -> deixicpublic.v1.Audit
+	153, // 153: deixicpublic.v1.GetAuditResponse.audit:type_name -> deixicpublic.v1.Audit
+	158, // 154: deixicpublic.v1.ListAuditRequestsResponse.requests:type_name -> deixicpublic.v1.AuditRequestItem
+	159, // 155: deixicpublic.v1.ListAuditRequestsResponse.counts:type_name -> deixicpublic.v1.AuditRequestCounts
+	158, // 156: deixicpublic.v1.GetAuditRequestItemResponse.request:type_name -> deixicpublic.v1.AuditRequestItem
+	98,  // 157: deixicpublic.v1.DeixicPublicService.GetThread:input_type -> deixicpublic.v1.GetThreadRequest
+	100, // 158: deixicpublic.v1.DeixicPublicService.ListThreads:input_type -> deixicpublic.v1.ListThreadsRequest
+	102, // 159: deixicpublic.v1.DeixicPublicService.RenameThread:input_type -> deixicpublic.v1.RenameThreadRequest
+	104, // 160: deixicpublic.v1.DeixicPublicService.ArchiveThread:input_type -> deixicpublic.v1.ArchiveThreadRequest
+	106, // 161: deixicpublic.v1.DeixicPublicService.ListEvents:input_type -> deixicpublic.v1.ListEventsRequest
+	108, // 162: deixicpublic.v1.DeixicPublicService.WatchEvents:input_type -> deixicpublic.v1.WatchEventsRequest
+	111, // 163: deixicpublic.v1.DeixicPublicService.SubmitTask:input_type -> deixicpublic.v1.SubmitTaskRequest
+	122, // 164: deixicpublic.v1.DeixicPublicService.SubmitVoicedTask:input_type -> deixicpublic.v1.SubmitVoicedTaskRequest
+	124, // 165: deixicpublic.v1.DeixicPublicService.GetVoiceCatalog:input_type -> deixicpublic.v1.GetVoiceCatalogRequest
+	113, // 166: deixicpublic.v1.DeixicPublicService.InterruptTask:input_type -> deixicpublic.v1.InterruptTaskRequest
+	115, // 167: deixicpublic.v1.DeixicPublicService.RespondToRequest:input_type -> deixicpublic.v1.RespondToRequestRequest
+	117, // 168: deixicpublic.v1.DeixicPublicService.GetReceipt:input_type -> deixicpublic.v1.GetReceiptRequest
+	119, // 169: deixicpublic.v1.DeixicPublicService.ResolveReceiptAction:input_type -> deixicpublic.v1.ResolveReceiptActionRequest
+	33,  // 170: deixicpublic.v1.DeixicPublicService.GetModelReadiness:input_type -> deixicpublic.v1.GetModelReadinessRequest
+	39,  // 171: deixicpublic.v1.DeixicPublicService.GetClientSetup:input_type -> deixicpublic.v1.GetClientSetupRequest
+	43,  // 172: deixicpublic.v1.DeixicPublicService.SubmitIssueReport:input_type -> deixicpublic.v1.SubmitIssueReportRequest
+	52,  // 173: deixicpublic.v1.DeixicPublicService.CreateBusinessObject:input_type -> deixicpublic.v1.CreateBusinessObjectRequest
+	54,  // 174: deixicpublic.v1.DeixicPublicService.GetBusinessObject:input_type -> deixicpublic.v1.GetBusinessObjectRequest
+	56,  // 175: deixicpublic.v1.DeixicPublicService.UpdateBusinessObject:input_type -> deixicpublic.v1.UpdateBusinessObjectRequest
+	58,  // 176: deixicpublic.v1.DeixicPublicService.DeleteBusinessObject:input_type -> deixicpublic.v1.DeleteBusinessObjectRequest
+	60,  // 177: deixicpublic.v1.DeixicPublicService.ListBusinessObjects:input_type -> deixicpublic.v1.ListBusinessObjectsRequest
+	72,  // 178: deixicpublic.v1.DeixicPublicService.ListBusinessObjectTypes:input_type -> deixicpublic.v1.ListBusinessObjectTypesRequest
+	66,  // 179: deixicpublic.v1.DeixicPublicService.DefineBusinessObjectType:input_type -> deixicpublic.v1.DefineBusinessObjectTypeRequest
+	68,  // 180: deixicpublic.v1.DeixicPublicService.GetBusinessObjectType:input_type -> deixicpublic.v1.GetBusinessObjectTypeRequest
+	70,  // 181: deixicpublic.v1.DeixicPublicService.UpsertBusinessObject:input_type -> deixicpublic.v1.UpsertBusinessObjectRequest
+	75,  // 182: deixicpublic.v1.DeixicPublicService.ListBusinessBlueprints:input_type -> deixicpublic.v1.ListBusinessBlueprintsRequest
+	78,  // 183: deixicpublic.v1.DeixicPublicService.BindBusinessObjectSource:input_type -> deixicpublic.v1.BindBusinessObjectSourceRequest
+	81,  // 184: deixicpublic.v1.DeixicPublicService.ListBusinessObjectRelationships:input_type -> deixicpublic.v1.ListBusinessObjectRelationshipsRequest
+	83,  // 185: deixicpublic.v1.DeixicPublicService.CreateBusinessObjectRelationship:input_type -> deixicpublic.v1.CreateBusinessObjectRelationshipRequest
+	85,  // 186: deixicpublic.v1.DeixicPublicService.DeleteBusinessObjectRelationship:input_type -> deixicpublic.v1.DeleteBusinessObjectRelationshipRequest
+	88,  // 187: deixicpublic.v1.DeixicPublicService.GetProgram:input_type -> deixicpublic.v1.GetProgramRequest
+	90,  // 188: deixicpublic.v1.DeixicPublicService.CreateProgram:input_type -> deixicpublic.v1.CreateProgramRequest
+	92,  // 189: deixicpublic.v1.DeixicPublicService.UpdateProgram:input_type -> deixicpublic.v1.UpdateProgramRequest
+	96,  // 190: deixicpublic.v1.DeixicPublicService.ReconcileComplianceLibrary:input_type -> deixicpublic.v1.ReconcileComplianceLibraryRequest
+	128, // 191: deixicpublic.v1.DeixicPublicService.ListControls:input_type -> deixicpublic.v1.ListControlsRequest
+	130, // 192: deixicpublic.v1.DeixicPublicService.GetControl:input_type -> deixicpublic.v1.GetControlRequest
+	135, // 193: deixicpublic.v1.DeixicPublicService.ListTests:input_type -> deixicpublic.v1.ListTestsRequest
+	138, // 194: deixicpublic.v1.DeixicPublicService.GetTest:input_type -> deixicpublic.v1.GetTestRequest
+	141, // 195: deixicpublic.v1.DeixicPublicService.ListEvidence:input_type -> deixicpublic.v1.ListEvidenceRequest
+	144, // 196: deixicpublic.v1.DeixicPublicService.ListEvidenceVersions:input_type -> deixicpublic.v1.ListEvidenceVersionsRequest
+	146, // 197: deixicpublic.v1.DeixicPublicService.GetEvidenceContent:input_type -> deixicpublic.v1.GetEvidenceContentRequest
+	149, // 198: deixicpublic.v1.DeixicPublicService.ListAssets:input_type -> deixicpublic.v1.ListAssetsRequest
+	151, // 199: deixicpublic.v1.DeixicPublicService.GetAsset:input_type -> deixicpublic.v1.GetAssetRequest
+	154, // 200: deixicpublic.v1.DeixicPublicService.ListAudits:input_type -> deixicpublic.v1.ListAuditsRequest
+	156, // 201: deixicpublic.v1.DeixicPublicService.GetAudit:input_type -> deixicpublic.v1.GetAuditRequest
+	160, // 202: deixicpublic.v1.DeixicPublicService.ListAuditRequests:input_type -> deixicpublic.v1.ListAuditRequestsRequest
+	162, // 203: deixicpublic.v1.DeixicPublicService.GetAuditRequestItem:input_type -> deixicpublic.v1.GetAuditRequestItemRequest
+	99,  // 204: deixicpublic.v1.DeixicPublicService.GetThread:output_type -> deixicpublic.v1.GetThreadResponse
+	101, // 205: deixicpublic.v1.DeixicPublicService.ListThreads:output_type -> deixicpublic.v1.ListThreadsResponse
+	103, // 206: deixicpublic.v1.DeixicPublicService.RenameThread:output_type -> deixicpublic.v1.RenameThreadResponse
+	105, // 207: deixicpublic.v1.DeixicPublicService.ArchiveThread:output_type -> deixicpublic.v1.ArchiveThreadResponse
+	107, // 208: deixicpublic.v1.DeixicPublicService.ListEvents:output_type -> deixicpublic.v1.ListEventsResponse
+	109, // 209: deixicpublic.v1.DeixicPublicService.WatchEvents:output_type -> deixicpublic.v1.WatchEventsResponse
+	112, // 210: deixicpublic.v1.DeixicPublicService.SubmitTask:output_type -> deixicpublic.v1.SubmitTaskResponse
+	123, // 211: deixicpublic.v1.DeixicPublicService.SubmitVoicedTask:output_type -> deixicpublic.v1.SubmitVoicedTaskResponse
+	126, // 212: deixicpublic.v1.DeixicPublicService.GetVoiceCatalog:output_type -> deixicpublic.v1.GetVoiceCatalogResponse
+	114, // 213: deixicpublic.v1.DeixicPublicService.InterruptTask:output_type -> deixicpublic.v1.InterruptTaskResponse
+	116, // 214: deixicpublic.v1.DeixicPublicService.RespondToRequest:output_type -> deixicpublic.v1.RespondToRequestResponse
+	118, // 215: deixicpublic.v1.DeixicPublicService.GetReceipt:output_type -> deixicpublic.v1.GetReceiptResponse
+	120, // 216: deixicpublic.v1.DeixicPublicService.ResolveReceiptAction:output_type -> deixicpublic.v1.ResolveReceiptActionResponse
+	34,  // 217: deixicpublic.v1.DeixicPublicService.GetModelReadiness:output_type -> deixicpublic.v1.GetModelReadinessResponse
+	40,  // 218: deixicpublic.v1.DeixicPublicService.GetClientSetup:output_type -> deixicpublic.v1.GetClientSetupResponse
+	45,  // 219: deixicpublic.v1.DeixicPublicService.SubmitIssueReport:output_type -> deixicpublic.v1.SubmitIssueReportResponse
+	53,  // 220: deixicpublic.v1.DeixicPublicService.CreateBusinessObject:output_type -> deixicpublic.v1.CreateBusinessObjectResponse
+	55,  // 221: deixicpublic.v1.DeixicPublicService.GetBusinessObject:output_type -> deixicpublic.v1.GetBusinessObjectResponse
+	57,  // 222: deixicpublic.v1.DeixicPublicService.UpdateBusinessObject:output_type -> deixicpublic.v1.UpdateBusinessObjectResponse
+	59,  // 223: deixicpublic.v1.DeixicPublicService.DeleteBusinessObject:output_type -> deixicpublic.v1.DeleteBusinessObjectResponse
+	61,  // 224: deixicpublic.v1.DeixicPublicService.ListBusinessObjects:output_type -> deixicpublic.v1.ListBusinessObjectsResponse
+	73,  // 225: deixicpublic.v1.DeixicPublicService.ListBusinessObjectTypes:output_type -> deixicpublic.v1.ListBusinessObjectTypesResponse
+	67,  // 226: deixicpublic.v1.DeixicPublicService.DefineBusinessObjectType:output_type -> deixicpublic.v1.DefineBusinessObjectTypeResponse
+	69,  // 227: deixicpublic.v1.DeixicPublicService.GetBusinessObjectType:output_type -> deixicpublic.v1.GetBusinessObjectTypeResponse
+	71,  // 228: deixicpublic.v1.DeixicPublicService.UpsertBusinessObject:output_type -> deixicpublic.v1.UpsertBusinessObjectResponse
+	76,  // 229: deixicpublic.v1.DeixicPublicService.ListBusinessBlueprints:output_type -> deixicpublic.v1.ListBusinessBlueprintsResponse
+	79,  // 230: deixicpublic.v1.DeixicPublicService.BindBusinessObjectSource:output_type -> deixicpublic.v1.BindBusinessObjectSourceResponse
+	82,  // 231: deixicpublic.v1.DeixicPublicService.ListBusinessObjectRelationships:output_type -> deixicpublic.v1.ListBusinessObjectRelationshipsResponse
+	84,  // 232: deixicpublic.v1.DeixicPublicService.CreateBusinessObjectRelationship:output_type -> deixicpublic.v1.CreateBusinessObjectRelationshipResponse
+	86,  // 233: deixicpublic.v1.DeixicPublicService.DeleteBusinessObjectRelationship:output_type -> deixicpublic.v1.DeleteBusinessObjectRelationshipResponse
+	89,  // 234: deixicpublic.v1.DeixicPublicService.GetProgram:output_type -> deixicpublic.v1.GetProgramResponse
+	91,  // 235: deixicpublic.v1.DeixicPublicService.CreateProgram:output_type -> deixicpublic.v1.CreateProgramResponse
+	93,  // 236: deixicpublic.v1.DeixicPublicService.UpdateProgram:output_type -> deixicpublic.v1.UpdateProgramResponse
+	97,  // 237: deixicpublic.v1.DeixicPublicService.ReconcileComplianceLibrary:output_type -> deixicpublic.v1.ReconcileComplianceLibraryResponse
+	129, // 238: deixicpublic.v1.DeixicPublicService.ListControls:output_type -> deixicpublic.v1.ListControlsResponse
+	133, // 239: deixicpublic.v1.DeixicPublicService.GetControl:output_type -> deixicpublic.v1.GetControlResponse
+	136, // 240: deixicpublic.v1.DeixicPublicService.ListTests:output_type -> deixicpublic.v1.ListTestsResponse
+	139, // 241: deixicpublic.v1.DeixicPublicService.GetTest:output_type -> deixicpublic.v1.GetTestResponse
+	142, // 242: deixicpublic.v1.DeixicPublicService.ListEvidence:output_type -> deixicpublic.v1.ListEvidenceResponse
+	145, // 243: deixicpublic.v1.DeixicPublicService.ListEvidenceVersions:output_type -> deixicpublic.v1.ListEvidenceVersionsResponse
+	147, // 244: deixicpublic.v1.DeixicPublicService.GetEvidenceContent:output_type -> deixicpublic.v1.GetEvidenceContentResponse
+	150, // 245: deixicpublic.v1.DeixicPublicService.ListAssets:output_type -> deixicpublic.v1.ListAssetsResponse
+	152, // 246: deixicpublic.v1.DeixicPublicService.GetAsset:output_type -> deixicpublic.v1.GetAssetResponse
+	155, // 247: deixicpublic.v1.DeixicPublicService.ListAudits:output_type -> deixicpublic.v1.ListAuditsResponse
+	157, // 248: deixicpublic.v1.DeixicPublicService.GetAudit:output_type -> deixicpublic.v1.GetAuditResponse
+	161, // 249: deixicpublic.v1.DeixicPublicService.ListAuditRequests:output_type -> deixicpublic.v1.ListAuditRequestsResponse
+	163, // 250: deixicpublic.v1.DeixicPublicService.GetAuditRequestItem:output_type -> deixicpublic.v1.GetAuditRequestItemResponse
+	204, // [204:251] is the sub-list for method output_type
+	157, // [157:204] is the sub-list for method input_type
+	157, // [157:157] is the sub-list for extension type_name
+	157, // [157:157] is the sub-list for extension extendee
+	0,   // [0:157] is the sub-list for field type_name
 }
 
 func init() { file_deixicpublic_v1_sdk_proto_init() }
@@ -12403,13 +13103,14 @@ func file_deixicpublic_v1_sdk_proto_init() {
 		(*BusinessFieldValue_Artifact)(nil),
 		(*BusinessFieldValue_TextList)(nil),
 	}
+	file_deixicpublic_v1_sdk_proto_msgTypes[44].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_deixicpublic_v1_sdk_proto_rawDesc), len(file_deixicpublic_v1_sdk_proto_rawDesc)),
-			NumEnums:      18,
-			NumMessages:   138,
+			NumEnums:      19,
+			NumMessages:   145,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
