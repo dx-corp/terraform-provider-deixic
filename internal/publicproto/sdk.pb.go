@@ -649,6 +649,8 @@ const (
 	BusinessFieldKind_BUSINESS_FIELD_KIND_REFERENCE   BusinessFieldKind = 9
 	BusinessFieldKind_BUSINESS_FIELD_KIND_ARTIFACT    BusinessFieldKind = 10
 	BusinessFieldKind_BUSINESS_FIELD_KIND_TEXT_LIST   BusinessFieldKind = 11
+	// Several of the field's enum values, each at most once.
+	BusinessFieldKind_BUSINESS_FIELD_KIND_ENUM_LIST BusinessFieldKind = 12
 )
 
 // Enum value maps for BusinessFieldKind.
@@ -666,6 +668,7 @@ var (
 		9:  "BUSINESS_FIELD_KIND_REFERENCE",
 		10: "BUSINESS_FIELD_KIND_ARTIFACT",
 		11: "BUSINESS_FIELD_KIND_TEXT_LIST",
+		12: "BUSINESS_FIELD_KIND_ENUM_LIST",
 	}
 	BusinessFieldKind_value = map[string]int32{
 		"BUSINESS_FIELD_KIND_UNSPECIFIED": 0,
@@ -680,6 +683,7 @@ var (
 		"BUSINESS_FIELD_KIND_REFERENCE":   9,
 		"BUSINESS_FIELD_KIND_ARTIFACT":    10,
 		"BUSINESS_FIELD_KIND_TEXT_LIST":   11,
+		"BUSINESS_FIELD_KIND_ENUM_LIST":   12,
 	}
 )
 
@@ -3391,6 +3395,7 @@ type BusinessFieldValue struct {
 	//	*BusinessFieldValue_Reference
 	//	*BusinessFieldValue_Artifact
 	//	*BusinessFieldValue_TextList
+	//	*BusinessFieldValue_EnumList
 	Value         isBusinessFieldValue_Value `protobuf_oneof:"value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -3539,6 +3544,15 @@ func (x *BusinessFieldValue) GetTextList() *BusinessTextList {
 	return nil
 }
 
+func (x *BusinessFieldValue) GetEnumList() *BusinessTextList {
+	if x != nil {
+		if x, ok := x.Value.(*BusinessFieldValue_EnumList); ok {
+			return x.EnumList
+		}
+	}
+	return nil
+}
+
 type isBusinessFieldValue_Value interface {
 	isBusinessFieldValue_Value()
 }
@@ -3587,6 +3601,10 @@ type BusinessFieldValue_TextList struct {
 	TextList *BusinessTextList `protobuf:"bytes,12,opt,name=text_list,json=textList,proto3,oneof"`
 }
 
+type BusinessFieldValue_EnumList struct {
+	EnumList *BusinessTextList `protobuf:"bytes,13,opt,name=enum_list,json=enumList,proto3,oneof"`
+}
+
 func (*BusinessFieldValue_Text) isBusinessFieldValue_Value() {}
 
 func (*BusinessFieldValue_Integer) isBusinessFieldValue_Value() {}
@@ -3608,6 +3626,8 @@ func (*BusinessFieldValue_Reference) isBusinessFieldValue_Value() {}
 func (*BusinessFieldValue_Artifact) isBusinessFieldValue_Value() {}
 
 func (*BusinessFieldValue_TextList) isBusinessFieldValue_Value() {}
+
+func (*BusinessFieldValue_EnumList) isBusinessFieldValue_Value() {}
 
 type BusinessObject struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
@@ -12680,7 +12700,7 @@ const file_deixicpublic_v1_sdk_proto_rawDesc = "" +
 	"\x19BusinessArtifactReference\x12.\n" +
 	"\x13artifact_version_id\x18\x01 \x01(\tR\x11artifactVersionId\"*\n" +
 	"\x10BusinessTextList\x12\x16\n" +
-	"\x06values\x18\x01 \x03(\tR\x06values\"\x87\x04\n" +
+	"\x06values\x18\x01 \x03(\tR\x06values\"\xc9\x04\n" +
 	"\x12BusinessFieldValue\x12\x19\n" +
 	"\bfield_id\x18\x01 \x01(\tR\afieldId\x12\x14\n" +
 	"\x04text\x18\x02 \x01(\tH\x00R\x04text\x12\x1a\n" +
@@ -12695,7 +12715,8 @@ const file_deixicpublic_v1_sdk_proto_rawDesc = "" +
 	"\treference\x18\n" +
 	" \x01(\v2(.deixicpublic.v1.BusinessObjectReferenceH\x00R\treference\x12H\n" +
 	"\bartifact\x18\v \x01(\v2*.deixicpublic.v1.BusinessArtifactReferenceH\x00R\bartifact\x12@\n" +
-	"\ttext_list\x18\f \x01(\v2!.deixicpublic.v1.BusinessTextListH\x00R\btextListB\a\n" +
+	"\ttext_list\x18\f \x01(\v2!.deixicpublic.v1.BusinessTextListH\x00R\btextList\x12@\n" +
+	"\tenum_list\x18\r \x01(\v2!.deixicpublic.v1.BusinessTextListH\x00R\benumListB\a\n" +
 	"\x05value\"\xac\x02\n" +
 	"\x0eBusinessObject\x12\x1b\n" +
 	"\tobject_id\x18\x01 \x01(\tR\bobjectId\x12\x17\n" +
@@ -13524,7 +13545,7 @@ const file_deixicpublic_v1_sdk_proto_rawDesc = "" +
 	"\x1bCLIENT_MCP_MODE_UNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x14CLIENT_MCP_MODE_OPEN\x10\x01\x12\x1d\n" +
 	"\x19CLIENT_MCP_MODE_ALLOWLIST\x10\x02\x12\x1c\n" +
-	"\x18CLIENT_MCP_MODE_DENYLIST\x10\x03*\x9f\x03\n" +
+	"\x18CLIENT_MCP_MODE_DENYLIST\x10\x03*\xc2\x03\n" +
 	"\x11BusinessFieldKind\x12#\n" +
 	"\x1fBUSINESS_FIELD_KIND_UNSPECIFIED\x10\x00\x12\x1c\n" +
 	"\x18BUSINESS_FIELD_KIND_TEXT\x10\x01\x12\x1f\n" +
@@ -13538,7 +13559,8 @@ const file_deixicpublic_v1_sdk_proto_rawDesc = "" +
 	"\x1dBUSINESS_FIELD_KIND_REFERENCE\x10\t\x12 \n" +
 	"\x1cBUSINESS_FIELD_KIND_ARTIFACT\x10\n" +
 	"\x12!\n" +
-	"\x1dBUSINESS_FIELD_KIND_TEXT_LIST\x10\v*\xae\x01\n" +
+	"\x1dBUSINESS_FIELD_KIND_TEXT_LIST\x10\v\x12!\n" +
+	"\x1dBUSINESS_FIELD_KIND_ENUM_LIST\x10\f*\xae\x01\n" +
 	"\x1bBusinessSourceFieldProperty\x12.\n" +
 	"*BUSINESS_SOURCE_FIELD_PROPERTY_UNSPECIFIED\x10\x00\x12/\n" +
 	"+BUSINESS_SOURCE_FIELD_PROPERTY_DISPLAY_NAME\x10\x01\x12.\n" +
@@ -13889,228 +13911,229 @@ var file_deixicpublic_v1_sdk_proto_depIdxs = []int32{
 	47,  // 44: deixicpublic.v1.BusinessFieldValue.reference:type_name -> deixicpublic.v1.BusinessObjectReference
 	48,  // 45: deixicpublic.v1.BusinessFieldValue.artifact:type_name -> deixicpublic.v1.BusinessArtifactReference
 	49,  // 46: deixicpublic.v1.BusinessFieldValue.text_list:type_name -> deixicpublic.v1.BusinessTextList
-	50,  // 47: deixicpublic.v1.BusinessObject.values:type_name -> deixicpublic.v1.BusinessFieldValue
-	50,  // 48: deixicpublic.v1.CreateBusinessObjectRequest.values:type_name -> deixicpublic.v1.BusinessFieldValue
-	51,  // 49: deixicpublic.v1.CreateBusinessObjectResponse.object:type_name -> deixicpublic.v1.BusinessObject
-	51,  // 50: deixicpublic.v1.GetBusinessObjectResponse.object:type_name -> deixicpublic.v1.BusinessObject
-	50,  // 51: deixicpublic.v1.UpdateBusinessObjectRequest.values:type_name -> deixicpublic.v1.BusinessFieldValue
-	51,  // 52: deixicpublic.v1.UpdateBusinessObjectResponse.object:type_name -> deixicpublic.v1.BusinessObject
-	51,  // 53: deixicpublic.v1.DeleteBusinessObjectResponse.object:type_name -> deixicpublic.v1.BusinessObject
-	51,  // 54: deixicpublic.v1.ListBusinessObjectsResponse.objects:type_name -> deixicpublic.v1.BusinessObject
-	10,  // 55: deixicpublic.v1.BusinessObjectTypeField.kind:type_name -> deixicpublic.v1.BusinessFieldKind
-	62,  // 56: deixicpublic.v1.BusinessObjectType.blueprint_origin:type_name -> deixicpublic.v1.BusinessBlueprintOrigin
-	63,  // 57: deixicpublic.v1.BusinessObjectType.fields:type_name -> deixicpublic.v1.BusinessObjectTypeField
-	64,  // 58: deixicpublic.v1.BusinessObjectType.relationships:type_name -> deixicpublic.v1.BusinessObjectTypeRelationship
-	66,  // 59: deixicpublic.v1.BusinessObjectType.facets:type_name -> deixicpublic.v1.BusinessTypeFacets
-	67,  // 60: deixicpublic.v1.BusinessTypeFacets.lifecycle:type_name -> deixicpublic.v1.BusinessLifecycleFacet
-	72,  // 61: deixicpublic.v1.BusinessTypeFacets.graph:type_name -> deixicpublic.v1.BusinessGraphFacet
-	74,  // 62: deixicpublic.v1.BusinessTypeFacets.index:type_name -> deixicpublic.v1.BusinessIndexFacet
-	75,  // 63: deixicpublic.v1.BusinessTypeFacets.display:type_name -> deixicpublic.v1.BusinessDisplayFacet
-	76,  // 64: deixicpublic.v1.BusinessTypeFacets.permissions:type_name -> deixicpublic.v1.BusinessPermissionFacet
-	68,  // 65: deixicpublic.v1.BusinessLifecycleFacet.states:type_name -> deixicpublic.v1.BusinessLifecycleState
-	69,  // 66: deixicpublic.v1.BusinessLifecycleFacet.transitions:type_name -> deixicpublic.v1.BusinessLifecycleTransition
-	70,  // 67: deixicpublic.v1.BusinessLifecycleFacet.approval:type_name -> deixicpublic.v1.BusinessLifecycleApproval
-	71,  // 68: deixicpublic.v1.BusinessLifecycleFacet.due:type_name -> deixicpublic.v1.BusinessLifecycleDue
-	73,  // 69: deixicpublic.v1.BusinessGraphFacet.relations:type_name -> deixicpublic.v1.BusinessGraphRelation
-	65,  // 70: deixicpublic.v1.DefineBusinessObjectTypeRequest.definition:type_name -> deixicpublic.v1.BusinessObjectType
-	65,  // 71: deixicpublic.v1.DefineBusinessObjectTypeResponse.definition:type_name -> deixicpublic.v1.BusinessObjectType
-	65,  // 72: deixicpublic.v1.GetBusinessObjectTypeResponse.definition:type_name -> deixicpublic.v1.BusinessObjectType
-	50,  // 73: deixicpublic.v1.UpsertBusinessObjectRequest.values:type_name -> deixicpublic.v1.BusinessFieldValue
-	51,  // 74: deixicpublic.v1.UpsertBusinessObjectResponse.object:type_name -> deixicpublic.v1.BusinessObject
-	65,  // 75: deixicpublic.v1.ListBusinessObjectTypesResponse.object_types:type_name -> deixicpublic.v1.BusinessObjectType
-	87,  // 76: deixicpublic.v1.ListBusinessBlueprintsResponse.blueprints:type_name -> deixicpublic.v1.BusinessBlueprint
-	11,  // 77: deixicpublic.v1.BusinessSourceFieldMapping.property:type_name -> deixicpublic.v1.BusinessSourceFieldProperty
-	90,  // 78: deixicpublic.v1.BindBusinessObjectSourceRequest.fields:type_name -> deixicpublic.v1.BusinessSourceFieldMapping
-	51,  // 79: deixicpublic.v1.BindBusinessObjectSourceResponse.object:type_name -> deixicpublic.v1.BusinessObject
-	93,  // 80: deixicpublic.v1.ListBusinessObjectRelationshipsResponse.relationships:type_name -> deixicpublic.v1.BusinessObjectRelationship
-	93,  // 81: deixicpublic.v1.CreateBusinessObjectRelationshipRequest.relationship:type_name -> deixicpublic.v1.BusinessObjectRelationship
-	51,  // 82: deixicpublic.v1.CreateBusinessObjectRelationshipResponse.object:type_name -> deixicpublic.v1.BusinessObject
-	93,  // 83: deixicpublic.v1.DeleteBusinessObjectRelationshipRequest.relationship:type_name -> deixicpublic.v1.BusinessObjectRelationship
-	51,  // 84: deixicpublic.v1.DeleteBusinessObjectRelationshipResponse.object:type_name -> deixicpublic.v1.BusinessObject
-	100, // 85: deixicpublic.v1.GetProgramResponse.program:type_name -> deixicpublic.v1.Program
-	100, // 86: deixicpublic.v1.CreateProgramResponse.program:type_name -> deixicpublic.v1.Program
-	100, // 87: deixicpublic.v1.UpdateProgramResponse.program:type_name -> deixicpublic.v1.Program
-	13,  // 88: deixicpublic.v1.ComplianceLibraryChange.kind:type_name -> deixicpublic.v1.ComplianceLibraryChangeKind
-	107, // 89: deixicpublic.v1.ReconcileComplianceLibraryRequest.selections:type_name -> deixicpublic.v1.BlueprintSelection
-	12,  // 90: deixicpublic.v1.ReconcileComplianceLibraryRequest.mode:type_name -> deixicpublic.v1.ComplianceLibraryReconcileMode
-	108, // 91: deixicpublic.v1.ReconcileComplianceLibraryResponse.changes:type_name -> deixicpublic.v1.ComplianceLibraryChange
-	19,  // 92: deixicpublic.v1.GetThreadRequest.scope:type_name -> deixicpublic.v1.Scope
-	22,  // 93: deixicpublic.v1.GetThreadResponse.thread:type_name -> deixicpublic.v1.Thread
-	23,  // 94: deixicpublic.v1.GetThreadResponse.messages:type_name -> deixicpublic.v1.TaskMessage
-	29,  // 95: deixicpublic.v1.GetThreadResponse.receipts:type_name -> deixicpublic.v1.Receipt
-	21,  // 96: deixicpublic.v1.GetThreadResponse.turns:type_name -> deixicpublic.v1.TaskTurn
-	32,  // 97: deixicpublic.v1.GetThreadResponse.setup:type_name -> deixicpublic.v1.SetupReadiness
-	19,  // 98: deixicpublic.v1.ListThreadsRequest.scope:type_name -> deixicpublic.v1.Scope
-	22,  // 99: deixicpublic.v1.ListThreadsResponse.threads:type_name -> deixicpublic.v1.Thread
-	19,  // 100: deixicpublic.v1.RenameThreadRequest.scope:type_name -> deixicpublic.v1.Scope
-	22,  // 101: deixicpublic.v1.RenameThreadResponse.thread:type_name -> deixicpublic.v1.Thread
-	19,  // 102: deixicpublic.v1.ArchiveThreadRequest.scope:type_name -> deixicpublic.v1.Scope
-	22,  // 103: deixicpublic.v1.ArchiveThreadResponse.thread:type_name -> deixicpublic.v1.Thread
-	19,  // 104: deixicpublic.v1.ListEventsRequest.scope:type_name -> deixicpublic.v1.Scope
-	25,  // 105: deixicpublic.v1.ListEventsResponse.events:type_name -> deixicpublic.v1.TaskEvent
-	22,  // 106: deixicpublic.v1.ListEventsResponse.snapshot:type_name -> deixicpublic.v1.Thread
-	21,  // 107: deixicpublic.v1.ListEventsResponse.snapshot_turns:type_name -> deixicpublic.v1.TaskTurn
-	19,  // 108: deixicpublic.v1.WatchEventsRequest.scope:type_name -> deixicpublic.v1.Scope
-	25,  // 109: deixicpublic.v1.WatchEventsResponse.events:type_name -> deixicpublic.v1.TaskEvent
-	22,  // 110: deixicpublic.v1.WatchEventsResponse.snapshot:type_name -> deixicpublic.v1.Thread
-	21,  // 111: deixicpublic.v1.WatchEventsResponse.snapshot_turns:type_name -> deixicpublic.v1.TaskTurn
-	19,  // 112: deixicpublic.v1.SubmitTaskRequest.scope:type_name -> deixicpublic.v1.Scope
-	30,  // 113: deixicpublic.v1.SubmitTaskRequest.model_selection:type_name -> deixicpublic.v1.ModelSelection
-	123, // 114: deixicpublic.v1.SubmitTaskRequest.coding_contract:type_name -> deixicpublic.v1.CodingContract
-	23,  // 115: deixicpublic.v1.SubmitTaskResponse.message:type_name -> deixicpublic.v1.TaskMessage
-	21,  // 116: deixicpublic.v1.SubmitTaskResponse.accepted_turn:type_name -> deixicpublic.v1.TaskTurn
-	29,  // 117: deixicpublic.v1.SubmitTaskResponse.receipts:type_name -> deixicpublic.v1.Receipt
-	19,  // 118: deixicpublic.v1.InterruptTaskRequest.scope:type_name -> deixicpublic.v1.Scope
-	21,  // 119: deixicpublic.v1.InterruptTaskResponse.turns:type_name -> deixicpublic.v1.TaskTurn
-	19,  // 120: deixicpublic.v1.RespondToRequestRequest.scope:type_name -> deixicpublic.v1.Scope
-	4,   // 121: deixicpublic.v1.RespondToRequestRequest.request_kind:type_name -> deixicpublic.v1.RequestKind
-	14,  // 122: deixicpublic.v1.RespondToRequestRequest.action:type_name -> deixicpublic.v1.ResponseAction
-	21,  // 123: deixicpublic.v1.RespondToRequestResponse.turns:type_name -> deixicpublic.v1.TaskTurn
-	19,  // 124: deixicpublic.v1.GetReceiptRequest.scope:type_name -> deixicpublic.v1.Scope
-	29,  // 125: deixicpublic.v1.GetReceiptResponse.receipt:type_name -> deixicpublic.v1.Receipt
-	19,  // 126: deixicpublic.v1.ResolveReceiptActionRequest.scope:type_name -> deixicpublic.v1.Scope
-	29,  // 127: deixicpublic.v1.ResolveReceiptActionResponse.receipt:type_name -> deixicpublic.v1.Receipt
-	15,  // 128: deixicpublic.v1.VoiceSelection.mode:type_name -> deixicpublic.v1.VoiceMode
-	16,  // 129: deixicpublic.v1.VoiceSelection.tone_adjustments:type_name -> deixicpublic.v1.VoiceTone
-	124, // 130: deixicpublic.v1.SubmitVoicedTaskRequest.task:type_name -> deixicpublic.v1.SubmitTaskRequest
-	134, // 131: deixicpublic.v1.SubmitVoicedTaskRequest.voice_selection:type_name -> deixicpublic.v1.VoiceSelection
-	125, // 132: deixicpublic.v1.SubmitVoicedTaskResponse.result:type_name -> deixicpublic.v1.SubmitTaskResponse
-	19,  // 133: deixicpublic.v1.GetVoiceCatalogRequest.scope:type_name -> deixicpublic.v1.Scope
-	19,  // 134: deixicpublic.v1.GetVoiceCatalogResponse.scope:type_name -> deixicpublic.v1.Scope
-	138, // 135: deixicpublic.v1.GetVoiceCatalogResponse.voices:type_name -> deixicpublic.v1.BrandVoice
-	17,  // 136: deixicpublic.v1.Control.state:type_name -> deixicpublic.v1.ControlState
-	177, // 137: deixicpublic.v1.Control.assessed_at:type_name -> google.protobuf.Timestamp
-	140, // 138: deixicpublic.v1.ListControlsResponse.controls:type_name -> deixicpublic.v1.Control
-	17,  // 139: deixicpublic.v1.ControlTestState.state:type_name -> deixicpublic.v1.ControlState
-	177, // 140: deixicpublic.v1.ControlTestState.assessed_at:type_name -> google.protobuf.Timestamp
-	140, // 141: deixicpublic.v1.GetControlResponse.control:type_name -> deixicpublic.v1.Control
-	144, // 142: deixicpublic.v1.GetControlResponse.requirements:type_name -> deixicpublic.v1.ControlRequirement
-	145, // 143: deixicpublic.v1.GetControlResponse.tests:type_name -> deixicpublic.v1.ControlTestState
-	17,  // 144: deixicpublic.v1.Test.state:type_name -> deixicpublic.v1.ControlState
-	177, // 145: deixicpublic.v1.Test.assessed_at:type_name -> google.protobuf.Timestamp
-	147, // 146: deixicpublic.v1.ListTestsResponse.tests:type_name -> deixicpublic.v1.Test
-	18,  // 147: deixicpublic.v1.TestResourceResult.state:type_name -> deixicpublic.v1.TestResultState
-	177, // 148: deixicpublic.v1.TestResourceResult.evaluated_at:type_name -> google.protobuf.Timestamp
-	177, // 149: deixicpublic.v1.TestResourceResult.state_since:type_name -> google.protobuf.Timestamp
-	147, // 150: deixicpublic.v1.GetTestResponse.test:type_name -> deixicpublic.v1.Test
-	150, // 151: deixicpublic.v1.GetTestResponse.resources:type_name -> deixicpublic.v1.TestResourceResult
-	177, // 152: deixicpublic.v1.GetTestResponse.last_evaluated_at:type_name -> google.protobuf.Timestamp
-	17,  // 153: deixicpublic.v1.Evidence.state:type_name -> deixicpublic.v1.ControlState
-	177, // 154: deixicpublic.v1.Evidence.due_at:type_name -> google.protobuf.Timestamp
-	153, // 155: deixicpublic.v1.ListEvidenceResponse.evidence:type_name -> deixicpublic.v1.Evidence
-	177, // 156: deixicpublic.v1.EvidenceVersion.collected_at:type_name -> google.protobuf.Timestamp
-	177, // 157: deixicpublic.v1.EvidenceVersion.covers_start:type_name -> google.protobuf.Timestamp
-	177, // 158: deixicpublic.v1.EvidenceVersion.covers_end:type_name -> google.protobuf.Timestamp
-	156, // 159: deixicpublic.v1.ListEvidenceVersionsResponse.versions:type_name -> deixicpublic.v1.EvidenceVersion
-	177, // 160: deixicpublic.v1.Asset.last_seen_at:type_name -> google.protobuf.Timestamp
-	161, // 161: deixicpublic.v1.ListAssetsResponse.assets:type_name -> deixicpublic.v1.Asset
-	161, // 162: deixicpublic.v1.GetAssetResponse.asset:type_name -> deixicpublic.v1.Asset
-	166, // 163: deixicpublic.v1.ListAuditsResponse.audits:type_name -> deixicpublic.v1.Audit
-	166, // 164: deixicpublic.v1.GetAuditResponse.audit:type_name -> deixicpublic.v1.Audit
-	171, // 165: deixicpublic.v1.ListAuditRequestsResponse.requests:type_name -> deixicpublic.v1.AuditRequestItem
-	172, // 166: deixicpublic.v1.ListAuditRequestsResponse.counts:type_name -> deixicpublic.v1.AuditRequestCounts
-	171, // 167: deixicpublic.v1.GetAuditRequestItemResponse.request:type_name -> deixicpublic.v1.AuditRequestItem
-	111, // 168: deixicpublic.v1.DeixicPublicService.GetThread:input_type -> deixicpublic.v1.GetThreadRequest
-	113, // 169: deixicpublic.v1.DeixicPublicService.ListThreads:input_type -> deixicpublic.v1.ListThreadsRequest
-	115, // 170: deixicpublic.v1.DeixicPublicService.RenameThread:input_type -> deixicpublic.v1.RenameThreadRequest
-	117, // 171: deixicpublic.v1.DeixicPublicService.ArchiveThread:input_type -> deixicpublic.v1.ArchiveThreadRequest
-	119, // 172: deixicpublic.v1.DeixicPublicService.ListEvents:input_type -> deixicpublic.v1.ListEventsRequest
-	121, // 173: deixicpublic.v1.DeixicPublicService.WatchEvents:input_type -> deixicpublic.v1.WatchEventsRequest
-	124, // 174: deixicpublic.v1.DeixicPublicService.SubmitTask:input_type -> deixicpublic.v1.SubmitTaskRequest
-	135, // 175: deixicpublic.v1.DeixicPublicService.SubmitVoicedTask:input_type -> deixicpublic.v1.SubmitVoicedTaskRequest
-	137, // 176: deixicpublic.v1.DeixicPublicService.GetVoiceCatalog:input_type -> deixicpublic.v1.GetVoiceCatalogRequest
-	126, // 177: deixicpublic.v1.DeixicPublicService.InterruptTask:input_type -> deixicpublic.v1.InterruptTaskRequest
-	128, // 178: deixicpublic.v1.DeixicPublicService.RespondToRequest:input_type -> deixicpublic.v1.RespondToRequestRequest
-	130, // 179: deixicpublic.v1.DeixicPublicService.GetReceipt:input_type -> deixicpublic.v1.GetReceiptRequest
-	132, // 180: deixicpublic.v1.DeixicPublicService.ResolveReceiptAction:input_type -> deixicpublic.v1.ResolveReceiptActionRequest
-	33,  // 181: deixicpublic.v1.DeixicPublicService.GetModelReadiness:input_type -> deixicpublic.v1.GetModelReadinessRequest
-	39,  // 182: deixicpublic.v1.DeixicPublicService.GetClientSetup:input_type -> deixicpublic.v1.GetClientSetupRequest
-	43,  // 183: deixicpublic.v1.DeixicPublicService.SubmitIssueReport:input_type -> deixicpublic.v1.SubmitIssueReportRequest
-	52,  // 184: deixicpublic.v1.DeixicPublicService.CreateBusinessObject:input_type -> deixicpublic.v1.CreateBusinessObjectRequest
-	54,  // 185: deixicpublic.v1.DeixicPublicService.GetBusinessObject:input_type -> deixicpublic.v1.GetBusinessObjectRequest
-	56,  // 186: deixicpublic.v1.DeixicPublicService.UpdateBusinessObject:input_type -> deixicpublic.v1.UpdateBusinessObjectRequest
-	58,  // 187: deixicpublic.v1.DeixicPublicService.DeleteBusinessObject:input_type -> deixicpublic.v1.DeleteBusinessObjectRequest
-	60,  // 188: deixicpublic.v1.DeixicPublicService.ListBusinessObjects:input_type -> deixicpublic.v1.ListBusinessObjectsRequest
-	85,  // 189: deixicpublic.v1.DeixicPublicService.ListBusinessObjectTypes:input_type -> deixicpublic.v1.ListBusinessObjectTypesRequest
-	77,  // 190: deixicpublic.v1.DeixicPublicService.DefineBusinessObjectType:input_type -> deixicpublic.v1.DefineBusinessObjectTypeRequest
-	79,  // 191: deixicpublic.v1.DeixicPublicService.GetBusinessObjectType:input_type -> deixicpublic.v1.GetBusinessObjectTypeRequest
-	81,  // 192: deixicpublic.v1.DeixicPublicService.UpsertBusinessObject:input_type -> deixicpublic.v1.UpsertBusinessObjectRequest
-	82,  // 193: deixicpublic.v1.DeixicPublicService.TransitionBusinessObject:input_type -> deixicpublic.v1.TransitionBusinessObjectRequest
-	88,  // 194: deixicpublic.v1.DeixicPublicService.ListBusinessBlueprints:input_type -> deixicpublic.v1.ListBusinessBlueprintsRequest
-	91,  // 195: deixicpublic.v1.DeixicPublicService.BindBusinessObjectSource:input_type -> deixicpublic.v1.BindBusinessObjectSourceRequest
-	94,  // 196: deixicpublic.v1.DeixicPublicService.ListBusinessObjectRelationships:input_type -> deixicpublic.v1.ListBusinessObjectRelationshipsRequest
-	96,  // 197: deixicpublic.v1.DeixicPublicService.CreateBusinessObjectRelationship:input_type -> deixicpublic.v1.CreateBusinessObjectRelationshipRequest
-	98,  // 198: deixicpublic.v1.DeixicPublicService.DeleteBusinessObjectRelationship:input_type -> deixicpublic.v1.DeleteBusinessObjectRelationshipRequest
-	101, // 199: deixicpublic.v1.DeixicPublicService.GetProgram:input_type -> deixicpublic.v1.GetProgramRequest
-	103, // 200: deixicpublic.v1.DeixicPublicService.CreateProgram:input_type -> deixicpublic.v1.CreateProgramRequest
-	105, // 201: deixicpublic.v1.DeixicPublicService.UpdateProgram:input_type -> deixicpublic.v1.UpdateProgramRequest
-	109, // 202: deixicpublic.v1.DeixicPublicService.ReconcileComplianceLibrary:input_type -> deixicpublic.v1.ReconcileComplianceLibraryRequest
-	141, // 203: deixicpublic.v1.DeixicPublicService.ListControls:input_type -> deixicpublic.v1.ListControlsRequest
-	143, // 204: deixicpublic.v1.DeixicPublicService.GetControl:input_type -> deixicpublic.v1.GetControlRequest
-	148, // 205: deixicpublic.v1.DeixicPublicService.ListTests:input_type -> deixicpublic.v1.ListTestsRequest
-	151, // 206: deixicpublic.v1.DeixicPublicService.GetTest:input_type -> deixicpublic.v1.GetTestRequest
-	154, // 207: deixicpublic.v1.DeixicPublicService.ListEvidence:input_type -> deixicpublic.v1.ListEvidenceRequest
-	157, // 208: deixicpublic.v1.DeixicPublicService.ListEvidenceVersions:input_type -> deixicpublic.v1.ListEvidenceVersionsRequest
-	159, // 209: deixicpublic.v1.DeixicPublicService.GetEvidenceContent:input_type -> deixicpublic.v1.GetEvidenceContentRequest
-	162, // 210: deixicpublic.v1.DeixicPublicService.ListAssets:input_type -> deixicpublic.v1.ListAssetsRequest
-	164, // 211: deixicpublic.v1.DeixicPublicService.GetAsset:input_type -> deixicpublic.v1.GetAssetRequest
-	167, // 212: deixicpublic.v1.DeixicPublicService.ListAudits:input_type -> deixicpublic.v1.ListAuditsRequest
-	169, // 213: deixicpublic.v1.DeixicPublicService.GetAudit:input_type -> deixicpublic.v1.GetAuditRequest
-	173, // 214: deixicpublic.v1.DeixicPublicService.ListAuditRequests:input_type -> deixicpublic.v1.ListAuditRequestsRequest
-	175, // 215: deixicpublic.v1.DeixicPublicService.GetAuditRequestItem:input_type -> deixicpublic.v1.GetAuditRequestItemRequest
-	112, // 216: deixicpublic.v1.DeixicPublicService.GetThread:output_type -> deixicpublic.v1.GetThreadResponse
-	114, // 217: deixicpublic.v1.DeixicPublicService.ListThreads:output_type -> deixicpublic.v1.ListThreadsResponse
-	116, // 218: deixicpublic.v1.DeixicPublicService.RenameThread:output_type -> deixicpublic.v1.RenameThreadResponse
-	118, // 219: deixicpublic.v1.DeixicPublicService.ArchiveThread:output_type -> deixicpublic.v1.ArchiveThreadResponse
-	120, // 220: deixicpublic.v1.DeixicPublicService.ListEvents:output_type -> deixicpublic.v1.ListEventsResponse
-	122, // 221: deixicpublic.v1.DeixicPublicService.WatchEvents:output_type -> deixicpublic.v1.WatchEventsResponse
-	125, // 222: deixicpublic.v1.DeixicPublicService.SubmitTask:output_type -> deixicpublic.v1.SubmitTaskResponse
-	136, // 223: deixicpublic.v1.DeixicPublicService.SubmitVoicedTask:output_type -> deixicpublic.v1.SubmitVoicedTaskResponse
-	139, // 224: deixicpublic.v1.DeixicPublicService.GetVoiceCatalog:output_type -> deixicpublic.v1.GetVoiceCatalogResponse
-	127, // 225: deixicpublic.v1.DeixicPublicService.InterruptTask:output_type -> deixicpublic.v1.InterruptTaskResponse
-	129, // 226: deixicpublic.v1.DeixicPublicService.RespondToRequest:output_type -> deixicpublic.v1.RespondToRequestResponse
-	131, // 227: deixicpublic.v1.DeixicPublicService.GetReceipt:output_type -> deixicpublic.v1.GetReceiptResponse
-	133, // 228: deixicpublic.v1.DeixicPublicService.ResolveReceiptAction:output_type -> deixicpublic.v1.ResolveReceiptActionResponse
-	34,  // 229: deixicpublic.v1.DeixicPublicService.GetModelReadiness:output_type -> deixicpublic.v1.GetModelReadinessResponse
-	40,  // 230: deixicpublic.v1.DeixicPublicService.GetClientSetup:output_type -> deixicpublic.v1.GetClientSetupResponse
-	45,  // 231: deixicpublic.v1.DeixicPublicService.SubmitIssueReport:output_type -> deixicpublic.v1.SubmitIssueReportResponse
-	53,  // 232: deixicpublic.v1.DeixicPublicService.CreateBusinessObject:output_type -> deixicpublic.v1.CreateBusinessObjectResponse
-	55,  // 233: deixicpublic.v1.DeixicPublicService.GetBusinessObject:output_type -> deixicpublic.v1.GetBusinessObjectResponse
-	57,  // 234: deixicpublic.v1.DeixicPublicService.UpdateBusinessObject:output_type -> deixicpublic.v1.UpdateBusinessObjectResponse
-	59,  // 235: deixicpublic.v1.DeixicPublicService.DeleteBusinessObject:output_type -> deixicpublic.v1.DeleteBusinessObjectResponse
-	61,  // 236: deixicpublic.v1.DeixicPublicService.ListBusinessObjects:output_type -> deixicpublic.v1.ListBusinessObjectsResponse
-	86,  // 237: deixicpublic.v1.DeixicPublicService.ListBusinessObjectTypes:output_type -> deixicpublic.v1.ListBusinessObjectTypesResponse
-	78,  // 238: deixicpublic.v1.DeixicPublicService.DefineBusinessObjectType:output_type -> deixicpublic.v1.DefineBusinessObjectTypeResponse
-	80,  // 239: deixicpublic.v1.DeixicPublicService.GetBusinessObjectType:output_type -> deixicpublic.v1.GetBusinessObjectTypeResponse
-	84,  // 240: deixicpublic.v1.DeixicPublicService.UpsertBusinessObject:output_type -> deixicpublic.v1.UpsertBusinessObjectResponse
-	83,  // 241: deixicpublic.v1.DeixicPublicService.TransitionBusinessObject:output_type -> deixicpublic.v1.TransitionBusinessObjectResponse
-	89,  // 242: deixicpublic.v1.DeixicPublicService.ListBusinessBlueprints:output_type -> deixicpublic.v1.ListBusinessBlueprintsResponse
-	92,  // 243: deixicpublic.v1.DeixicPublicService.BindBusinessObjectSource:output_type -> deixicpublic.v1.BindBusinessObjectSourceResponse
-	95,  // 244: deixicpublic.v1.DeixicPublicService.ListBusinessObjectRelationships:output_type -> deixicpublic.v1.ListBusinessObjectRelationshipsResponse
-	97,  // 245: deixicpublic.v1.DeixicPublicService.CreateBusinessObjectRelationship:output_type -> deixicpublic.v1.CreateBusinessObjectRelationshipResponse
-	99,  // 246: deixicpublic.v1.DeixicPublicService.DeleteBusinessObjectRelationship:output_type -> deixicpublic.v1.DeleteBusinessObjectRelationshipResponse
-	102, // 247: deixicpublic.v1.DeixicPublicService.GetProgram:output_type -> deixicpublic.v1.GetProgramResponse
-	104, // 248: deixicpublic.v1.DeixicPublicService.CreateProgram:output_type -> deixicpublic.v1.CreateProgramResponse
-	106, // 249: deixicpublic.v1.DeixicPublicService.UpdateProgram:output_type -> deixicpublic.v1.UpdateProgramResponse
-	110, // 250: deixicpublic.v1.DeixicPublicService.ReconcileComplianceLibrary:output_type -> deixicpublic.v1.ReconcileComplianceLibraryResponse
-	142, // 251: deixicpublic.v1.DeixicPublicService.ListControls:output_type -> deixicpublic.v1.ListControlsResponse
-	146, // 252: deixicpublic.v1.DeixicPublicService.GetControl:output_type -> deixicpublic.v1.GetControlResponse
-	149, // 253: deixicpublic.v1.DeixicPublicService.ListTests:output_type -> deixicpublic.v1.ListTestsResponse
-	152, // 254: deixicpublic.v1.DeixicPublicService.GetTest:output_type -> deixicpublic.v1.GetTestResponse
-	155, // 255: deixicpublic.v1.DeixicPublicService.ListEvidence:output_type -> deixicpublic.v1.ListEvidenceResponse
-	158, // 256: deixicpublic.v1.DeixicPublicService.ListEvidenceVersions:output_type -> deixicpublic.v1.ListEvidenceVersionsResponse
-	160, // 257: deixicpublic.v1.DeixicPublicService.GetEvidenceContent:output_type -> deixicpublic.v1.GetEvidenceContentResponse
-	163, // 258: deixicpublic.v1.DeixicPublicService.ListAssets:output_type -> deixicpublic.v1.ListAssetsResponse
-	165, // 259: deixicpublic.v1.DeixicPublicService.GetAsset:output_type -> deixicpublic.v1.GetAssetResponse
-	168, // 260: deixicpublic.v1.DeixicPublicService.ListAudits:output_type -> deixicpublic.v1.ListAuditsResponse
-	170, // 261: deixicpublic.v1.DeixicPublicService.GetAudit:output_type -> deixicpublic.v1.GetAuditResponse
-	174, // 262: deixicpublic.v1.DeixicPublicService.ListAuditRequests:output_type -> deixicpublic.v1.ListAuditRequestsResponse
-	176, // 263: deixicpublic.v1.DeixicPublicService.GetAuditRequestItem:output_type -> deixicpublic.v1.GetAuditRequestItemResponse
-	216, // [216:264] is the sub-list for method output_type
-	168, // [168:216] is the sub-list for method input_type
-	168, // [168:168] is the sub-list for extension type_name
-	168, // [168:168] is the sub-list for extension extendee
-	0,   // [0:168] is the sub-list for field type_name
+	49,  // 47: deixicpublic.v1.BusinessFieldValue.enum_list:type_name -> deixicpublic.v1.BusinessTextList
+	50,  // 48: deixicpublic.v1.BusinessObject.values:type_name -> deixicpublic.v1.BusinessFieldValue
+	50,  // 49: deixicpublic.v1.CreateBusinessObjectRequest.values:type_name -> deixicpublic.v1.BusinessFieldValue
+	51,  // 50: deixicpublic.v1.CreateBusinessObjectResponse.object:type_name -> deixicpublic.v1.BusinessObject
+	51,  // 51: deixicpublic.v1.GetBusinessObjectResponse.object:type_name -> deixicpublic.v1.BusinessObject
+	50,  // 52: deixicpublic.v1.UpdateBusinessObjectRequest.values:type_name -> deixicpublic.v1.BusinessFieldValue
+	51,  // 53: deixicpublic.v1.UpdateBusinessObjectResponse.object:type_name -> deixicpublic.v1.BusinessObject
+	51,  // 54: deixicpublic.v1.DeleteBusinessObjectResponse.object:type_name -> deixicpublic.v1.BusinessObject
+	51,  // 55: deixicpublic.v1.ListBusinessObjectsResponse.objects:type_name -> deixicpublic.v1.BusinessObject
+	10,  // 56: deixicpublic.v1.BusinessObjectTypeField.kind:type_name -> deixicpublic.v1.BusinessFieldKind
+	62,  // 57: deixicpublic.v1.BusinessObjectType.blueprint_origin:type_name -> deixicpublic.v1.BusinessBlueprintOrigin
+	63,  // 58: deixicpublic.v1.BusinessObjectType.fields:type_name -> deixicpublic.v1.BusinessObjectTypeField
+	64,  // 59: deixicpublic.v1.BusinessObjectType.relationships:type_name -> deixicpublic.v1.BusinessObjectTypeRelationship
+	66,  // 60: deixicpublic.v1.BusinessObjectType.facets:type_name -> deixicpublic.v1.BusinessTypeFacets
+	67,  // 61: deixicpublic.v1.BusinessTypeFacets.lifecycle:type_name -> deixicpublic.v1.BusinessLifecycleFacet
+	72,  // 62: deixicpublic.v1.BusinessTypeFacets.graph:type_name -> deixicpublic.v1.BusinessGraphFacet
+	74,  // 63: deixicpublic.v1.BusinessTypeFacets.index:type_name -> deixicpublic.v1.BusinessIndexFacet
+	75,  // 64: deixicpublic.v1.BusinessTypeFacets.display:type_name -> deixicpublic.v1.BusinessDisplayFacet
+	76,  // 65: deixicpublic.v1.BusinessTypeFacets.permissions:type_name -> deixicpublic.v1.BusinessPermissionFacet
+	68,  // 66: deixicpublic.v1.BusinessLifecycleFacet.states:type_name -> deixicpublic.v1.BusinessLifecycleState
+	69,  // 67: deixicpublic.v1.BusinessLifecycleFacet.transitions:type_name -> deixicpublic.v1.BusinessLifecycleTransition
+	70,  // 68: deixicpublic.v1.BusinessLifecycleFacet.approval:type_name -> deixicpublic.v1.BusinessLifecycleApproval
+	71,  // 69: deixicpublic.v1.BusinessLifecycleFacet.due:type_name -> deixicpublic.v1.BusinessLifecycleDue
+	73,  // 70: deixicpublic.v1.BusinessGraphFacet.relations:type_name -> deixicpublic.v1.BusinessGraphRelation
+	65,  // 71: deixicpublic.v1.DefineBusinessObjectTypeRequest.definition:type_name -> deixicpublic.v1.BusinessObjectType
+	65,  // 72: deixicpublic.v1.DefineBusinessObjectTypeResponse.definition:type_name -> deixicpublic.v1.BusinessObjectType
+	65,  // 73: deixicpublic.v1.GetBusinessObjectTypeResponse.definition:type_name -> deixicpublic.v1.BusinessObjectType
+	50,  // 74: deixicpublic.v1.UpsertBusinessObjectRequest.values:type_name -> deixicpublic.v1.BusinessFieldValue
+	51,  // 75: deixicpublic.v1.UpsertBusinessObjectResponse.object:type_name -> deixicpublic.v1.BusinessObject
+	65,  // 76: deixicpublic.v1.ListBusinessObjectTypesResponse.object_types:type_name -> deixicpublic.v1.BusinessObjectType
+	87,  // 77: deixicpublic.v1.ListBusinessBlueprintsResponse.blueprints:type_name -> deixicpublic.v1.BusinessBlueprint
+	11,  // 78: deixicpublic.v1.BusinessSourceFieldMapping.property:type_name -> deixicpublic.v1.BusinessSourceFieldProperty
+	90,  // 79: deixicpublic.v1.BindBusinessObjectSourceRequest.fields:type_name -> deixicpublic.v1.BusinessSourceFieldMapping
+	51,  // 80: deixicpublic.v1.BindBusinessObjectSourceResponse.object:type_name -> deixicpublic.v1.BusinessObject
+	93,  // 81: deixicpublic.v1.ListBusinessObjectRelationshipsResponse.relationships:type_name -> deixicpublic.v1.BusinessObjectRelationship
+	93,  // 82: deixicpublic.v1.CreateBusinessObjectRelationshipRequest.relationship:type_name -> deixicpublic.v1.BusinessObjectRelationship
+	51,  // 83: deixicpublic.v1.CreateBusinessObjectRelationshipResponse.object:type_name -> deixicpublic.v1.BusinessObject
+	93,  // 84: deixicpublic.v1.DeleteBusinessObjectRelationshipRequest.relationship:type_name -> deixicpublic.v1.BusinessObjectRelationship
+	51,  // 85: deixicpublic.v1.DeleteBusinessObjectRelationshipResponse.object:type_name -> deixicpublic.v1.BusinessObject
+	100, // 86: deixicpublic.v1.GetProgramResponse.program:type_name -> deixicpublic.v1.Program
+	100, // 87: deixicpublic.v1.CreateProgramResponse.program:type_name -> deixicpublic.v1.Program
+	100, // 88: deixicpublic.v1.UpdateProgramResponse.program:type_name -> deixicpublic.v1.Program
+	13,  // 89: deixicpublic.v1.ComplianceLibraryChange.kind:type_name -> deixicpublic.v1.ComplianceLibraryChangeKind
+	107, // 90: deixicpublic.v1.ReconcileComplianceLibraryRequest.selections:type_name -> deixicpublic.v1.BlueprintSelection
+	12,  // 91: deixicpublic.v1.ReconcileComplianceLibraryRequest.mode:type_name -> deixicpublic.v1.ComplianceLibraryReconcileMode
+	108, // 92: deixicpublic.v1.ReconcileComplianceLibraryResponse.changes:type_name -> deixicpublic.v1.ComplianceLibraryChange
+	19,  // 93: deixicpublic.v1.GetThreadRequest.scope:type_name -> deixicpublic.v1.Scope
+	22,  // 94: deixicpublic.v1.GetThreadResponse.thread:type_name -> deixicpublic.v1.Thread
+	23,  // 95: deixicpublic.v1.GetThreadResponse.messages:type_name -> deixicpublic.v1.TaskMessage
+	29,  // 96: deixicpublic.v1.GetThreadResponse.receipts:type_name -> deixicpublic.v1.Receipt
+	21,  // 97: deixicpublic.v1.GetThreadResponse.turns:type_name -> deixicpublic.v1.TaskTurn
+	32,  // 98: deixicpublic.v1.GetThreadResponse.setup:type_name -> deixicpublic.v1.SetupReadiness
+	19,  // 99: deixicpublic.v1.ListThreadsRequest.scope:type_name -> deixicpublic.v1.Scope
+	22,  // 100: deixicpublic.v1.ListThreadsResponse.threads:type_name -> deixicpublic.v1.Thread
+	19,  // 101: deixicpublic.v1.RenameThreadRequest.scope:type_name -> deixicpublic.v1.Scope
+	22,  // 102: deixicpublic.v1.RenameThreadResponse.thread:type_name -> deixicpublic.v1.Thread
+	19,  // 103: deixicpublic.v1.ArchiveThreadRequest.scope:type_name -> deixicpublic.v1.Scope
+	22,  // 104: deixicpublic.v1.ArchiveThreadResponse.thread:type_name -> deixicpublic.v1.Thread
+	19,  // 105: deixicpublic.v1.ListEventsRequest.scope:type_name -> deixicpublic.v1.Scope
+	25,  // 106: deixicpublic.v1.ListEventsResponse.events:type_name -> deixicpublic.v1.TaskEvent
+	22,  // 107: deixicpublic.v1.ListEventsResponse.snapshot:type_name -> deixicpublic.v1.Thread
+	21,  // 108: deixicpublic.v1.ListEventsResponse.snapshot_turns:type_name -> deixicpublic.v1.TaskTurn
+	19,  // 109: deixicpublic.v1.WatchEventsRequest.scope:type_name -> deixicpublic.v1.Scope
+	25,  // 110: deixicpublic.v1.WatchEventsResponse.events:type_name -> deixicpublic.v1.TaskEvent
+	22,  // 111: deixicpublic.v1.WatchEventsResponse.snapshot:type_name -> deixicpublic.v1.Thread
+	21,  // 112: deixicpublic.v1.WatchEventsResponse.snapshot_turns:type_name -> deixicpublic.v1.TaskTurn
+	19,  // 113: deixicpublic.v1.SubmitTaskRequest.scope:type_name -> deixicpublic.v1.Scope
+	30,  // 114: deixicpublic.v1.SubmitTaskRequest.model_selection:type_name -> deixicpublic.v1.ModelSelection
+	123, // 115: deixicpublic.v1.SubmitTaskRequest.coding_contract:type_name -> deixicpublic.v1.CodingContract
+	23,  // 116: deixicpublic.v1.SubmitTaskResponse.message:type_name -> deixicpublic.v1.TaskMessage
+	21,  // 117: deixicpublic.v1.SubmitTaskResponse.accepted_turn:type_name -> deixicpublic.v1.TaskTurn
+	29,  // 118: deixicpublic.v1.SubmitTaskResponse.receipts:type_name -> deixicpublic.v1.Receipt
+	19,  // 119: deixicpublic.v1.InterruptTaskRequest.scope:type_name -> deixicpublic.v1.Scope
+	21,  // 120: deixicpublic.v1.InterruptTaskResponse.turns:type_name -> deixicpublic.v1.TaskTurn
+	19,  // 121: deixicpublic.v1.RespondToRequestRequest.scope:type_name -> deixicpublic.v1.Scope
+	4,   // 122: deixicpublic.v1.RespondToRequestRequest.request_kind:type_name -> deixicpublic.v1.RequestKind
+	14,  // 123: deixicpublic.v1.RespondToRequestRequest.action:type_name -> deixicpublic.v1.ResponseAction
+	21,  // 124: deixicpublic.v1.RespondToRequestResponse.turns:type_name -> deixicpublic.v1.TaskTurn
+	19,  // 125: deixicpublic.v1.GetReceiptRequest.scope:type_name -> deixicpublic.v1.Scope
+	29,  // 126: deixicpublic.v1.GetReceiptResponse.receipt:type_name -> deixicpublic.v1.Receipt
+	19,  // 127: deixicpublic.v1.ResolveReceiptActionRequest.scope:type_name -> deixicpublic.v1.Scope
+	29,  // 128: deixicpublic.v1.ResolveReceiptActionResponse.receipt:type_name -> deixicpublic.v1.Receipt
+	15,  // 129: deixicpublic.v1.VoiceSelection.mode:type_name -> deixicpublic.v1.VoiceMode
+	16,  // 130: deixicpublic.v1.VoiceSelection.tone_adjustments:type_name -> deixicpublic.v1.VoiceTone
+	124, // 131: deixicpublic.v1.SubmitVoicedTaskRequest.task:type_name -> deixicpublic.v1.SubmitTaskRequest
+	134, // 132: deixicpublic.v1.SubmitVoicedTaskRequest.voice_selection:type_name -> deixicpublic.v1.VoiceSelection
+	125, // 133: deixicpublic.v1.SubmitVoicedTaskResponse.result:type_name -> deixicpublic.v1.SubmitTaskResponse
+	19,  // 134: deixicpublic.v1.GetVoiceCatalogRequest.scope:type_name -> deixicpublic.v1.Scope
+	19,  // 135: deixicpublic.v1.GetVoiceCatalogResponse.scope:type_name -> deixicpublic.v1.Scope
+	138, // 136: deixicpublic.v1.GetVoiceCatalogResponse.voices:type_name -> deixicpublic.v1.BrandVoice
+	17,  // 137: deixicpublic.v1.Control.state:type_name -> deixicpublic.v1.ControlState
+	177, // 138: deixicpublic.v1.Control.assessed_at:type_name -> google.protobuf.Timestamp
+	140, // 139: deixicpublic.v1.ListControlsResponse.controls:type_name -> deixicpublic.v1.Control
+	17,  // 140: deixicpublic.v1.ControlTestState.state:type_name -> deixicpublic.v1.ControlState
+	177, // 141: deixicpublic.v1.ControlTestState.assessed_at:type_name -> google.protobuf.Timestamp
+	140, // 142: deixicpublic.v1.GetControlResponse.control:type_name -> deixicpublic.v1.Control
+	144, // 143: deixicpublic.v1.GetControlResponse.requirements:type_name -> deixicpublic.v1.ControlRequirement
+	145, // 144: deixicpublic.v1.GetControlResponse.tests:type_name -> deixicpublic.v1.ControlTestState
+	17,  // 145: deixicpublic.v1.Test.state:type_name -> deixicpublic.v1.ControlState
+	177, // 146: deixicpublic.v1.Test.assessed_at:type_name -> google.protobuf.Timestamp
+	147, // 147: deixicpublic.v1.ListTestsResponse.tests:type_name -> deixicpublic.v1.Test
+	18,  // 148: deixicpublic.v1.TestResourceResult.state:type_name -> deixicpublic.v1.TestResultState
+	177, // 149: deixicpublic.v1.TestResourceResult.evaluated_at:type_name -> google.protobuf.Timestamp
+	177, // 150: deixicpublic.v1.TestResourceResult.state_since:type_name -> google.protobuf.Timestamp
+	147, // 151: deixicpublic.v1.GetTestResponse.test:type_name -> deixicpublic.v1.Test
+	150, // 152: deixicpublic.v1.GetTestResponse.resources:type_name -> deixicpublic.v1.TestResourceResult
+	177, // 153: deixicpublic.v1.GetTestResponse.last_evaluated_at:type_name -> google.protobuf.Timestamp
+	17,  // 154: deixicpublic.v1.Evidence.state:type_name -> deixicpublic.v1.ControlState
+	177, // 155: deixicpublic.v1.Evidence.due_at:type_name -> google.protobuf.Timestamp
+	153, // 156: deixicpublic.v1.ListEvidenceResponse.evidence:type_name -> deixicpublic.v1.Evidence
+	177, // 157: deixicpublic.v1.EvidenceVersion.collected_at:type_name -> google.protobuf.Timestamp
+	177, // 158: deixicpublic.v1.EvidenceVersion.covers_start:type_name -> google.protobuf.Timestamp
+	177, // 159: deixicpublic.v1.EvidenceVersion.covers_end:type_name -> google.protobuf.Timestamp
+	156, // 160: deixicpublic.v1.ListEvidenceVersionsResponse.versions:type_name -> deixicpublic.v1.EvidenceVersion
+	177, // 161: deixicpublic.v1.Asset.last_seen_at:type_name -> google.protobuf.Timestamp
+	161, // 162: deixicpublic.v1.ListAssetsResponse.assets:type_name -> deixicpublic.v1.Asset
+	161, // 163: deixicpublic.v1.GetAssetResponse.asset:type_name -> deixicpublic.v1.Asset
+	166, // 164: deixicpublic.v1.ListAuditsResponse.audits:type_name -> deixicpublic.v1.Audit
+	166, // 165: deixicpublic.v1.GetAuditResponse.audit:type_name -> deixicpublic.v1.Audit
+	171, // 166: deixicpublic.v1.ListAuditRequestsResponse.requests:type_name -> deixicpublic.v1.AuditRequestItem
+	172, // 167: deixicpublic.v1.ListAuditRequestsResponse.counts:type_name -> deixicpublic.v1.AuditRequestCounts
+	171, // 168: deixicpublic.v1.GetAuditRequestItemResponse.request:type_name -> deixicpublic.v1.AuditRequestItem
+	111, // 169: deixicpublic.v1.DeixicPublicService.GetThread:input_type -> deixicpublic.v1.GetThreadRequest
+	113, // 170: deixicpublic.v1.DeixicPublicService.ListThreads:input_type -> deixicpublic.v1.ListThreadsRequest
+	115, // 171: deixicpublic.v1.DeixicPublicService.RenameThread:input_type -> deixicpublic.v1.RenameThreadRequest
+	117, // 172: deixicpublic.v1.DeixicPublicService.ArchiveThread:input_type -> deixicpublic.v1.ArchiveThreadRequest
+	119, // 173: deixicpublic.v1.DeixicPublicService.ListEvents:input_type -> deixicpublic.v1.ListEventsRequest
+	121, // 174: deixicpublic.v1.DeixicPublicService.WatchEvents:input_type -> deixicpublic.v1.WatchEventsRequest
+	124, // 175: deixicpublic.v1.DeixicPublicService.SubmitTask:input_type -> deixicpublic.v1.SubmitTaskRequest
+	135, // 176: deixicpublic.v1.DeixicPublicService.SubmitVoicedTask:input_type -> deixicpublic.v1.SubmitVoicedTaskRequest
+	137, // 177: deixicpublic.v1.DeixicPublicService.GetVoiceCatalog:input_type -> deixicpublic.v1.GetVoiceCatalogRequest
+	126, // 178: deixicpublic.v1.DeixicPublicService.InterruptTask:input_type -> deixicpublic.v1.InterruptTaskRequest
+	128, // 179: deixicpublic.v1.DeixicPublicService.RespondToRequest:input_type -> deixicpublic.v1.RespondToRequestRequest
+	130, // 180: deixicpublic.v1.DeixicPublicService.GetReceipt:input_type -> deixicpublic.v1.GetReceiptRequest
+	132, // 181: deixicpublic.v1.DeixicPublicService.ResolveReceiptAction:input_type -> deixicpublic.v1.ResolveReceiptActionRequest
+	33,  // 182: deixicpublic.v1.DeixicPublicService.GetModelReadiness:input_type -> deixicpublic.v1.GetModelReadinessRequest
+	39,  // 183: deixicpublic.v1.DeixicPublicService.GetClientSetup:input_type -> deixicpublic.v1.GetClientSetupRequest
+	43,  // 184: deixicpublic.v1.DeixicPublicService.SubmitIssueReport:input_type -> deixicpublic.v1.SubmitIssueReportRequest
+	52,  // 185: deixicpublic.v1.DeixicPublicService.CreateBusinessObject:input_type -> deixicpublic.v1.CreateBusinessObjectRequest
+	54,  // 186: deixicpublic.v1.DeixicPublicService.GetBusinessObject:input_type -> deixicpublic.v1.GetBusinessObjectRequest
+	56,  // 187: deixicpublic.v1.DeixicPublicService.UpdateBusinessObject:input_type -> deixicpublic.v1.UpdateBusinessObjectRequest
+	58,  // 188: deixicpublic.v1.DeixicPublicService.DeleteBusinessObject:input_type -> deixicpublic.v1.DeleteBusinessObjectRequest
+	60,  // 189: deixicpublic.v1.DeixicPublicService.ListBusinessObjects:input_type -> deixicpublic.v1.ListBusinessObjectsRequest
+	85,  // 190: deixicpublic.v1.DeixicPublicService.ListBusinessObjectTypes:input_type -> deixicpublic.v1.ListBusinessObjectTypesRequest
+	77,  // 191: deixicpublic.v1.DeixicPublicService.DefineBusinessObjectType:input_type -> deixicpublic.v1.DefineBusinessObjectTypeRequest
+	79,  // 192: deixicpublic.v1.DeixicPublicService.GetBusinessObjectType:input_type -> deixicpublic.v1.GetBusinessObjectTypeRequest
+	81,  // 193: deixicpublic.v1.DeixicPublicService.UpsertBusinessObject:input_type -> deixicpublic.v1.UpsertBusinessObjectRequest
+	82,  // 194: deixicpublic.v1.DeixicPublicService.TransitionBusinessObject:input_type -> deixicpublic.v1.TransitionBusinessObjectRequest
+	88,  // 195: deixicpublic.v1.DeixicPublicService.ListBusinessBlueprints:input_type -> deixicpublic.v1.ListBusinessBlueprintsRequest
+	91,  // 196: deixicpublic.v1.DeixicPublicService.BindBusinessObjectSource:input_type -> deixicpublic.v1.BindBusinessObjectSourceRequest
+	94,  // 197: deixicpublic.v1.DeixicPublicService.ListBusinessObjectRelationships:input_type -> deixicpublic.v1.ListBusinessObjectRelationshipsRequest
+	96,  // 198: deixicpublic.v1.DeixicPublicService.CreateBusinessObjectRelationship:input_type -> deixicpublic.v1.CreateBusinessObjectRelationshipRequest
+	98,  // 199: deixicpublic.v1.DeixicPublicService.DeleteBusinessObjectRelationship:input_type -> deixicpublic.v1.DeleteBusinessObjectRelationshipRequest
+	101, // 200: deixicpublic.v1.DeixicPublicService.GetProgram:input_type -> deixicpublic.v1.GetProgramRequest
+	103, // 201: deixicpublic.v1.DeixicPublicService.CreateProgram:input_type -> deixicpublic.v1.CreateProgramRequest
+	105, // 202: deixicpublic.v1.DeixicPublicService.UpdateProgram:input_type -> deixicpublic.v1.UpdateProgramRequest
+	109, // 203: deixicpublic.v1.DeixicPublicService.ReconcileComplianceLibrary:input_type -> deixicpublic.v1.ReconcileComplianceLibraryRequest
+	141, // 204: deixicpublic.v1.DeixicPublicService.ListControls:input_type -> deixicpublic.v1.ListControlsRequest
+	143, // 205: deixicpublic.v1.DeixicPublicService.GetControl:input_type -> deixicpublic.v1.GetControlRequest
+	148, // 206: deixicpublic.v1.DeixicPublicService.ListTests:input_type -> deixicpublic.v1.ListTestsRequest
+	151, // 207: deixicpublic.v1.DeixicPublicService.GetTest:input_type -> deixicpublic.v1.GetTestRequest
+	154, // 208: deixicpublic.v1.DeixicPublicService.ListEvidence:input_type -> deixicpublic.v1.ListEvidenceRequest
+	157, // 209: deixicpublic.v1.DeixicPublicService.ListEvidenceVersions:input_type -> deixicpublic.v1.ListEvidenceVersionsRequest
+	159, // 210: deixicpublic.v1.DeixicPublicService.GetEvidenceContent:input_type -> deixicpublic.v1.GetEvidenceContentRequest
+	162, // 211: deixicpublic.v1.DeixicPublicService.ListAssets:input_type -> deixicpublic.v1.ListAssetsRequest
+	164, // 212: deixicpublic.v1.DeixicPublicService.GetAsset:input_type -> deixicpublic.v1.GetAssetRequest
+	167, // 213: deixicpublic.v1.DeixicPublicService.ListAudits:input_type -> deixicpublic.v1.ListAuditsRequest
+	169, // 214: deixicpublic.v1.DeixicPublicService.GetAudit:input_type -> deixicpublic.v1.GetAuditRequest
+	173, // 215: deixicpublic.v1.DeixicPublicService.ListAuditRequests:input_type -> deixicpublic.v1.ListAuditRequestsRequest
+	175, // 216: deixicpublic.v1.DeixicPublicService.GetAuditRequestItem:input_type -> deixicpublic.v1.GetAuditRequestItemRequest
+	112, // 217: deixicpublic.v1.DeixicPublicService.GetThread:output_type -> deixicpublic.v1.GetThreadResponse
+	114, // 218: deixicpublic.v1.DeixicPublicService.ListThreads:output_type -> deixicpublic.v1.ListThreadsResponse
+	116, // 219: deixicpublic.v1.DeixicPublicService.RenameThread:output_type -> deixicpublic.v1.RenameThreadResponse
+	118, // 220: deixicpublic.v1.DeixicPublicService.ArchiveThread:output_type -> deixicpublic.v1.ArchiveThreadResponse
+	120, // 221: deixicpublic.v1.DeixicPublicService.ListEvents:output_type -> deixicpublic.v1.ListEventsResponse
+	122, // 222: deixicpublic.v1.DeixicPublicService.WatchEvents:output_type -> deixicpublic.v1.WatchEventsResponse
+	125, // 223: deixicpublic.v1.DeixicPublicService.SubmitTask:output_type -> deixicpublic.v1.SubmitTaskResponse
+	136, // 224: deixicpublic.v1.DeixicPublicService.SubmitVoicedTask:output_type -> deixicpublic.v1.SubmitVoicedTaskResponse
+	139, // 225: deixicpublic.v1.DeixicPublicService.GetVoiceCatalog:output_type -> deixicpublic.v1.GetVoiceCatalogResponse
+	127, // 226: deixicpublic.v1.DeixicPublicService.InterruptTask:output_type -> deixicpublic.v1.InterruptTaskResponse
+	129, // 227: deixicpublic.v1.DeixicPublicService.RespondToRequest:output_type -> deixicpublic.v1.RespondToRequestResponse
+	131, // 228: deixicpublic.v1.DeixicPublicService.GetReceipt:output_type -> deixicpublic.v1.GetReceiptResponse
+	133, // 229: deixicpublic.v1.DeixicPublicService.ResolveReceiptAction:output_type -> deixicpublic.v1.ResolveReceiptActionResponse
+	34,  // 230: deixicpublic.v1.DeixicPublicService.GetModelReadiness:output_type -> deixicpublic.v1.GetModelReadinessResponse
+	40,  // 231: deixicpublic.v1.DeixicPublicService.GetClientSetup:output_type -> deixicpublic.v1.GetClientSetupResponse
+	45,  // 232: deixicpublic.v1.DeixicPublicService.SubmitIssueReport:output_type -> deixicpublic.v1.SubmitIssueReportResponse
+	53,  // 233: deixicpublic.v1.DeixicPublicService.CreateBusinessObject:output_type -> deixicpublic.v1.CreateBusinessObjectResponse
+	55,  // 234: deixicpublic.v1.DeixicPublicService.GetBusinessObject:output_type -> deixicpublic.v1.GetBusinessObjectResponse
+	57,  // 235: deixicpublic.v1.DeixicPublicService.UpdateBusinessObject:output_type -> deixicpublic.v1.UpdateBusinessObjectResponse
+	59,  // 236: deixicpublic.v1.DeixicPublicService.DeleteBusinessObject:output_type -> deixicpublic.v1.DeleteBusinessObjectResponse
+	61,  // 237: deixicpublic.v1.DeixicPublicService.ListBusinessObjects:output_type -> deixicpublic.v1.ListBusinessObjectsResponse
+	86,  // 238: deixicpublic.v1.DeixicPublicService.ListBusinessObjectTypes:output_type -> deixicpublic.v1.ListBusinessObjectTypesResponse
+	78,  // 239: deixicpublic.v1.DeixicPublicService.DefineBusinessObjectType:output_type -> deixicpublic.v1.DefineBusinessObjectTypeResponse
+	80,  // 240: deixicpublic.v1.DeixicPublicService.GetBusinessObjectType:output_type -> deixicpublic.v1.GetBusinessObjectTypeResponse
+	84,  // 241: deixicpublic.v1.DeixicPublicService.UpsertBusinessObject:output_type -> deixicpublic.v1.UpsertBusinessObjectResponse
+	83,  // 242: deixicpublic.v1.DeixicPublicService.TransitionBusinessObject:output_type -> deixicpublic.v1.TransitionBusinessObjectResponse
+	89,  // 243: deixicpublic.v1.DeixicPublicService.ListBusinessBlueprints:output_type -> deixicpublic.v1.ListBusinessBlueprintsResponse
+	92,  // 244: deixicpublic.v1.DeixicPublicService.BindBusinessObjectSource:output_type -> deixicpublic.v1.BindBusinessObjectSourceResponse
+	95,  // 245: deixicpublic.v1.DeixicPublicService.ListBusinessObjectRelationships:output_type -> deixicpublic.v1.ListBusinessObjectRelationshipsResponse
+	97,  // 246: deixicpublic.v1.DeixicPublicService.CreateBusinessObjectRelationship:output_type -> deixicpublic.v1.CreateBusinessObjectRelationshipResponse
+	99,  // 247: deixicpublic.v1.DeixicPublicService.DeleteBusinessObjectRelationship:output_type -> deixicpublic.v1.DeleteBusinessObjectRelationshipResponse
+	102, // 248: deixicpublic.v1.DeixicPublicService.GetProgram:output_type -> deixicpublic.v1.GetProgramResponse
+	104, // 249: deixicpublic.v1.DeixicPublicService.CreateProgram:output_type -> deixicpublic.v1.CreateProgramResponse
+	106, // 250: deixicpublic.v1.DeixicPublicService.UpdateProgram:output_type -> deixicpublic.v1.UpdateProgramResponse
+	110, // 251: deixicpublic.v1.DeixicPublicService.ReconcileComplianceLibrary:output_type -> deixicpublic.v1.ReconcileComplianceLibraryResponse
+	142, // 252: deixicpublic.v1.DeixicPublicService.ListControls:output_type -> deixicpublic.v1.ListControlsResponse
+	146, // 253: deixicpublic.v1.DeixicPublicService.GetControl:output_type -> deixicpublic.v1.GetControlResponse
+	149, // 254: deixicpublic.v1.DeixicPublicService.ListTests:output_type -> deixicpublic.v1.ListTestsResponse
+	152, // 255: deixicpublic.v1.DeixicPublicService.GetTest:output_type -> deixicpublic.v1.GetTestResponse
+	155, // 256: deixicpublic.v1.DeixicPublicService.ListEvidence:output_type -> deixicpublic.v1.ListEvidenceResponse
+	158, // 257: deixicpublic.v1.DeixicPublicService.ListEvidenceVersions:output_type -> deixicpublic.v1.ListEvidenceVersionsResponse
+	160, // 258: deixicpublic.v1.DeixicPublicService.GetEvidenceContent:output_type -> deixicpublic.v1.GetEvidenceContentResponse
+	163, // 259: deixicpublic.v1.DeixicPublicService.ListAssets:output_type -> deixicpublic.v1.ListAssetsResponse
+	165, // 260: deixicpublic.v1.DeixicPublicService.GetAsset:output_type -> deixicpublic.v1.GetAssetResponse
+	168, // 261: deixicpublic.v1.DeixicPublicService.ListAudits:output_type -> deixicpublic.v1.ListAuditsResponse
+	170, // 262: deixicpublic.v1.DeixicPublicService.GetAudit:output_type -> deixicpublic.v1.GetAuditResponse
+	174, // 263: deixicpublic.v1.DeixicPublicService.ListAuditRequests:output_type -> deixicpublic.v1.ListAuditRequestsResponse
+	176, // 264: deixicpublic.v1.DeixicPublicService.GetAuditRequestItem:output_type -> deixicpublic.v1.GetAuditRequestItemResponse
+	217, // [217:265] is the sub-list for method output_type
+	169, // [169:217] is the sub-list for method input_type
+	169, // [169:169] is the sub-list for extension type_name
+	169, // [169:169] is the sub-list for extension extendee
+	0,   // [0:169] is the sub-list for field type_name
 }
 
 func init() { file_deixicpublic_v1_sdk_proto_init() }
@@ -14130,6 +14153,7 @@ func file_deixicpublic_v1_sdk_proto_init() {
 		(*BusinessFieldValue_Reference)(nil),
 		(*BusinessFieldValue_Artifact)(nil),
 		(*BusinessFieldValue_TextList)(nil),
+		(*BusinessFieldValue_EnumList)(nil),
 	}
 	file_deixicpublic_v1_sdk_proto_msgTypes[44].OneofWrappers = []any{}
 	file_deixicpublic_v1_sdk_proto_msgTypes[52].OneofWrappers = []any{}
