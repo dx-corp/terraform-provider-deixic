@@ -15,7 +15,7 @@ management uses the connectors HTTP API through the configured connectors endpoi
 ## Requirements
 
 - Terraform 1.9 or later
-- Go 1.26.9 or later to build the provider
+- Go 1.26.10 or later to build the provider
 - A Deixic Platform API endpoint
 - A bearer token with `console:read` and `console:write`
 - An existing published business object type and exact schema revision
@@ -42,7 +42,7 @@ provider "deixic" {
 Each setting may instead come from `DEIXIC_ENDPOINT`, `DEIXIC_TOKEN`,
 `DEIXIC_ORGANIZATION_ID`, or `DEIXIC_WORKSPACE_ID`. The token attribute is
 marked sensitive and is used only to configure the API client. Terraform does
-not store it in resource state. API endpoints must use HTTPS; plaintext HTTP is
+not store it in resource state. API endpoints must use HTTPS; HTTP without TLS is
 accepted only for loopback development and contract tests.
 
 See [the business object documentation](docs/resources/business_object.md),
@@ -52,6 +52,9 @@ See [the business object documentation](docs/resources/business_object.md),
 [connections](docs/resources/connection.md) for resource shapes and lifecycle limits.
 
 ## Development
+
+Run the Go checks from `sdk/terraform-provider-deixic` in Mono or from the
+root of the published provider repository.
 
 The provider vendors only the generated `deixicpublic.v1` binding from Mono's
 reviewed public proto source. Resource discovery, programs, relationships, and
